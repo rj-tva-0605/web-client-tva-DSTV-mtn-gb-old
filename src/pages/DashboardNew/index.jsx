@@ -37,6 +37,9 @@ const cookies = new Cookies();
     const history = useHistory();
     const location = useLocation();
 
+    
+
+
 
 
  
@@ -93,11 +96,11 @@ const cookies = new Cookies();
 
 
 
-    const vodcontentAllMovies = (stringPackages, categoryTempids, access_token, categoryDictTemp) =>{
+    const vodcontentAllMovies = (stringPackages, categoryTempids, access_token, categoryDictTemp, user_id, operator_uid) =>{
 
         var config = {
             method: 'get',
-            url: `https://glonigeria.tvanywhereafrica.com:28182/api/client/v1/testglotv/categories/vod/content?packages=${stringPackages}&categories=${categoryTempids}`,
+            url: `https://ott.tvanywhereafrica.com:28182/api/client/v1/${operator_uid}/categories/vod/content?packages=${stringPackages}&categories=${categoryTempids}`,
             headers: { 
                 'Authorization': `Bearer ${access_token}`            }
         };
@@ -116,7 +119,7 @@ const cookies = new Cookies();
         
     }
 
-    const categoryIDfunc = async(packageTempids, access_token) =>{
+    const categoryIDfunc = async(packageTempids, access_token, user_id, operator_uid) =>{
  
         var categoryTempids = []
         var categoryTempNames = []
@@ -126,7 +129,7 @@ const cookies = new Cookies();
     
             var config = {
                 method: 'get',
-                url: `https://glonigeria.tvanywhereafrica.com:28182/api/client/v3/testglotv/categories/vod?packages=${stringPackages}`,
+                url: `https://ott.tvanywhereafrica.com:28182/api/client/v3/${operator_uid}/categories/vod?packages=${stringPackages}`,
                 headers: { 
                 'Authorization': `Bearer ${access_token}`
                 }
@@ -150,7 +153,7 @@ const cookies = new Cookies();
                     let categoryDictTemp = dictMaker(categoryTempids, categoryTempNames)
                     console.log('Category ids and names', categoryDictTemp)
     
-                    if(categoryIDs && categoryDictTemp ){vodcontentAllMovies(stringPackages, categoryTempids, access_token,categoryDictTemp)}
+                    if(categoryIDs && categoryDictTemp ){vodcontentAllMovies(stringPackages, categoryTempids, access_token,categoryDictTemp, user_id, operator_uid)}
     
                     
             })
@@ -165,12 +168,14 @@ const cookies = new Cookies();
 
     const packageIDfunc = async() =>{
         const access_token = cookies.get("access_token")
+        const user_id = cookies.get("user_id");
+        const operator_uid = cookies.get("operator_uid");
         let packageTempids = []
         let purchasedPackageIds = []
 
         var config = {
             method: 'get',
-            url: 'https://glonigeria.tvanywhereafrica.com:28182/api/client/v1/testglotv/users/48965/packages?device_class=desktop',
+            url: `https://ott.tvanywhereafrica.com:28182/api/client/v1/${operator_uid}/users/${user_id}/packages?device_class=desktop`,
             headers: { 
               'Authorization': `Bearer ${access_token}`
             }
@@ -204,7 +209,7 @@ const cookies = new Cookies();
                 cookies.set("stringPackages", stringPackages)
                 cookies.set("purchasedPackageIds", purchasedPackageIds)
 
-                categoryIDfunc(packageTempids , access_token)
+                categoryIDfunc(packageTempids , access_token, user_id, operator_uid)
                     }
                 else{console.log('PackageIds not ready')}
             

@@ -76,6 +76,8 @@ export const loginReducer = (data) => (dispatch)  => {
 
         cookies.set("refresh_token", response.data.data.refresh_token)
         cookies.set("access_token", response.data.data.access_token)
+        cookies.set('user_id', response.data.data.user_id)
+        cookies.set("operator_uid", response.data.data.operator_uid)
         
         dispatch(login(response.data.data))
         console.log(JSON.stringify(response.data))
@@ -132,6 +134,9 @@ const authReducer = (state = initialState, action) => {
         case LOGOUT:
           cookies.remove("refresh_token")
           cookies.remove("access_token")
+          cookies.remove("user_id")
+          cookies.remove("operator_uid")
+
           return{
             ...state,
             isUserLoggedIn: false,
