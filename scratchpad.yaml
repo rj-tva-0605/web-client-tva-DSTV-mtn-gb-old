@@ -1,0 +1,372 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {box-sizing: border-box}
+body {font-family: Verdana, sans-serif; margin:0}
+.mySlides {display: none}
+img {vertical-align: middle;}
+
+/* Slideshow container */
+.slideshow-container {
+  max-width: 1000px;
+  position: relative;
+  margin: auto;
+}
+
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: relative;
+  background-color: blue;
+  top: 20%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+
+
+/* The dots/bullets/indicators */
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .prev, .next,.text {font-size: 11px}
+}
+</style>
+</head>
+<body>
+
+<div class="slideshow-container">
+
+<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+<a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+
+<div class="mySlides fade">
+  <div class="numbertext">1 / 3</div>
+  <img src="img_nature_wide.jpg" style="width:100%">
+  <div class="text">Caption Text</div>
+</div>
+
+<div class="mySlides fade">
+  <div class="numbertext">2 / 3</div>
+  <img src="img_snow_wide.jpg" style="width:100%">
+  <div class="text">Caption Two</div>
+</div>
+
+<div class="mySlides fade">
+  <div class="numbertext">3 / 3</div>
+  <img src="img_mountains_wide.jpg" style="width:100%">
+  <div class="text">Caption Three</div>
+</div>
+
+
+
+</div>
+<br>
+
+<div style="text-align:center">
+  <span class="dot" onclick="currentSlide(1)"></span> 
+  <span class="dot" onclick="currentSlide(2)"></span> 
+  <span class="dot" onclick="currentSlide(3)"></span> 
+</div>
+
+<script>
+var slideIndex = 1;
+showSlides(slideIndex);
+
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("dot");
+  if (n > slides.length) {slideIndex = 1}    
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";  
+  }
+  for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";  
+  dots[slideIndex-1].className += " active";
+}
+</script>
+
+</body>
+</html> 
+
+
+
+Usehistory links ---> passing stuff to the component rendered by a usehistory link of react router dom
+
+link  -->   https://stackoverflow.com/questions/44121069/how-to-pass-params-with-history-push-link-redirect-in-react-router-v4
+
+
+
+* {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+}
+html {
+  scroll-behavior: smooth;
+}
+.diamondKnowledgeNav.navbar {
+  padding-bottom: 0px !important;
+}
+.diamondKnowledgeNav.navbar-light .navbar-nav .nav-item {
+  margin-right: 40px;
+}
+.diamondKnowledgeNav.navbar-light .navbar-nav .nav-link {
+  margin-right: 0px;
+  color: var(--color-secondary-dark) !important;
+  font-size: var(--para-web);
+}
+.dk .DkParent .new-line-b-margin,
+.dk .DkChild .new-line-b-margin {
+  font-size: var(--para-web);
+  color: var(--color-secondary-dark);
+}
+.dk .DkChildDkChildTopics p {
+  font-size: var(--text-16);
+}
+.dk .DkChildDkChildTopics p:first-child {
+  font-size: var(--text-18);
+}
+.diamondKnowledgeNav .navbar-nav .nav-item.active .nav-link {
+  border-bottom: 3px solid #0bb19a;
+  color: #000 !important;
+}
+.diamondKnowledgeNav .navbar-nav .nav-item .nav-link.active {
+  border-bottom: 3px solid #0bb19a;
+  color: #000 !important;
+}
+.dk .DkChild .makeinline {
+  display: none;
+}
+.dk .DkChild .makeinline .dropdown {
+  text-align: right;
+  width: 100%;
+  position: absolute;
+}
+.dk .DkChild .makeinline .dropdown .btn-dropdown {
+  padding: 3px 15px;
+}
+.dk .DkChild .makeinline .dropdown .dropdown-menu {
+  background-color: #f1f1f1;
+  box-shadow: 0px 0px 4px #00000048;
+  border-radius: 0px;
+  border: 0px;
+}
+.dk .DkChild .makeinline .dropdown .dropdown-menu .dropdown-item {
+  font-size: 12px;
+  border-bottom: 1px solid #0003;
+  padding: 0.45rem 1.5rem;
+}
+.DkChildTopics {
+  border-left: 1px solid rgb(151, 151, 151);
+}
+.DkChildTopics section {
+  padding: 25px 10px;
+  position: sticky;
+  top: 0px;
+}
+.DkChildTopics span {
+  text-decoration: none;
+  color: var(--color-secondary-dark);
+  cursor: pointer;
+}
+.DkChildTopics .activeside {
+  color: #0bb19a;
+  color: #0bb19a;
+}
+
+.pb-2 .activeside {
+  color: #0bb19a;
+  color: #0bb19a;
+}
+
+.diamondKnowledgeNav .dropdown {
+  position: relative;
+}
+.diamondKnowledgeNav .dropdown-menu{
+    border-radius: 0px;
+    border: 0px;
+    box-shadow: 0px 0px 4px #00000048;
+    margin-top: 12px !important;
+    padding: 0px ;
+    font-size: 14px;
+}
+.diamondKnowledgeNav .dropdown-menu .dropdown-item {
+  padding: 0.45rem 1.5rem;
+}
+.diamondKnowledgeNav .dropdown-menu .dropdown-item:hover {
+  background-color: #00000048;
+}
+.diamondKnowledgeNav .dropdown-item.active {
+  background-color: transparent;
+  color: #000;
+}
+.dk .dropdown .btn-dropdown{
+    border: 1px solid var(--color-secondary-dark);
+    font-size: var(--para-mobile);
+}
+.new-line-b-margin {
+  margin-bottom: var(--mb15);
+}
+.dropdown-menu.show:empty {
+  display: none;
+}
+
+@media only screen and (max-width: 428px) and (min-width: 320px) {
+  .dk .DkParent .new-line-b-margin,
+  .dk .DkChild .new-line-b-margin {
+    font-size: var(--para-mobile);
+    color: var(--color-secondary-dark);
+  }
+  .diamondKnowledgeNav.navbar {
+    background-color: #fff;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    padding: 20px 10px 10px !important;
+    padding-bottom: 0px !important;
+  }
+  .diamondKnowledgeNav.navbar-light .navbar-nav .nav-link {
+    font-size: var(--header-mobile);
+  }
+  .diamondKnowledgeNav .navbar-nav {
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+  }
+  .diamondKnowledgeNav .navbar-nav .nav-item {
+    margin-right: 0px !important;
+  }
+  .DkParent .text-24 {
+    font-size: var(--header-mobile) !important;
+  }
+  .DkChild .text-24 {
+    font-size: var(--header-mobile) !important;
+  }
+  .dk .text-14 {
+    font-size: 12px !important;
+  }
+  .diamondKnowledgeNav .dropdown {
+    position: unset;
+  }
+
+    
+  .dk .DkChild .makeinline .dropdown .dropdown-menu{
+      padding: 0px;
+  }
+  .dk .DkChild .makeinline .dropdown > div.dropdown-menu{
+      padding: 15px;
+      
+  }
+  .dk .DkChild .makeinline .dropdown > div.dropdown-menu > p {
+      font-size: 14px;
+  }
+  .dk .DkChild .makeinline .dropdown > div.dropdown-menu > p:last-child{
+      padding-bottom: 0px !important;
+  }
+  .dk .DkChild .makeinline .dropdown .dropdown-menu .text-14{
+      padding: .45rem 1.5rem;
+      color: #000;
+  }
+  .dk .DkChild .para-320 .text-14{
+      padding-right: 0px !important
+  }
+  .diamondKnowledgeNav .dropdown-menu .dropdown-item{
+    border-bottom: 1px solid #0003;
+  }
+
+  #dkToggleButton {
+    background-color: #0BB19A !important;
+    color: white !important;
+    border: none;
+  }
+  .diamondKnowledgeNav .dropdown-menu {
+    position: absolute !important;
+    width: 95%;
+    /* box-shadow: none; */
+    margin-left: 2.5% !important;
+    background-color: #F1F1F1;
+}
+
+  .DkChildTopics{
+    display: none !important;
+  }
+  .dk .DkChild .makeinline{
+    display: block !important
+  }
+  
+  #dkToggleButton {
+      background-color: #0BB19A !important;
+      color: white !important;
+      border: none;
+  }
+}
+
