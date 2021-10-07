@@ -1,0 +1,13 @@
+
+.login-modal .modal-content{
+    background-color: #333033;
+    color: white;
+}
+.login-modal .modal-backdrop,.show{
+    background-color: rgba(0, 0, 0, 0.7);
+}
+.login-link{
+    width: 200px;
+    margin: auto;
+    
+}

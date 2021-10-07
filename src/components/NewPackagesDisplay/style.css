@@ -1,0 +1,70 @@
+
+.main-package-title{
+    margin: 0 auto;
+}
+.row-of-cards{
+    display: flex;
+    flex-wrap:nowrap;
+    /* border: 2px  solid red; */
+
+}
+
+.one-card{
+    border: 2px  solid grey;
+    /* background-color: rgb(100, 187, 93,  0.8); */
+    border-radius: 8px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 3%;
+    width: 340px;
+    height: 250px;
+    flex: 0 1 calc(25% - 1em);
+    margin: 2%;
+}
+
+.one-card:hover{
+    border-color: transparent ;
+}
+.dropdown-active{
+    color: rgba(24, 175, 13, 0.8);
+    font-size: large;
+}
+.package-title:hover{
+    background-color: rgba(24, 175, 13, 0.8)  ;
+    cursor: pointer;
+
+}
+.package-title-active{
+    background-color: rgba(24, 175, 13, 0.8)  ;
+
+}
+.package-title{
+    background-color: transparent  ;
+
+}
+
+@media only screen and (max-width: 428px) and (min-width: 320px) {
+    .row-of-cards{
+        flex-wrap: wrap !important ;
+        /* border: 2px  solid red;   */
+        align-items: center !important;
+        justify-content: space-around !important;
+  
+    }
+    
+    .one-card{
+        
+        flex: 0 1 calc(75% - 1em);
+        margin: 10% auto;
+        padding-top: 15%;
+
+
+    }
+    .one-card:hover{
+        border-color: transparent;
+    }
+    
+    
+
+}

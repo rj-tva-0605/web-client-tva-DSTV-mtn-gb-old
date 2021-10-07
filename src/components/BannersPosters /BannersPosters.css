@@ -1,0 +1,113 @@
+
+
+
+.dashboard-banners{
+    height:400px;
+  }
+
+.dashboard-banners-main-title{
+    /* border: 2px solid white; */
+    margin-top: 40px;
+    
+}
+.dsh-bn-mn-title-text{
+    text-decoration: none;
+    color:white;
+    margin-left: 25px;
+   
+}
+a.dashboard-first-banner-card-text{
+    font-size: 3px;
+}
+
+.dashboard-banners-main-content{
+    display: flex;
+}
+
+.dashboard-first-banner-card{
+    margin-top: 30px;
+    margin-left: 30px;
+   
+}
+
+/* this class below has to be investigated why its functionality isnt working */
+.dashboard-first-banner-card-img{
+    width: 350px;
+    height: "auto";
+    
+}
+
+.dashboard-first-banner-card-text{
+    margin-top: 30px;
+    
+    padding-top: 0px;
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+
+
+
+
+.controls-wrapper {
+    width: 100%;
+  }
+  
+  .carousel-wrapper {
+    width: 100%;
+  }
+  
+  .rec-carousel-item:focus {
+    outline: none;
+    box-shadow: inset 0 0 1px 0px rgb(130, 173, 238);
+  }
+  
+  .rec-arrow[disabled] {
+    transform: scale(0);
+}
+
+.rec.rec-arrow {
+    border-radius: 0;
+}
+/* round buttons on hover */
+.rec.rec-arrow:hover {
+    border-radius: 50%;
+}
+
+.poster-img{
+    width: 100%;
+    height: "auto";
+}
+
+button.rec-dot{
+    visibility: hidden;
+  }
+  
+
+
+
+
+
+
+
+/* square buttons */
+/* .rec.rec-arrow {
+    border-radius: 0;
+} */
+/* round buttons on hover */
+/* .rec.rec-arrow:hover {
+    border-radius: 50%;
+} */
+/* hide disabled buttons */
+/* .rec.rec-arrow:disabled {
+    visibility: hidden;
+} */
+/* disable default outline on focused items */
+/* add custom outline on focused items */
+/* .rec-carousel-item:focus {
+    outline: none;
+    box-shadow: inset 0 0 1px 1px lightgrey;
+} */
+

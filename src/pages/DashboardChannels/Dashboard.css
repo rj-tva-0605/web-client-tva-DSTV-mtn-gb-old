@@ -1,0 +1,116 @@
+body {
+    font-family: sans-serif;
+    font-size: 16px;
+    background-image: none;
+    background-color: rgb(30, 33, 36);
+    color: white;
+    background-repeat: none;
+    overflow: hidden;
+  }
+  
+  .navbar-header{
+    margin-top: 10px;
+    padding-top: 3px;
+    height: 50px;
+    background-color: rgb(63, 66, 70);
+    
+}
+
+.dashboard-main-nav{
+    margin-top: 2px;
+    padding-left: 30px;
+    display: flex;
+    flex-wrap: nowrap;
+    list-style-type: none;
+}
+.navbar-bars{
+    padding: 12px;
+}
+.dashboard-main-nav-logo{
+    /* color: red; */
+    padding: 2px;
+    margin-right: 50px;
+    width: 150px;
+    height: auto;
+    z-index: 30;
+}
+.dashboard-main-search{
+    margin-left: 1px;
+    height: 30px;
+}
+.dashboard-body{
+    display:flex;
+    margin-top: 14px;
+}
+.sidebar{
+    background-color: rgb(63, 66, 70);
+    border-radius: 3px;
+    width: 250px;
+    height: 700px;
+    margin-right: 8px;
+    margin-left: 1%;
+    
+}
+.sidebar-widgts{
+    list-style-type: none;
+    margin-top: 6%;
+    /* border:  blue 2px solid;
+    padding-left: none; */
+}
+.sidebar-widgts-txt{
+    margin-left: 4%;
+    color: whitesmoke;
+}
+.main-content{
+    width: 1100px;
+    height: auto;
+    margin-top: 0.5%;
+    padding: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    /* border: 2px blue solid; */
+    /* border: 1px solid oldlace; */
+
+    
+}
+
+.main-content-y-scrollable{
+    overflow: scroll;
+    /* border: 2px solid red; */
+    height:500px;
+}
+
+
+.dashboard-banners-main-title{
+    /* border: 2px solid white; */
+    margin-top: 40px;
+    
+}
+.dsh-bn-mn-title-text{
+    text-decoration: none;
+    color:white;
+    margin-left: 25px;
+   
+}
+
+
+.unstyled-button {
+    border: none;
+    padding: 0;
+    background: none;
+    cursor: pointer;
+  }
+
+  /* will use this to measure and  */
+  /* arrange the buttons on dashboard  */
+  
+.chicken{
+    /* border: tomato 2px solid; */
+}
+
+.activ-yellow{
+    color: rgb(240, 236, 12) ;
+}
+.activ-hoovr {
+    color: #00c3ff;
+  }

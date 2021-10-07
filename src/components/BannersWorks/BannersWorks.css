@@ -1,0 +1,89 @@
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
+
+
+.dashboard-banners{
+  height:400px;
+}
+.dashboard-banners-main-title{
+    /* border: 2px solid white; */
+    margin-top: 40px;
+    
+}
+.dsh-bn-mn-title-text{
+    text-decoration: none;
+    color:white;
+    margin-left: 25px;
+   
+}
+a.dashboard-first-banner-card-text{
+    font-size: 3px;
+}
+
+.dashboard-banners-main-content{
+    display: flex;
+}
+
+.BannerApp {
+  width: 100%;
+  margin: 1rem auto;
+  height: 570px;
+}
+.dashboard-first-banner-card{
+    margin-top: 30px;
+    margin-left: 30px;
+   
+}
+
+.slide img {
+  width: 25rem;
+  align-items: center;
+  margin: 0 auto;
+  margin-left: 120px;
+  z-index: 1;
+}
+
+.slide {
+  transform: scale(0.8);
+  transition: transform 300ms;
+  opacity: 0.5;
+  z-index: -1;
+  /* border: 2px solid red; */
+}
+
+.activeSlide {
+  transform: scale(1.1);
+  align-items: center;
+  opacity: 1;
+}
+
+.arrow {
+  background-color: #087cc4;
+  
+  cursor: pointer;
+  /* border: 2px solid  red; */
+  z-index: 10;
+}
+
+.arrow svg {
+  transition: color 300ms;
+}
+
+.arrow svg:hover {
+  color: #68edff;
+}
+
+.next {
+  right: 3%;
+  top: 1%;
+  position: absolute;
+}
+
+.prev {
+  left: 3%;
+  top: 1%;
+  position: absolute;
+  width: 15px;
+  margin-left: 1000px;
+  
+}

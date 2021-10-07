@@ -1,0 +1,111 @@
+
+
+.general_spacing{
+    margin: 20px;
+}
+.table-color{
+    border-color: rgb(249, 244, 244);
+}
+
+table {
+   
+    /* background-color: whitesmoke; */
+    color: black;
+    border-collapse: collapse;
+    width: 600px !important;
+    margin: 20px auto;
+    text-align: center !important;
+  
+  }
+  
+.table-box{
+    width: 100%;
+}
+
+
+
+td, th {
+   
+    margin: 20px;
+    width: 100%;
+    padding: 20px;
+    border-left: transparent !important;
+    border-right: transparent !important;
+    /* border-bottom:  1px solid rgb(192, 190, 190) !important;
+    border-top: 1px solid rgb(254, 254, 254) !important; */
+
+    border-top: 1px solid  rgb(36, 38, 41) !important;
+    border-bottom: 1px solid  rgb(36, 38, 41) !important;
+
+  }
+  table, td, th {
+    border: 1px solid  rgb(36, 38, 41);
+    background-color: rgb(36, 38, 41);
+    color: white;
+  }
+ .tab{
+    /* border: 2px red solid;  general width */
+    width: 900px;
+ }
+
+
+  tr {
+    border-bottom:  1px solid #ccc !important;
+    border-top: 1px solid #ccc !important;
+}
+
+
+
+.package-title-container{
+    padding: 4px;
+    /* border : red 2px solid !important; */
+    border-top: 1px solid  rgb(36, 38, 41) !important;
+    border-bottom: 1px solid  rgb(36, 38, 41) !important;
+    text-align: center;
+    width: 30%;
+    height:20%;
+    cursor: pointer;
+    
+}
+.package-title{
+    background-color: rgb(100, 187, 93,  0.8) ;
+    border-radius: 4px;
+    text-align: center;
+    vertical-align: center;
+    padding-top: 2%;
+    color: whitesmoke;
+    width : 200px;   /*  !!NB increases the the width of the general package-container */
+    height: 85px;
+    box-shadow: none;    
+}
+
+.package-title:hover{
+    background-color: rgba(24, 175, 13, 0.8)  ;
+}
+.package-title-active{
+    background-color: rgba(24, 175, 13, 0.8)  ;
+
+}
+.dropdown-active{
+    color: rgba(24, 175, 13, 0.8);
+    font-size: large;
+}
+.pkg-tle-comp{
+    margin-top: 9px;
+    
+}
+
+.first-row-pkg-tle-comp{
+
+}
+
+.final-package-submit-btn{
+    width: 60px;
+    margin: 15px auto;
+}
+
+
+
+/* .tab {border-collapse:collapse;}
+.tab .first {border-bottom:1px solid #EEE;}
+.tab .second {border-top:1px solid #CCC;box-shadow: inset 0 1px 0 #CCC;} */

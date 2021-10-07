@@ -1,0 +1,108 @@
+
+
+
+
+.movie-det-wide{
+    width: 100%;
+    display: flex;
+    margin-top: 3%;
+}
+
+.movie-det-poster{
+    /* border: 2px red solid ; */
+    width: 25%;
+    height: 400px;
+    margin-left: 3%;    
+}
+.movie-det-poster-info-sub{
+    display: flex;
+    
+}
+
+.movie-det-poster-info{
+    /* border: 2px red solid ; */
+    width: 60%;
+    height: 450px;
+    margin-left: 6%;
+}
+
+.movie-det-poster-info-org{
+    
+    margin-top: 5%; 
+    /* display: flex; */
+    border-color: transparent !important;
+
+    padding: 0;
+    text-align: left !important;
+   
+}
+.movie-det-poster-info-org table{
+    /* border: red 2px solid;
+    text-align: left;
+    width : 100%; */
+    
+    text-align: left;
+    padding: 0;
+}
+.movie-det-poster-info-org   tr{
+    /* border: red 2px solid; */
+    height: auto;
+}
+.tr-movie-info{
+    /* border: 2px red solid; */
+    background-color: none;
+    width: 100%;
+
+}
+
+.movie-det-poster-info-orglist{
+    /* border: 2px red solid; */
+    width: 90%; 
+    height: 100px;
+}
+.movie-det-poster-info-orgsublist{
+    text-decoration: none;
+    padding: 0 !important;
+    list-style: none;
+    color: gray;
+
+}
+
+
+.movie-det-poster-info-orgsublist li{
+    
+    margin-left: "30px";
+    /* margin-top: none !important; */
+    font-size: 90%;
+    font-weight: 800;
+    /* border: red 4px solid; */
+    margin-bottom: none;
+    /* padding-bottom: 0; */
+}
+.movie-det-poster-info-orgsublist span {
+    color: whitesmoke;
+    margin-left: 5%;
+    /* padding: none; */
+}
+
+.play-movie-trailer{
+    /* border: 2px red solid; */
+    width: 80%;
+    height: 7%;
+    margin:2% 5% 2% 0%;
+    display: flex;
+    
+}
+
+.play-movie-trailer-button{
+    background-color: #e5a00d;
+    width: 19% ;
+    height: 80%;
+    border-radius: 6px;
+    display: flex;
+    padding: 0 3px;
+    text-decoration: none;
+    color: #000000;
+    
+
+}
