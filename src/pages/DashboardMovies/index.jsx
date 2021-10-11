@@ -2,7 +2,7 @@
 
 import React from 'react';
 import './style.css';
-import logo from '../../assets/images/glo-logo.png';
+import logo from '../../assets/images/mtn-logo.png';
 import axios from 'axios';
 
 import Cookies from 'universal-cookie';
@@ -76,11 +76,11 @@ const cookies = new Cookies();
 
 
 
-    const vodcontentAllMovies = (stringPackages, categoryTempids, access_token, categoryDictTemp) =>{
+    const vodcontentAllMovies = (stringPackages, categoryTempids, access_token, categoryDictTemp, operator_uid) =>{
 
         var config = {
             method: 'get',
-            url: `https://glonigeria.tvanywhereafrica.com:28182/api/client/v1/testglotv/categories/vod/content?packages=${stringPackages}&categories=${categoryTempids}`,
+            url: `https://ott.tvanywhereafrica.com:28182/api/client/v1/${operator_uid}/categories/vod/content?packages=${stringPackages}&categories=${categoryTempids}`,
             headers: { 
                 'Authorization': `Bearer ${access_token}`            }
         };
@@ -120,10 +120,9 @@ const cookies = new Cookies();
 
     }
 
-    const categoryIDfunc = async() =>{
+    const categoryIDfunc = async(stringPackages,access_token, user_id, operator_uid) =>{
 
-        var stringPackages = cookies.get("stringPackages") 
-        const access_token = cookies.get("access_token")
+        
  
         var categoryTempids = []
         var categoryTempNames = []
@@ -133,7 +132,7 @@ const cookies = new Cookies();
     
             var config = {
                 method: 'get',
-                url: `https://glonigeria.tvanywhereafrica.com:28182/api/client/v3/testglotv/categories/vod?packages=${stringPackages}`,
+                url: `https://ott.tvanywhereafrica.com:28182/api/client/v3/${operator_uid}/categories/vod?packages=${stringPackages}`,
                 headers: { 
                 'Authorization': `Bearer ${access_token}`
                 }
@@ -157,7 +156,7 @@ const cookies = new Cookies();
                     let categoryDictTemp = dictMaker(categoryTempids, categoryTempNames)
                     console.log('Category ids and names', categoryDictTemp)
     
-                    if(categoryIDs && categoryDictTemp ){vodcontentAllMovies(stringPackages, categoryTempids, access_token,categoryDictTemp)}
+                    if(categoryIDs && categoryDictTemp ){vodcontentAllMovies(stringPackages, categoryTempids, access_token,categoryDictTemp, operator_uid)}
     
                     
             })
@@ -172,8 +171,12 @@ const cookies = new Cookies();
 
 
     useEffect(() => {     
+        const access_token = cookies.get("access_token");
+        const user_id = cookies.get("user_id");
+        const operator_uid = cookies.get("operator_uid");
+        var stringPackages = cookies.get("stringPackages") 
 
-        categoryIDfunc()
+        categoryIDfunc(stringPackages,access_token, user_id, operator_uid);
 
         setTimeout(
             () => {

@@ -48,75 +48,16 @@ const ChannelPlayerPage = () =>{
     const shakaRef = useRef();
 
 
-    const dashHomeState = (e) => {
-        e.preventDefault();
-        setHomeActive('homeIsActive')
-
-        history.push({
-            pathname:  "/dashboard",
-            state: {
-            response: "messageFromServer",
-            detail: "somevaraible or state containing information will be here"
-            } 
-                     });
-
-        
-       
-    }
-
-    const dashliveTvState = (e) => {
-        e.preventDefault();
-        setLiveTvActive('livetvActive')
-
-        history.push({
-            pathname:  "/dashLivetv",
-            state: {
-            response: "messageFromServer",
-            detail: "somevaraible or state containing information will be here"
-            } 
-                     });
-
-        
-       
-    }
-
-    const dashmovieShowsState = (e) => {
-        e.preventDefault();
-        setMovieShowsActive('movieshowsActive')
-
-     
-        
-       
-    }
-
-    const dashwebShowsState = (e) => {
-        e.preventDefault();
-       
-    }
+    
 
     const playerRef = React.useRef();
  
-  function playVideo() {
-    playerRef.current.play();
-  }
- 
-  function pauseVideo() {
-    playerRef.current.pause();
-  }
- 
-  function toggleControls() {
-    playerRef.current.controls = !playerRef.current.controls;
-  }
 
-    // useEffect(() => {
-    //     const { player, ui } = shakaRef.current;
-    //     // player & ui point to an instance of shaka.Player & shaka.ui.Overlay.
-    //     player.load('https://bitmovin-a.akamaihd.net/content/playhouse-vr/mpds/105560.mpd');
-    // }, []);
 
-    const getChannelsPlayoutDet = () => {
+    
 
-        const access_token = cookies.get("access_token")
+    const getChannelsPlayoutDet = (access_token, user_id, operator_uid, stringPackages) => {
+
         console.log("prefetch trailer link")
         console.log("location.state.detail.id", location.state.detail.id)
         console.log("accesToken here", access_token)
@@ -126,7 +67,7 @@ const ChannelPlayerPage = () =>{
 
         var config = {
             method: 'get',
-            url: `https://glonigeria.tvanywhereafrica.com:28182/api/client/v1/testglotv/users/48965/live/channels/${location.state.detail.uid}`,
+            url: `https://ott.tvanywhereafrica.com:28182/api/client/v1/${operator_uid}/users/${user_id}/live/channels/${location.state.detail.uid}`,
             headers: {
               'Authorization': `Bearer ${access_token}`,
                'Content-Type': 'application/json'
@@ -138,18 +79,20 @@ const ChannelPlayerPage = () =>{
             console.log("trailer response is here", response.data);
             console.log("trailer url" ,response.data.data.url)
             setTrailerUrl(response.data.data.url)
-            // setTrailerUrl('https://glonigeria.tvanywhereafrica.com:28182/api/client/v1/testglotv/users/48965/vod/trailers/movies/9515')
           })
           .catch((error) => {
             console.log(error);
           });
 
-          // setTrailerUrl('https://glonigeria.tvanywhereafrica.com:28182/api/client/v1/testglotv/users/48965/vod/trailers/movies/9515')
-          // setmovieData(location.state.detail.id)
+         
     }
 
     useEffect(() => {
-      getChannelsPlayoutDet()
+        const access_token = cookies.get("access_token");
+        const user_id = cookies.get("user_id");
+        const operator_uid = cookies.get("operator_uid");
+        var stringPackages = cookies.get("stringPackages")
+      getChannelsPlayoutDet(access_token, user_id, operator_uid, stringPackages)
     }, [])
 
 

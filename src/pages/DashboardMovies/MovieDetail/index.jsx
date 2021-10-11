@@ -37,146 +37,7 @@ const MovieDetailZ = () =>{
     
     const location = useLocation();
 
-    const dictMaker = (colz,rowz) => {       
-        var result =  rowz.reduce(function(result, field, index) {
-        result[colz[index]] = field;
-        return result;
-        }, {})
-    return result 
-    }
 
-    const removeNull = (array) =>{
-        return array.filter(x => x !== null)
-        };
-
-
-    const trimContentFunc = (vodContent, categoryDictTemp) =>{
-        console.log('trimContentFunc ', vodContent)
-        let trimContent = []
-        let trimName = []
- 
-        for ( let i = 0;  i in vodContent; i++  ){
-             let arCont = vodContent[i].content ;
-             arCont.length = 15;
-             let arContmod = removeNull(arCont)
-             trimContent.push(arContmod)            
-             trimName.push(vodContent[i].id )
-        }
-        console.log('trimContent', trimContent)
-        
-
-        let finalTrimContent = dictMaker(trimName, trimContent)
-        
-        let ftrimContentValues = Object.values(finalTrimContent)
- 
-        let ftrimTitleValues = Object.values(categoryDictTemp)
- 
-        let iDealcontent = dictMaker(ftrimTitleValues, ftrimContentValues)
-
-        console.log('iDealcontent from purchased packages', iDealcontent)
-
-        // purchasedMoviesChecker(iDealcontent)
-        console.log("category names",  location.state.detail.categoryName)
- 
-        setIdealContent(iDealcontent)
-  
- 
-    }
-
-
-
-    const vodcontentAllMovies = (stringPackages, categoryTempids, access_token, categoryDictTemp) =>{
-
-        var config = {
-            method: 'get',
-            url: `https://glonigeria.tvanywhereafrica.com:28182/api/client/v1/testglotv/categories/vod/content?packages=${stringPackages}&categories=${categoryTempids}`,
-            headers: { 
-                'Authorization': `Bearer ${access_token}`            }
-        };
-        
-        axios(config)
-        .then(function (response) {
-            console.log('this is the data for all movies far all categories   ',  JSON.stringify(response.data));
-            console.log('VodContent Here', response.data.data)
-            console.log('Category Ids and their names', categoryDictTemp)
-            trimContentFunc(response.data.data, categoryDictTemp)
-            appendNewIDs(response.data.data)
-            // console.log("Movie purchased package  Vod Content exists", moviePackagePurchased)
-
-
-    
-    
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
-        
-    }
-
-
-    const appendNewIDs = (resp) =>{
-        let respList = resp
-        var appendNewList = []
-
-        var count = 0
-        for (let i; i < respList.length; i++){
-            // console.log("i value", i)
-            for (let y;  y < respList.[i].content.length; y++){
-                console.log("y value", respList.[i].content.[y])
-                respList.[i].content.[y].["new_unique_id"] = count + 1
-            }
-        }
-
-        console.log("New RespList adding unique key ", respList)
-
-    }
-
-    const categoryIDfunc = async() =>{
-
-        var stringPackages = cookies.get("purchasedPackageIds") 
-        const access_token = cookies.get("access_token")
- 
-        var categoryTempids = []
-        var categoryTempNames = []
-        // var stringPackages = packageTempids.join(',')
-        
-        console.log('stringPackages', stringPackages)
-    
-            var config = {
-                method: 'get',
-                url: `https://glonigeria.tvanywhereafrica.com:28182/api/client/v3/testglotv/categories/vod?packages=${stringPackages}`,
-                headers: { 
-                'Authorization': `Bearer ${access_token}`
-                }
-            };
-            
-            await axios(config)
-            .then((response) => {
-                console.log(JSON.stringify(response.data));
-                for (let i = 0; i < response.data.data.length; i++){
-    
-                    categoryTempNames.push(response.data.data.[i].name)
-                    categoryTempids.push(response.data.data.[i].id)
-                    }   
-    
-                    setCategoryIDs(categoryTempids)
-    
-                    
-    
-                    console.log('this is catIds ', categoryIDs)                
-    
-                    let categoryDictTemp = dictMaker(categoryTempids, categoryTempNames)
-                    console.log('Category ids and names', categoryDictTemp)
-    
-                    if(categoryIDs && categoryDictTemp ){vodcontentAllMovies(stringPackages, categoryTempids, access_token,categoryDictTemp)}
-    
-                    
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-    
-       }
     
     
 
@@ -206,12 +67,11 @@ const MovieDetailZ = () =>{
 
    
 
-    const getMovieDetail = () => {
-        const access_token = cookies.get("access_token")
+    const getMovieDetail = (access_token, user_id, operator_uid) => {
 
         var config = {
             method: 'get',
-            url: `https://glonigeria.tvanywhereafrica.com:28182/api/client/v1/testglotv/users/48965/movies/${location.state.detail.movieID}`,
+            url: `https://ott.tvanywhereafrica.com:28182/api/client/v1/${operator_uid}/users/${user_id}/movies/${location.state.detail.movieID}`,
             headers: { 
                 'Authorization': `Bearer ${access_token}`
             }
@@ -244,14 +104,16 @@ const MovieDetailZ = () =>{
     }
 
     useEffect(() => {
-        
+        const access_token = cookies.get("access_token");
+        const user_id = cookies.get("user_id");
+        const operator_uid = cookies.get("operator_uid");
+        var purchasedPackageIds = cookies.get("purchasedPackageIds") 
 
-        categoryIDfunc();
 
         setTimeout(
             () => {
                 
-                getMovieDetail();
+                getMovieDetail(access_token, user_id, operator_uid);
             },
             2 * 1000
           );
@@ -307,12 +169,12 @@ const MovieDetailZ = () =>{
                             {console.log("imageid from categories page",movieData.imageID)}
                             {console.log("movieData", movieData)}
                             <img className="poster-img"
-                                src={`https://glonigeria.tvanywhereafrica.com:28182/api/client/v1/global/images/${location.state.detail.imageID}?accessKey=WkVjNWNscFhORDBLCg==`} alt={320872} 
+                                src={`https://ott.tvanywhereafrica.com:28182/api/client/v1/global/images/${location.state.detail.imageID}?accessKey=WkVjNWNscFhORDBLCg==`} alt={320872} 
                                 style = {{width: "auto"}}
                                 /> 
                             </div>
                             <div className="movie-det-poster-info">
-                                <h3 style={{marginTop: "3%", color:"white"}}>{movieData.uiD}</h3>
+                                <h3 style={{marginTop: "3%", color:"white"}}>{location.state.detail.title}</h3>
                                 <p>2016</p>
                                 
                                 {/* <i class="fas fa-hourglass"></i> */}

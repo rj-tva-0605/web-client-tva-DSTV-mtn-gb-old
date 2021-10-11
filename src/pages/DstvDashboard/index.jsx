@@ -2,7 +2,7 @@
 
 import React from 'react';
 import './style.css';
-import logo from '../../assets/images/glo-logo.png';
+import logo from '../../assets/images/mtn-logo.png';
 
 
 

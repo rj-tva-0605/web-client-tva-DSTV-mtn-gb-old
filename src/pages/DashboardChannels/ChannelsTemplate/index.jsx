@@ -31,7 +31,7 @@ const ChannelsTemplate = ({channels}) =>{
                                             {/* <div className=""> */}
                                                 <img className="" 
                                                         style={{}}
-                                                        src={`https://glonigeria.tvanywhereafrica.com:28182/api/client/v1/global/images/${logos.NORMAL}?accessKey=WkVjNWNscFhORDBLCg==`} alt={logos.NORMAL} />                                                  
+                                                        src={`https://ott.tvanywhereafrica.com:28182/api/client/v1/global/images/${logos.NORMAL}?accessKey=WkVjNWNscFhORDBLCg==`} alt={logos.NORMAL} />                                                  
                                                     {console.log(uid)}
                                             {/* </div>     */}
 

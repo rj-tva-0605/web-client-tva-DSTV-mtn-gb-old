@@ -2,7 +2,7 @@
 
 import React from 'react';
 import './style.css';
-import logo from '../../assets/images/glo-logo.png';
+import logo from '../../assets/images/mtn-logo.png';
 import loading from '../../assets/gifs/loading_glo.gif'
 import axios from 'axios';
 
@@ -32,7 +32,7 @@ const cookies = new Cookies();
     const [channelDetaiLs, setChannelDetaiLs] = useState(false) 
     const [categoryIdsNames, setCategoryIdsNames] = useState(false)
 
-    const [currentChannel, setCurrentChannel] = useState("news")
+    const [currentChannel, setCurrentChannel] = useState("kids")
 
 
 
@@ -110,10 +110,9 @@ const cookies = new Cookies();
 
 
     
-    const channelDetailZ = async(channelcats) =>{
+    const channelDetailZ = async(channelcats, stringPackages, access_token ,operator_uid, user_id) =>{
 
-    var stringPackages = cookies.get("stringPackages") 
-    const access_token = cookies.get("access_token")
+    
 
     var categoryTempids = []
     var categoryTempNames = []
@@ -123,7 +122,7 @@ const cookies = new Cookies();
 
         var config = {
             method: 'get',
-            url: `https://glonigeria.tvanywhereafrica.com:28182/api/client/v2/testglotv/channels?packages=${stringPackages}`,
+            url: `https://ott.tvanywhereafrica.com:28182/api/client/v2/${operator_uid}/channels?packages=${stringPackages}`,
             headers: { 
             'Authorization': `Bearer ${access_token}`
             }
@@ -148,10 +147,9 @@ const cookies = new Cookies();
 
 
 
-    const channelCategory = () =>{
+    const channelCategory = (stringPackages, access_token, user_id, operator_uid) =>{
 
-        var stringPackages = cookies.get("stringPackages") 
-        const access_token = cookies.get("access_token")
+       
  
         var channelCategoryUID = []
         var channelCategoryDetail = [] 
@@ -164,7 +162,7 @@ const cookies = new Cookies();
 
             var config = {
             method: 'get',
-            url: 'https://glonigeria.tvanywhereafrica.com:28182/api/client/v1/testglotv/categories/channels',
+            url: `https://ott.tvanywhereafrica.com:28182/api/client/v1/${operator_uid}/categories/channels`,
             headers: { 
                 'Authorization': `Bearer ${access_token}`
             }
@@ -190,7 +188,7 @@ const cookies = new Cookies();
 
             var channelcats = response.data.data
             
-            return channelDetailZ(channelcats);
+            return channelDetailZ(channelcats, stringPackages ,access_token ,operator_uid, user_id);
 
             //actual use in the idealCategoryChannel app
             // return setCategoryIdsNames(response.data.data)
@@ -206,12 +204,15 @@ const cookies = new Cookies();
 
 
 
-    useEffect(() => {     
-
-           
+    useEffect(() => {   
+        const access_token = cookies.get("access_token");
+        const user_id = cookies.get("user_id");
+        const operator_uid = cookies.get("operator_uid");
+        var stringPackages = cookies.get("stringPackages")   
+        
         setTimeout(
             () => {
-                channelCategory();
+                channelCategory(stringPackages, access_token, user_id, operator_uid);
                 
             },
             1 * 1000
@@ -295,7 +296,7 @@ const cookies = new Cookies();
                                                         <button 
                                                             onClick={(e)=>{e.preventDefault();setCurrentChannel(key)}}
                                                             className={"sec-nav " + (!(currentChannel === key) ? '' : 'sec-highlit-div')}
-                                                            style={{color: !(currentChannel === key) ? 'white' : 'aquamarine', backgroundColor:"transparent", border:"none"}}
+                                                            style={{color: !(currentChannel === key) ? 'white' : 'rgb(250, 250, 51)', backgroundColor:"transparent", border:"none"}}
                                                             
                                                             >
                                                                 {key} 

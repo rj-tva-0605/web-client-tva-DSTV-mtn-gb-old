@@ -33,35 +33,6 @@ const cookies = new Cookies();
 
 const MovieStreamShakaMovies = () =>{
 
-
-    const playerRef = React.useRef(null);
-
-    const videoJsOptions = { // lookup the options in the docs for more options
-        autoplay: true,
-        controls: true,
-        responsive: true,
-        fluid: true,
-        sources: [{
-        src: 'https://glonigeria.tvanywhereafrica.com:28182/auth-streaming/2,61af797effbc295500ff39aee36d3e6593fe4437,1631392100,g00000000000,0-29000wishes1regretsdlowbitrate,8,8,2,8,8,8,DESKTOP,30278,all,none,glotv,172.20.1.31/hls/vod/0-29000wishes1regretsdlowbitrate-hls-NONE/playlist.m3u8',
-        type: 'video/mp4'
-        }]
-    }
-
-    const handlePlayerReady = (player) => {
-        playerRef.current = player;
-    
-        // you can handle player events here
-        player.on('waiting', () => {
-          console.log('player is waiting');
-        });
-    
-        player.on('dispose', () => {
-          console.log('player will dispose');
-        });
-      };
-
-
-
       
 
     const [homeActive, setHomeActive] = useState('')
@@ -77,85 +48,23 @@ const MovieStreamShakaMovies = () =>{
     const shakaRef = useRef();
 
 
-    const dashHomeState = (e) => {
-        e.preventDefault();
-        setHomeActive('homeIsActive')
+  
 
-        history.push({
-            pathname:  "/dashboard",
-            state: {
-            response: "messageFromServer",
-            detail: "somevaraible or state containing information will be here"
-            } 
-                     });
-
-        
-       
-    }
-
-    const dashliveTvState = (e) => {
-        e.preventDefault();
-        setLiveTvActive('livetvActive')
-
-        history.push({
-            pathname:  "/dashLivetv",
-            state: {
-            response: "messageFromServer",
-            detail: "somevaraible or state containing information will be here"
-            } 
-                     });
-
-        
-       
-    }
-
-    const dashmovieShowsState = (e) => {
-        e.preventDefault();
-        setMovieShowsActive('movieshowsActive')
-
-     
-        
-       
-    }
-
-    const dashwebShowsState = (e) => {
-        e.preventDefault();
-       
-    }
-
-    // const playerRef = React.useRef();
  
-  function playVideo() {
-    playerRef.current.play();
-  }
- 
-  function pauseVideo() {
-    playerRef.current.pause();
-  }
- 
-  function toggleControls() {
-    playerRef.current.controls = !playerRef.current.controls;
-  }
+  
 
-    // useEffect(() => {
-    //     const { player, ui } = shakaRef.current;
-    //     // player & ui point to an instance of shaka.Player & shaka.ui.Overlay.
-    //     player.load('https://bitmovin-a.akamaihd.net/content/playhouse-vr/mpds/105560.mpd');
-    // }, []);
 
-      const getMoviestrailerDet = () => {
+      const getMoviestrailerDet = (access_token, operator_uid, user_id) => {
 
-        const access_token = cookies.get("access_token")
         console.log("prefetch trailer link")
         console.log("location.state.detail.id", location.state.detail.uid)
         console.log("accesToken here", access_token)
-        // setmovieData(location.state.detail.id)
 
         console.log(access_token)
 
         var config = {
             method: 'get',
-            url: `https://glonigeria.tvanywhereafrica.com:28182/api/client/v1/testglotv/users/48965/vod/movies/${location.state.detail.uid}`,
+            url: `https://ott.tvanywhereafrica.com:28182/api/client/v1/${operator_uid}/users/${user_id}/vod/movies/${location.state.detail.uid}`,
             headers: {
               'Authorization': `Bearer ${access_token}`,
               'Content-Type': 'application/json'
@@ -167,18 +76,21 @@ const MovieStreamShakaMovies = () =>{
             console.log("trailer response is here", response.data);
             console.log("trailer url" ,response.data.data.url)
             setTrailerUrl(response.data.data.url)
-            // setTrailerUrl('https://glonigeria.tvanywhereafrica.com:28182/api/client/v1/testglotv/users/48965/vod/trailers/movies/9515')
           })
           .catch((error) => {
             console.log(error);
           });
 
-          // setTrailerUrl('https://glonigeria.tvanywhereafrica.com:28182/api/client/v1/testglotv/users/48965/vod/trailers/movies/9515')
-          // setmovieData(location.state.detail.id)
+         
     }
 
     useEffect(() => {
-        getMoviestrailerDet()
+        const access_token = cookies.get("access_token");
+        const user_id = cookies.get("user_id");
+        const operator_uid = cookies.get("operator_uid");
+        var purchasedPackageIds = cookies.get("purchasedPackageIds") 
+
+        getMoviestrailerDet(access_token, operator_uid, user_id)
     }, [])
 
 

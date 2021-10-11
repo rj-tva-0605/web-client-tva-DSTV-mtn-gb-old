@@ -280,8 +280,6 @@
                     "data_unavailable": "No Data Available",
                     "movie_unavailable": "This movie is not yet available",
                     "not_in_package": "This movie is not in your package.",
-                    
-                    
                     "loading": "Loading...",
                     "data_unavailable": "No Data Available",
                     "bundle_purchase_complete": "Bundle purchase complete!",
@@ -298,8 +296,6 @@
                     "error_transaction": "Error in Transaction. Try again later",
                     "insufficient_fund": "Your account has insufficient funds\nTop up and try again.",
                     "processing_request": "Processing request\nPlease wait...",
-                    
-                    
                     "loading": "Loading...",
                     "program_not_yet_available": "Sorry! this program is not yet available",
                     "data_unavailable": "No Data Available",
@@ -307,9 +303,7 @@
                     "timeshift": "Timeshift",
                     "scheduled": "Scheduled",
                     "failed": "Failed, try again later!",
-                    "my_recordings": "My Recordings",
-                    
-                    
+                    "my_recordings": "My Recordings",                    
                     "close": "Close",
                     "configuration_change_message": "There were some configuration changes\nKindly restart your app!",
                     "connect_to_valid_network": "Connect to a valid network to continue using this app!",
@@ -330,9 +324,7 @@
                     "standard": "Standard",
                     "high_quality": "High Quality",
                     "higher_quality": "Higher Quality",
-                    "best_quality":"Best Quality",
-                    
-                    
+                    "best_quality":"Best Quality",                
                     "popular_search": "Popular Searches",
                     "watch_channel": "Watch Channel?",
                     "channel_not_available": "This channel is not available in your package.",
@@ -344,9 +336,7 @@
                     "added": "Added",
                     "play": "Play",
                     "info": "Info",
-                    "data_unavailable": "No Data Available",
-                    
-                    
+                    "data_unavailable": "No Data Available",                    
                     "match": "match",
                     "watch_trailer": "Watch Trailer",
                     "series_unavailable": "This series is not yet available",
@@ -393,8 +383,6 @@
                     "high_quality": "High Quality",
                     "higher_quality": "Higher Quality",
                     "best_quality":"Best Quality",
-
-
                     "sign_in": "SIGN IN",
                     "create_account": "Create your account",
                     "page1_subheading": "Enter your mobile number and desired password to complete sign up",
@@ -437,8 +425,6 @@
                     "invalid_mobile_number": "Invalid mobile number\nTry again or contact support!",
                     "confirm_your_password": "Confirm your password",
                     "password_do_not_match": "Passwords do not match",
-                    
-                    
                     "sign_in": "SIGN IN",
                     "page1_heading": "Unlimited films, Live TV Channels & many more",
                     "page1_subheading": "Watch anywhere at anytime",
@@ -447,8 +433,6 @@
                     "page3_heading": "Available to MTN subscribers only",
                     "page3_subheading": "Get onto a valid MTN network to enjoy amazing content on this app",
                     "sign_up": "SIGN UP",
-                    
-                    
                     "loading": "Loading...",
                     "catch_up": "Catch Up!",
                     "watch_show": "Do you want to watch this show?",
@@ -469,8 +453,6 @@
                     "Thu":"Thu",
                     "Fri":"Fri",
                     "Sat":"Sat",
-                    
-                    
                     "video_quality": "Video Quality",
                     "sub_heading": "Select your default streaming quality for videos.\nYou can switch streaming quality in player options for single videos",
                     "mini_heading_movies": "VIDEO QUALITY FOR MOVIES",
@@ -480,8 +462,6 @@
                     "high_quality_text": "Uses more data",
                     "data_saver": "Data saver",
                     "data_saver_text": "Lower picture quality",
-                    
-                    
                     "watched_history": "Watched History",
                     "loading": "Loading...",
                     "no_data_available": "No Data Available",
@@ -767,8 +747,6 @@
                     "data_unavailable": "Sem dados disponíveis",
                     "movie_unavailable": "Este filme ainda não está disponível",
                     "not_in_package": "Este filme não está em seu pacote.",
-                    
-                    
                     "loading": "Carregando...",
                     "data_unavailable": "Sem dados disponíveis",
                     "bundle_purchase_complete": "Compra do pacote concluída!",
@@ -784,8 +762,6 @@
                     "error_transaction": "Erro na transação. Tente mais tarde",
                     "insufficient_fund": "Sua conta tem fundos insuficientes\nEncha e tente novamente.",
                     "processing_request": "Processando pedido\nPor favor, espere...",
-                    
-                    
                     "loading": "Carregando...",
                     "program_not_yet_available": "Desculpa! este programa ainda não está disponível",
                     "data_unavailable": "Sem dados disponíveis",
@@ -794,9 +770,6 @@
                     "scheduled": "Agendado",
                     "failed": "Falha, tente novamente mais tarde!",
                     "my_recordings": "Minhas Gravações",
-                    
-                    
-                    
                     "close": "Fechar",
                     "configuration_change_message": "Houve algumas mudanças de configuração\nReinicie seu aplicativo",
                     "connect_to_valid_network": "Conecte-se a uma rede válida para continuar usando este aplicativo!",
@@ -818,22 +791,16 @@
                     "high_quality": "Alta qualidade",
                     "higher_quality": "Maior qualidade",
                     "best_quality":"Melhor qualidade",
-                    
-                    
                     "popular_search": "Escolhas Populares",
                     "watch_channel": "Assistir ao canal?",
                     "channel_not_available": "Este canal não está disponível em seu pacote.",
                     "search_text": "Pesquise filmes, canais de TV lineares, etc.",
                     "ok": "OK",
-                    
-                    
                     "add_to_list": "Adicionar aos lista",
                     "added": "Adicionado",
                     "play": "Ver",
                     "info": "Informações",
                     "data_unavailable": "Sem dados disponíveis",
-                    
-                    
                     "match": "partida",
                     "watch_trailer": "Ver Trailer",
                     "series_unavailable": "Esta série ainda não está disponível",
@@ -879,8 +846,6 @@
                     "high_quality": "Alta qualidade",
                     "higher_quality": "Maior qualidade",
                     "best_quality":"Melhor qualidade",
-                    
-                    
                     "sign_in": "ENTRAR",
                     "create_account": "Criar conta",
                     "page1_subheading": "Insira o seu número de telefone e a sua palavra-chave para completar a criação da sua conta",
@@ -922,8 +887,6 @@
                     "invalid_mobile_number": "Número de celular inválido\nTente novamente ou entre em contato com o suporte!",
                     "confirm_your_password": "Confirme sua senha",
                     "password_do_not_match": "As senhas não coincidem",
-                    
-                    
                     "sign_in": "ENTRAR",
                     "page1_heading": "Filmes ilimitados, canais de TV ao vivo e muito mais",
                     "page1_subheading": "Watch anywhere at anytime",
@@ -932,7 +895,6 @@
                     "page3_heading": "Disponível apenas para assinantes MTN",
                     "page3_subheading": "Entre em uma rede MTN válida para desfrutar de conteúdo incrível neste aplicativo",
                     "sign_up": "CRIAR CONTA",	  
-                    
                     "loading": "Carregando...",
                     "catch_up": "Alcançar!",
                     "watch_show": "Você quer assistir este show?",
@@ -953,7 +915,6 @@
                     "Thu": "Qui",
                     "Fri": "Sex",
                     "Sat": "Sáb",
-                    
                     "video_quality": "Qualidade de vídeo",
                     "sub_heading": "Selecione sua qualidade de streaming padrão para vídeos.Você pode mudar a qualidade do streaming nas opções do player para vídeos individuais",
                     "mini_heading_movies": "QUALIDADE DE VÍDEO PARA FILMES",
@@ -963,8 +924,6 @@
                     "high_quality_text": "Usa mais dados",
                     "data_saver": "Poupança de dados",
                     "data_saver_text": "Qualidade de imagem inferior",
-                    
-                    
                     "watched_history": "Histórico",
                     "loading": "Carregando...",
                     "no_data_available": "Sem dados disponíveis",

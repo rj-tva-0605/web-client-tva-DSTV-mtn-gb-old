@@ -49,7 +49,7 @@ body{
 }
 
 .main-nav:hover{
-    color: aqua;
+    color: rgb(251, 236, 93);
 }
 
 .logo{
@@ -70,7 +70,7 @@ body{
 }
 .highlit-div{
     border-bottom-style: solid;
-    border-bottom-color: aquamarine;
+    border-bottom-color: rgb(250, 250, 51);
 }
 .sec-Navbar{
     /* border-bottom: 1px solid rgb(75, 72, 72); */
@@ -110,7 +110,7 @@ body{
     /* display: flex !important; */
 }
 .sec-highlit-div{
-    color: aquamarine;
+    color: rgb(250, 250, 51);
 }
 
 
