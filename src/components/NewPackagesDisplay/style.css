@@ -31,12 +31,12 @@
     font-size: large;
 }
 .package-title:hover{
-    background-color: rgba(24, 175, 13, 0.8)  ;
+    background-color: rgb(204, 150, 14) ;
     cursor: pointer;
 
 }
 .package-title-active{
-    background-color: rgba(24, 175, 13, 0.8)  ;
+    background-color: rgb(218, 172, 58)  ;
 
 }
 .package-title{

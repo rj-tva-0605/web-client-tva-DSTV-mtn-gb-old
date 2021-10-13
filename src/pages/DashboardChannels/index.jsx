@@ -263,7 +263,19 @@ const cookies = new Cookies();
                                 <div className=" mnvs">Movies</div>
                             </Link>
 
-                            <div className="main-nav ">TV Shows</div>
+                            <Link className="main-nav " 
+                                        style ={{ }}
+                                     to = {{
+                                      pathname: "/tvshowspage",
+                                      state: {
+                                           detail: {
+                                               id: ""
+                                           }
+                                       }
+                                   }}
+                                    >
+                            <div className=" mnvs">TV Shows</div>
+                        </Link>
                             
                             <Link className="main-nav highlit-div" 
                                             style ={{ }}

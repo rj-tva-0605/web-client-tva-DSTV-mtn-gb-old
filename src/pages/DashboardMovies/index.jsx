@@ -46,17 +46,23 @@ const cookies = new Cookies();
 
 
     const trimContentFunc = (vodContent, categoryDictTemp) =>{
-        console.log('trimContentFunc ', vodContent)
+        console.log('Vod Content within trimContentFunc ', vodContent)
         let trimContent = []
         let trimName = []
+        let newVodContent = []
  
-        for ( let i = 0;  i in vodContent; i++  ){
-             let arCont = vodContent[i].content ;
-             arCont.length = 15;
-             let arContmod = removeNull(arCont)
-             trimContent.push(arContmod)            
+        for ( let i = 0;  i in vodContent; i++  ){  
+
+             console.log(" i value ", i)            
+             let arCont = vodContent.[i].content ;
+             let arContmod = removeNull(vodContent[i].content)
+             trimContent.push(arContmod)
+             console.log("Content filtered out from trimContent", trimContent)
+            
              trimName.push(vodContent[i].id )
         }
+
+        console.log("Content in all movies from VOD Category", )
         console.log('trimContent', trimContent)
         
 
@@ -77,7 +83,10 @@ const cookies = new Cookies();
 
 
     const vodcontentAllMovies = (stringPackages, categoryTempids, access_token, categoryDictTemp, operator_uid) =>{
+        console.log("vodContent stringPackages", stringPackages)
 
+        let newContent = []
+        // let respCont = []
         var config = {
             method: 'get',
             url: `https://ott.tvanywhereafrica.com:28182/api/client/v1/${operator_uid}/categories/vod/content?packages=${stringPackages}&categories=${categoryTempids}`,
@@ -90,10 +99,33 @@ const cookies = new Cookies();
             console.log('this is the data for all movies far all categories   ',  JSON.stringify(response.data));
             console.log('VodContent Here', response.data.data)
             console.log('Category Ids and their names', categoryDictTemp)
-            trimContentFunc(response.data.data, categoryDictTemp)
-            appendNewIDs(response.data.data)
+            const respCont = response.data.data
+            let maxArray = []
+            
+            
+            for (let y = 0; y in respCont; y++ ){
+                
+                
+                console.log(`array result from respCont ${y} content`, respCont[y].content)
+                let minArray = []
 
-    
+                for (let x = 0; x in respCont[y].content; x++ ){
+                    const movieValFilter = (contentVal) => {
+                        return contentVal.["type"] === "movie"
+                    }
+                   
+                    let reslt = respCont[y].content.filter(movieValFilter)
+                    minArray = reslt
+                }
+
+                respCont[y].content = minArray
+
+            }
+            console.log(`array NEW result  replace respCont  content`, respCont)
+
+
+            trimContentFunc(respCont, categoryDictTemp)
+            appendNewIDs(respCont)    
     
         })
         .catch(function (error) {
@@ -180,7 +212,7 @@ const cookies = new Cookies();
 
         setTimeout(
             () => {
-                categoryIDfunc();
+                categoryIDfunc(stringPackages,access_token, user_id, operator_uid);
             },
             2 * 1000
           );
@@ -228,7 +260,19 @@ const cookies = new Cookies();
                             <div className=" mnvs">Movies</div>
                         </Link>
 
-                        <div className="main-nav">TV Shows</div>
+                        <Link className="main-nav " 
+                                        style ={{ }}
+                                     to = {{
+                                      pathname: "/tvshowspage",
+                                      state: {
+                                           detail: {
+                                               id: ""
+                                           }
+                                       }
+                                   }}
+                                    >
+                            <div className=" mnvs">TV Shows</div>
+                        </Link>
                         <Link className="main-nav " 
                                         style ={{ }}
                                      to = {{

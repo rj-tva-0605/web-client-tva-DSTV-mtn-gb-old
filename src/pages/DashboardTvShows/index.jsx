@@ -1,4 +1,4 @@
-
+// get package ids in cookies  from newdashboard  page
 
 import React from 'react';
 import './style.css';
@@ -7,15 +7,7 @@ import axios from 'axios';
 
 import Cookies from 'universal-cookie';
 import { useEffect, useState } from 'react';
-
-import { useHistory } from "react-router";
-import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import PackagesDisplay from '../../components/PackagesDisplay';
-
-import NewPackagesDisplay from 'components/NewPackagesDisplay';
-
-
 
 import List from './list'
 
@@ -25,25 +17,17 @@ import List from './list'
 const cookies = new Cookies();
 
 
- const DstvDashboard = () =>{
-    const [packageIDs, setPackageIDs] = useState(false)
+ const DashboardTvShows = () =>{
+
+
     const [categoryIDs, setCategoryIDs] = useState([])
     const [IdealContent, setIdealContent] = useState(false)
-    const [trimVal, setTrimVal] = useState("")
-    const [trimCont, setTrimCont] = useState(false)
 
-    const [ dataReady, setDataready] = useState(false)
-
-    const history = useHistory();
-    const location = useLocation();
-
-    
+    //  use redux instead to store it like storing access 
+    //  token const [purchasedIdealContent, setPurchasedIdealContent] = useState(false)
 
 
 
-
- 
-    
 
 
 
@@ -62,21 +46,21 @@ const cookies = new Cookies();
 
 
     const trimContentFunc = (vodContent, categoryDictTemp) =>{
-        console.log('trimContentFunc ', vodContent)
+        console.log('Vod Content within trimContentFunc ', vodContent)
         let trimContent = []
         let trimName = []
+        let newVodContent = []
  
-        for ( let i = 0;  i in vodContent; i++  ){
-             let arCont = vodContent[i].content ;
-             arCont.length = 15;
-             let arContmod = removeNull(arCont)
-             trimContent.push(arContmod)            
+        for ( let i = 0;  i in vodContent; i++  ){  
+
+             let arCont = vodContent.[i].content ;
+             let arContmod = removeNull(vodContent[i].content)
+             trimContent.push(arContmod)
+            
              trimName.push(vodContent[i].id )
         }
-        console.log('trimContent', trimContent)
-        setTimeout(function(){setTrimCont(trimContent)}, 300)
-         // setTrimCont(trimContent)
-        setTrimVal(trimVal)
+
+        
 
         let finalTrimContent = dictMaker(trimName, trimContent)
         
@@ -88,16 +72,17 @@ const cookies = new Cookies();
         console.log('iDealcontent', iDealcontent)
  
         setIdealContent(iDealcontent)
- 
-        setTrimCont(true)
- 
+  
  
     }
 
 
 
-    const vodcontentAllMovies = (stringPackages, categoryTempids, access_token, categoryDictTemp, user_id, operator_uid) =>{
+    const vodcontentAllMovies = (stringPackages, categoryTempids, access_token, categoryDictTemp, operator_uid) =>{
+        console.log("vodContent stringPackages", stringPackages)
 
+        let newContent = []
+        // let respCont = []
         var config = {
             method: 'get',
             url: `https://ott.tvanywhereafrica.com:28182/api/client/v1/${operator_uid}/categories/vod/content?packages=${stringPackages}&categories=${categoryTempids}`,
@@ -108,9 +93,35 @@ const cookies = new Cookies();
         axios(config)
         .then(function (response) {
             console.log('this is the data for all movies far all categories   ',  JSON.stringify(response.data));
-            console.log('VodContent Here', response.data.data, categoryDictTemp)
-            trimContentFunc(response.data.data, categoryDictTemp)
-    
+            console.log('VodContent Here', response.data.data)
+            console.log('Category Ids and their names', categoryDictTemp)
+            const respCont = response.data.data
+            let maxArray = []
+            
+            
+            for (let y = 0; y in respCont; y++ ){
+                
+                
+                console.log(`array result from respCont ${y} content`, respCont[y].content)
+                let minArray = []
+
+                for (let x = 0; x in respCont[y].content; x++ ){
+                    const movieValFilter = (contentVal) => {
+                        return contentVal.["type"] === "series"
+                    }
+                   
+                    let reslt = respCont[y].content.filter(movieValFilter)
+                    minArray = reslt
+                }
+
+                respCont[y].content = minArray
+
+            }
+            console.log(`array NEW result  replace respCont  content`, respCont)
+
+
+            trimContentFunc(respCont, categoryDictTemp)
+            appendNewIDs(respCont)    
     
         })
         .catch(function (error) {
@@ -119,11 +130,31 @@ const cookies = new Cookies();
         
     }
 
-    const categoryIDfunc = async(packageTempids, access_token, user_id, operator_uid) =>{
+
+    const appendNewIDs = (resp) =>{
+        let respList = resp
+        var appendNewList = []
+
+        var count = 0
+        for (let i; i < respList.length; i++){
+            // console.log("i value", i)
+            for (let y;  y < respList.[i].content.length; y++){
+                console.log("y value", respList.[i].content.[y])
+                respList.[i].content.[y].["new_unique_id"] = count + 1
+            }
+        }
+
+        console.log("New RespList adding unique key ", respList)
+
+    }
+
+    const categoryIDfunc = async(stringPackages,access_token, user_id, operator_uid) =>{
+
+        
  
         var categoryTempids = []
         var categoryTempNames = []
-        var stringPackages = packageTempids.join(',')
+        // var stringPackages = packageTempids.join(',')
         
         console.log('stringPackages', stringPackages)
     
@@ -153,7 +184,7 @@ const cookies = new Cookies();
                     let categoryDictTemp = dictMaker(categoryTempids, categoryTempNames)
                     console.log('Category ids and names', categoryDictTemp)
     
-                    if(categoryIDs && categoryDictTemp ){vodcontentAllMovies(stringPackages, categoryTempids, access_token,categoryDictTemp, user_id, operator_uid)}
+                    if(categoryIDs && categoryDictTemp ){vodcontentAllMovies(stringPackages, categoryTempids, access_token,categoryDictTemp, operator_uid)}
     
                     
             })
@@ -163,78 +194,58 @@ const cookies = new Cookies();
     
        }
     
+    
 
-
-
-    const packageIDfunc = async() =>{
-        const access_token = cookies.get("access_token")
-        const user_id = cookies.get("user_id");
-        const operator_uid = cookies.get("operator_uid");
-        let packageTempids = []
-        let purchasedPackageIds = []
+    const purchSeriesStatus = (access_token, stringPackages, operator_uid, user_id) =>{
 
         var config = {
-            method: 'get',
-            url: `https://ott.tvanywhereafrica.com:28182/api/client/v1/${operator_uid}/users/${user_id}/packages?device_class=desktop`,
-            headers: { 
-              'Authorization': `Bearer ${access_token}`
-            }
-          };
-          
-          await  axios(config)
-          .then( (response) => {
-            console.log('This the various packages from the package api ', JSON.stringify(response.data));
-            for (let i = 0; i < response.data.data.length; i++){
-                packageTempids.push(response.data.data.[i].id)
-                // do seperation for purchased packages here before we set it in the cookie 
-                if (response.data.data.[i].purchased !== "null"){
-                    purchasedPackageIds.push(response.data.data.[i].id)
-                }
+        method: 'get',
+        url: `https://ott.tvanywhereafrica.com:28182/api/client/v1/${operator_uid}/users/${user_id}/series?packages=${stringPackages}`,
+        headers: { 
+            'Authorization': `Bearer ${access_token}`
+        }
+        };
 
-            }
+        axios(config)
+        .then(function (response) {
+        console.log(JSON.stringify(response.data));
+        })
+        .catch(function (error) {
+        console.log(error);
+        });
+    }
 
-            
+    const seriesDetailsEpisode = (access_token, stringPackages, operator_uid, user_id, series_ids) => {
 
-            
-            setPackageIDs(packageTempids)
-            console.log(packageIDs)
+        var config = {
+        method: 'get',
+        url: `https://ott.tvanywhereafrica.com:28182/api/client/v1/${operator_uid}/series?series_id=${series_ids}`,
+        headers: { 
+            'Authorization': `Bearer ${access_token}`
+        }
+        };
 
-               if (packageTempids !== false ){
-                let stringPackages = packageTempids.join(',')
-                let purchasedStringPackages = purchasedPackageIds.join(',')
-                
-                console.log('string Packages for packageIDs' ,stringPackages)
-                console.log('Purchased for packageIDs' ,purchasedPackageIds)
-                // setting value as a cookie to be used later 
-                cookies.set("stringPackages", stringPackages)
-                cookies.set("purchasedPackageIds", purchasedPackageIds)
-
-                categoryIDfunc(packageTempids , access_token, user_id, operator_uid)
-                    }
-                else{console.log('PackageIds not ready')}
-            
-          })
-          .catch( (error) => {
-            console.log(error);
-          });
-
-          
-
+        axios(config)
+        .then(function (response) {
+        console.log(JSON.stringify(response.data));
+        })
+        .catch(function (error) {
+        console.log(error);
+        });
     }
 
 
-
-    
-
-
-
     useEffect(() => {     
+        const access_token = cookies.get("access_token");
+        const user_id = cookies.get("user_id");
+        const operator_uid = cookies.get("operator_uid");
+        var stringPackages = cookies.get("stringPackages") 
 
-        packageIDfunc()
+        categoryIDfunc(stringPackages,access_token, user_id, operator_uid);
 
         setTimeout(
             () => {
-                packageIDfunc();
+                categoryIDfunc(stringPackages,access_token, user_id, operator_uid);
             },
             2 * 1000
           );
@@ -250,13 +261,12 @@ const cookies = new Cookies();
             <div className="main-dashboard">
 
                 <div className="navbars-ctrl">
-
+                    
                     <div className="main-Navbar"> 
                         {/* <p className="main-nav logo "> */}
-                        
                             <img src={logo} className="main-nav logo "/>
                         {/* </p> */}               
-                        <Link className="main-nav highlit-div" 
+                        <Link className="main-nav " 
                                         style ={{ }}
                                      to = {{
                                       pathname: "/newdashboard",
@@ -269,7 +279,7 @@ const cookies = new Cookies();
                                     >
                             <div className="mnvs">Featured</div>
                         </Link>
-                        <Link className="main-nav " 
+                        <Link className="main-nav  " 
                                         style ={{ }}
                                      to = {{
                                       pathname: "/moviespage",
@@ -282,8 +292,7 @@ const cookies = new Cookies();
                                     >
                             <div className=" mnvs">Movies</div>
                         </Link>
-
-                        <Link className="main-nav" 
+                        <Link className="main-nav highlit-div " 
                                         style ={{ }}
                                      to = {{
                                       pathname: "/tvshowspage",
@@ -296,7 +305,6 @@ const cookies = new Cookies();
                                     >
                             <div className=" mnvs">TV Shows</div>
                         </Link>
-                        
                         <Link className="main-nav " 
                                         style ={{ }}
                                      to = {{
@@ -316,50 +324,16 @@ const cookies = new Cookies();
                         <div className="main-nav">My List</div>
                     </div>
                     
-                                            
+                                             
+                    
                 </div>
-                
-                
+
+
                 
                 { !IdealContent ? <div className="mx-auto" style ={{marginTop:"250px", marginLeft: "560px"}} >Loading Content ...</div>
                         :
-                <div className="scroll-in-centrediv" style={{paddingTop: "5%"}} >
-
-                    <div style={{width: "94%", margin: "0 auto", display: "flex", flex: "no-wrap", justifyContent: "space-between", marginBottom: "3%"}}>
-                        
-                        <div style={{ width: "", height: "", flex: "0 1 24%", }}>
-                            <img className="" 
-                                style={{ width: "95%", height: "150px", borderRadius: "4px" }}
-                                src={`https://glonigeria.tvanywhereafrica.com:28182/api/client/v1/global/images/${322780}?accessKey=WkVjNWNscFhORDBLCg==`} alt={322780} />  
-                        </div>
-                        <div style={{ width: "", height: "", flex: "0 1 24%" }}>
-                            <img className="" 
-                                style={{ width: "95%", height: "150px", borderRadius: "4px" }}
-                                src={`https://glonigeria.tvanywhereafrica.com:28182/api/client/v1/global/images/${322777}?accessKey=WkVjNWNscFhORDBLCg==`} alt={322777} />  
-                            </div>
-                        <div style={{ width: "", height: "", flex: "0 1 24%", borderRadius: "4px"}}>
-                            <img className="" 
-                                style={{ width: "95%", height: "150px" }}
-                                src={`https://glonigeria.tvanywhereafrica.com:28182/api/client/v1/global/images/${322755}?accessKey=WkVjNWNscFhORDBLCg==`} alt={322755} />  
-                            </div>
-                        <div style={{ width: "", height: "", flex: "0 1 24%"}}>
-                            <img className="" 
-                                style={{ width: "95%", height: "150px", borderRadius: "4px"}}
-                                src={`https://glonigeria.tvanywhereafrica.com:28182/api/client/v1/global/images/${322746}?accessKey=WkVjNWNscFhORDBLCg==`} alt={322755} />  
-                            </div>
-                    </div>
-                  
-                   <div style={{width: "90%", margin: "0 auto", marginTop: "1%", marginBottom: "3%"}}>
-                        {/* <h3> Choose a plan that is right for you</h3> */}
-                        {/* <p>Downgrade or upgrade at anytime</p> */}
-                    </div>
-                   {/* packages are here  */}
-                   {/* <PackagesDispay style={{width: "30%"}}/> */}
-                  <br />
-                  <br />
-                  <NewPackagesDisplay style={{width: "90%"}}/>
-                  <br />
-                  <br />
+                <div className="scroll-in-centrediv" >
+                   
 
                         {Object.entries(IdealContent).map(([key, value]) =>(
                             <List catgName={key}  
@@ -387,7 +361,7 @@ const cookies = new Cookies();
 
 }
 
-export default DstvDashboard;
+export default DashboardTvShows;
 
 
 

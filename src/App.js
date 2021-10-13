@@ -29,6 +29,7 @@ import MoviesTrailerShaka from 'pages/DashboardMovies/Movies/MoviesTrailerShaka'
 
 import DashboardMovies from 'pages/DashboardMovies';
 import DashboardMoviesStream from 'pages/DashboardMovies/Movies';
+import DashboardTvShows from 'pages/DashboardTvShows';
 
 
 
@@ -93,6 +94,9 @@ function App() {
 					</Route>
 					<Route path="/dstvdashboardlive">
 						<DstvDashboardLive />
+					</Route>
+					<Route path="/tvshowspage">
+						<DashboardTvShows />
 					</Route>
 					<Route path="/moviespage">
 						<DashboardMovies />

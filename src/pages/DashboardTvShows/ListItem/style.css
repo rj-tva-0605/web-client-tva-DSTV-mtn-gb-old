@@ -1,0 +1,14 @@
+
+
+
+
+.image-hover img:hover{
+    visibility: hidden !important;
+    display: none !important;
+    border: red 2px solid;
+}
+
+.trailer-hover{
+    visibility: visible !important;
+}
+
