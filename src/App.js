@@ -29,7 +29,9 @@ import MoviesTrailerShaka from 'pages/DashboardMovies/Movies/MoviesTrailerShaka'
 
 import DashboardMovies from 'pages/DashboardMovies';
 import DashboardMoviesStream from 'pages/DashboardMovies/Movies';
+
 import DashboardTvShows from 'pages/DashboardTvShows';
+import SeriesDetail from 'pages/DashboardTvShows/SeriesDetail';
 
 
 

@@ -105,7 +105,8 @@ const ListItem = ({upMoviegrp, CategoryName, setUpmoviegrp, addNewArray, setAddN
               {  
                 upMoviegrp.map(({id, image_id, uid, title }, idx = countMovie +1 ) =>
                 
-                    <div   className="listItem" ref ={hoveRef} onMouseEnter={(e)=>MouseEnterFunc(e)} >
+                    <div   className="listItem" ref ={hoveRef}  >
+                            {console.log("series id" ,id)}
                             <Link  style={{textDecoration: "none", padding: "0"}}
                                     to={{pathname: "/moviesdetailpage", 
                                       state: { 

@@ -25,7 +25,7 @@ const cookies = new Cookies();
 
 
 
-const MovieDetailZ = () =>{
+const SeriesDetail = () =>{
 
  
 
@@ -243,7 +243,7 @@ const MovieDetailZ = () =>{
     )
 }
 
-export default MovieDetailZ;
+export default SeriesDetail;
 
 
 

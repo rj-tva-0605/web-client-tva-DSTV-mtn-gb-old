@@ -176,7 +176,13 @@ const cookies = new Cookies();
                     }   
     
                     setCategoryIDs(categoryTempids)
-    
+                    let purchasedSeriesStatusTemp = purchSeriesStatusFunc(access_token, stringPackages, operator_uid, user_id)
+                    console.log("purchasedSeriesStatusTemp", purchasedSeriesStatusTemp)
+
+                    let seriesIdsTemp = [10216,10215]
+                    let seriesIds = seriesIdsTemp.join(',')
+                    let seriesDetailsEpisodeTemp = seriesDetailsEpisodeFunc(access_token, stringPackages, operator_uid, user_id, seriesIds)
+                    console.log("seriesDetailsEpisodeTemp", seriesDetailsEpisodeTemp )
                     
     
                     console.log('this is catIds ', categoryIDs)                
@@ -185,7 +191,7 @@ const cookies = new Cookies();
                     console.log('Category ids and names', categoryDictTemp)
     
                     if(categoryIDs && categoryDictTemp ){vodcontentAllMovies(stringPackages, categoryTempids, access_token,categoryDictTemp, operator_uid)}
-    
+                    // arrangeDetailsOfSeries(purchasedSeriesStatusTemp, seriesDetailsEpisodeTemp)
                     
             })
             .catch(function (error) {
@@ -196,7 +202,7 @@ const cookies = new Cookies();
     
     
 
-    const purchSeriesStatus = (access_token, stringPackages, operator_uid, user_id) =>{
+    const purchSeriesStatusFunc = (access_token, stringPackages, operator_uid, user_id) =>{
 
         var config = {
         method: 'get',
@@ -207,15 +213,17 @@ const cookies = new Cookies();
         };
 
         axios(config)
-        .then(function (response) {
-        console.log(JSON.stringify(response.data));
+        .then((response) => {
+            // console.log("Response from purchSeriesStatus", response.data.data);
+            let value = response.data.data
+            return "hello"
         })
         .catch(function (error) {
         console.log(error);
         });
     }
 
-    const seriesDetailsEpisode = (access_token, stringPackages, operator_uid, user_id, series_ids) => {
+    const seriesDetailsEpisodeFunc = (access_token, stringPackages, operator_uid, user_id, series_ids) => {
 
         var config = {
         method: 'get',
@@ -226,12 +234,30 @@ const cookies = new Cookies();
         };
 
         axios(config)
-        .then(function (response) {
-        console.log(JSON.stringify(response.data));
+        .then((response) => {
+            // console.log("Response from seriesDetailsEpisode", response.data.data);
+            let value = response.data.data
+            return ("hello 2")
         })
         .catch(function (error) {
         console.log(error);
         });
+    }
+
+
+    const arrangeDetailsOfSeries = (purchasedSeriesStatusTemp, seriesDetailsEpisodeTemp) =>{
+        // use dictMaker to make new dicts with id and the data 
+        // in the arrays from response of the two data
+        let interMediateSeriesArray = []
+        let interMediateseriesDetailsEpisode = []
+
+        for (let i; i in purchasedSeriesStatusTemp; i++){
+            interMediateSeriesArray.push(purchasedSeriesStatusTemp.[i].id)
+            interMediateseriesDetailsEpisode.push(seriesDetailsEpisodeTemp.[i].id)
+        }
+        console.log("interMediateSeriesArray " ,interMediateSeriesArray)
+        console.log("interMediateseriesDetailsEpisode" ,interMediateseriesDetailsEpisode)
+
     }
 
 
