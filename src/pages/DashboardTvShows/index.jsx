@@ -22,6 +22,8 @@ const cookies = new Cookies();
 
     const [categoryIDs, setCategoryIDs] = useState([])
     const [IdealContent, setIdealContent] = useState(false)
+    const [purchSeriesDetail, setPurchSeriesDetail] = useState(false)
+    const [seriesDetail, setSeriesDetail] = useState(false)
 
     //  use redux instead to store it like storing access 
     //  token const [purchasedIdealContent, setPurchasedIdealContent] = useState(false)
@@ -176,13 +178,15 @@ const cookies = new Cookies();
                     }   
     
                     setCategoryIDs(categoryTempids)
-                    let purchasedSeriesStatusTemp = purchSeriesStatusFunc(access_token, stringPackages, operator_uid, user_id)
-                    console.log("purchasedSeriesStatusTemp", purchasedSeriesStatusTemp)
 
-                    let seriesIdsTemp = [10216,10215]
-                    let seriesIds = seriesIdsTemp.join(',')
-                    let seriesDetailsEpisodeTemp = seriesDetailsEpisodeFunc(access_token, stringPackages, operator_uid, user_id, seriesIds)
-                    console.log("seriesDetailsEpisodeTemp", seriesDetailsEpisodeTemp )
+                    let purchasedSeriesStatusTemp =  purchSeriesStatusFunc(access_token, stringPackages, operator_uid, user_id)
+                    
+
+                    
+                    
+
+                    
+                    
                     
     
                     console.log('this is catIds ', categoryIDs)                
@@ -191,7 +195,7 @@ const cookies = new Cookies();
                     console.log('Category ids and names', categoryDictTemp)
     
                     if(categoryIDs && categoryDictTemp ){vodcontentAllMovies(stringPackages, categoryTempids, access_token,categoryDictTemp, operator_uid)}
-                    // arrangeDetailsOfSeries(purchasedSeriesStatusTemp, seriesDetailsEpisodeTemp)
+                    
                     
             })
             .catch(function (error) {
@@ -202,7 +206,10 @@ const cookies = new Cookies();
     
     
 
-    const purchSeriesStatusFunc = (access_token, stringPackages, operator_uid, user_id) =>{
+    const purchSeriesStatusFunc = async(access_token, stringPackages, operator_uid, user_id) =>{
+
+        let seriesIdsTemp = [10216,10215]
+        let seriesIds = seriesIdsTemp.join(',')
 
         var config = {
         method: 'get',
@@ -215,15 +222,15 @@ const cookies = new Cookies();
         axios(config)
         .then((response) => {
             // console.log("Response from purchSeriesStatus", response.data.data);
-            let value = response.data.data
-            return "hello"
+            let purchstuff = response.data.data
+            seriesDetailsEpisodeFunc(access_token, stringPackages, operator_uid, user_id, seriesIds, purchstuff)
         })
         .catch(function (error) {
         console.log(error);
         });
     }
 
-    const seriesDetailsEpisodeFunc = (access_token, stringPackages, operator_uid, user_id, series_ids) => {
+    const seriesDetailsEpisodeFunc = (access_token, stringPackages, operator_uid, user_id, series_ids, purchstuff) => {
 
         var config = {
         method: 'get',
@@ -234,29 +241,41 @@ const cookies = new Cookies();
         };
 
         axios(config)
-        .then((response) => {
-            // console.log("Response from seriesDetailsEpisode", response.data.data);
-            let value = response.data.data
-            return ("hello 2")
-        })
+        .then((response) => { 
+            
+            console.log("Response from seriesDetailsEpisode", response.data.data, "purchStuff", purchstuff);
+            arrangeDetailsOfSeries(purchstuff, response.data.data)
+        }
+        )
         .catch(function (error) {
         console.log(error);
         });
     }
 
 
-    const arrangeDetailsOfSeries = (purchasedSeriesStatusTemp, seriesDetailsEpisodeTemp) =>{
+    const arrangeDetailsOfSeries = (purchasedSeriesStatus, seriesDetailsEpisode) =>{
         // use dictMaker to make new dicts with id and the data 
         // in the arrays from response of the two data
-        let interMediateSeriesArray = []
+        let interMediatePurchSeriesArray = []
         let interMediateseriesDetailsEpisode = []
 
-        for (let i; i in purchasedSeriesStatusTemp; i++){
-            interMediateSeriesArray.push(purchasedSeriesStatusTemp.[i].id)
-            interMediateseriesDetailsEpisode.push(seriesDetailsEpisodeTemp.[i].id)
+        for(let i = 0 ; i < purchasedSeriesStatus.length; i++){
+            interMediatePurchSeriesArray.append(purchasedSeriesStatus[i].["id"])           
         }
-        console.log("interMediateSeriesArray " ,interMediateSeriesArray)
+
+        for(let i = 0 ; i < seriesDetailsEpisode.length; i++){    
+            interMediateseriesDetailsEpisode.append(seriesDetailsEpisode.[i].id)
+        }
+
+        console.log("interMediateSeriesArray " ,interMediatePurchSeriesArray)
         console.log("interMediateseriesDetailsEpisode" ,interMediateseriesDetailsEpisode)
+        // key value to be used to check the purchase value and detail of the series respectively
+
+        let newPurchDetails = dictMaker(interMediatePurchSeriesArray, purchasedSeriesStatus)
+        console.log("new purch details", newPurchDetails)
+
+        let newSeriesDetails = dictMaker(interMediatePurchSeriesArray, seriesDetailsEpisode)
+        console.log("new series details", newSeriesDetails)
 
     }
 
@@ -265,13 +284,18 @@ const cookies = new Cookies();
         const access_token = cookies.get("access_token");
         const user_id = cookies.get("user_id");
         const operator_uid = cookies.get("operator_uid");
-        var stringPackages = cookies.get("stringPackages") 
-
+        var stringPackages = cookies.get("stringPackages")
+        
+        
+        
+        
         categoryIDfunc(stringPackages,access_token, user_id, operator_uid);
 
         setTimeout(
             () => {
                 categoryIDfunc(stringPackages,access_token, user_id, operator_uid);
+                console.log("Purch Series Details", purchSeriesDetail);
+
             },
             2 * 1000
           );
