@@ -14,12 +14,12 @@
 .seri-epi-main-layout{
     width: 80%;
     margin: 2px auto;
-    border: 2px solid red ;
+    /* border: 2px solid red ; */
 }
 .seri-epi-main-heading-lyt{
     width: 90%;
     margin: 2px auto;
-    border: 2px solid red ;
+    /* border: 2px solid red ; */
     display: flex;
     justify-content: space-between;
 }
@@ -27,12 +27,14 @@
     width: 95%;
     margin: 2px auto;
 }
+
 .episode-cards{
     display: flex;
     
     justify-content: space-evenly !important;
-    border-bottom: grey !important;
+    border-bottom: 1px solid grey !important;
 }
+
 .episode-gen{
     margin: 1% 8%;
 }

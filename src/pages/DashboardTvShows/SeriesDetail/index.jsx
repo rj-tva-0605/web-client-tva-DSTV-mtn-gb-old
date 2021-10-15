@@ -164,6 +164,7 @@ const SeriesDetail = () =>{
 
                 <div className="seri-epi-main-heading-lyt">
                     <h2>Episodes</h2> 
+
                     <DropdownButton
                         alignRight
                         title={!seasonNumberDrpdwn?"Season1":seasonNumberDrpdwn}
@@ -178,7 +179,7 @@ const SeriesDetail = () =>{
                     </DropdownButton>                    
                 </div>
             
-                <div className="episode-cards-cont" style={{width: "90%", height:"80%", border: "2px blue solid"}}>
+                <div className="episode-cards-cont" style={{width: "90%", height:"80%"}}>
                     {console.log("Episodes for this Season", location.state.detail.seriesDetail.seasons.[seasonNumber])}
                      {
                         !location.state.detail.seriesDetail.seasons 
@@ -186,7 +187,7 @@ const SeriesDetail = () =>{
                         <div>loading</div>
                         :
                         location.state.detail.seriesDetail.seasons.[seasonNumber].episodes.map(({image_id, number,title,uid, duration})=> 
-                        <div className="episode-cards">
+                        <div className="episode-cards" >
                             <div className="episode-number episode-gen">{number}</div>
 
                             <div className="episode-img episode-gen">
@@ -203,15 +204,13 @@ const SeriesDetail = () =>{
                                 </div>
                                 <div className="episode-desc">Joe, a programmer and obsessive self-quantifier, and Emily, a budding comedy performer, are happily married until they decide to use one another in their work. A dark comedy about love, technology, and what can’t be programmed</div>
                             </div>
+
+                            <hr  style={{color: "red"}} />
                             
                         </div>
                     ) 
                         } 
-                        {/* mapping of episode Details here */}
-                    {                    
-                    
-                    
-                    }
+                        
 
 
                 </div>
