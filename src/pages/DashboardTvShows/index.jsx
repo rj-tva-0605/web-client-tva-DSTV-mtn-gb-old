@@ -23,7 +23,8 @@ const cookies = new Cookies();
     const [categoryIDs, setCategoryIDs] = useState([])
     const [IdealContent, setIdealContent] = useState(false)
     const [purchSeriesDetail, setPurchSeriesDetail] = useState(false)
-    const [seriesDetail, setSeriesDetail] = useState(false)
+    const [seriesDetailComp, setSeriesDetailComp] = useState(false)
+    // const [seriesPurchDet, setSeriesPurchDet] = useState(false)
 
     //  use redux instead to store it like storing access 
     //  token const [purchasedIdealContent, setPurchasedIdealContent] = useState(false)
@@ -80,7 +81,7 @@ const cookies = new Cookies();
 
 
 
-    const vodcontentAllMovies = (stringPackages, categoryTempids, access_token, categoryDictTemp, operator_uid) =>{
+    const vodcontentAllMovies = (stringPackages, categoryTempids, access_token, categoryDictTemp, operator_uid, user_id) =>{
         console.log("vodContent stringPackages", stringPackages)
 
         let newContent = []
@@ -99,7 +100,20 @@ const cookies = new Cookies();
             console.log('Category Ids and their names', categoryDictTemp)
             const respCont = response.data.data
             let maxArray = []
-            
+
+            const grabSeriesIDs = (serArr) => {
+                let series_ids = []
+
+                for(let v = 0; v in serArr; v++){
+                    for(let w = 0; w in  serArr[v].content; w++){
+                        if ( !(serArr[v].content[w].["id"]  in series_ids)){
+                            series_ids.push(serArr[v].content[w].["id"]) 
+                        }
+                    }
+                }
+                return series_ids
+
+            }
             
             for (let y = 0; y in respCont; y++ ){
                 
@@ -115,12 +129,16 @@ const cookies = new Cookies();
                     let reslt = respCont[y].content.filter(movieValFilter)
                     minArray = reslt
                 }
-
                 respCont[y].content = minArray
-
             }
-            console.log(`array NEW result  replace respCont  content`, respCont)
+            
+            
+            console.log(`array NEW filetered content with just series  respCont `, respCont)
 
+            let filteredSeriesIds = grabSeriesIDs(respCont)
+            console.log("finally series ids is bundled", filteredSeriesIds)
+
+            purchSeriesStatusFunc(access_token, stringPackages, operator_uid, user_id)
 
             trimContentFunc(respCont, categoryDictTemp)
             appendNewIDs(respCont)    
@@ -178,23 +196,14 @@ const cookies = new Cookies();
                     }   
     
                     setCategoryIDs(categoryTempids)
-
-                    let purchasedSeriesStatusTemp =  purchSeriesStatusFunc(access_token, stringPackages, operator_uid, user_id)
-                    
-
-                    
-                    
-
-                    
-                    
-                    
+                   
     
                     console.log('this is catIds ', categoryIDs)                
     
                     let categoryDictTemp = dictMaker(categoryTempids, categoryTempNames)
                     console.log('Category ids and names', categoryDictTemp)
     
-                    if(categoryIDs && categoryDictTemp ){vodcontentAllMovies(stringPackages, categoryTempids, access_token,categoryDictTemp, operator_uid)}
+                    if(categoryIDs && categoryDictTemp ){vodcontentAllMovies(stringPackages, categoryTempids, access_token,categoryDictTemp, operator_uid, user_id)}
                     
                     
             })
@@ -208,8 +217,7 @@ const cookies = new Cookies();
 
     const purchSeriesStatusFunc = async(access_token, stringPackages, operator_uid, user_id) =>{
 
-        let seriesIdsTemp = [10216,10215]
-        let seriesIds = seriesIdsTemp.join(',')
+        
 
         var config = {
         method: 'get',
@@ -221,7 +229,19 @@ const cookies = new Cookies();
 
         axios(config)
         .then((response) => {
-            // console.log("Response from purchSeriesStatus", response.data.data);
+            console.log("Response from purchSeriesStatus", response.data.data);
+            
+
+            const grabSeriesDetPurch = () =>{
+                let seriesIdsTemp = []
+                for (let q = 0; q in response.data.data; q++){
+                    seriesIdsTemp.push(response.data.data[q].id)
+                }
+                let seriesIDs = seriesIdsTemp.join(',')
+                return seriesIDs
+            }
+            let seriesIds = grabSeriesDetPurch()
+
             let purchstuff = response.data.data
             seriesDetailsEpisodeFunc(access_token, stringPackages, operator_uid, user_id, seriesIds, purchstuff)
         })
@@ -265,11 +285,12 @@ const cookies = new Cookies();
             interMediatePurchSeriesArray.push(purchstuff[i].["id"])           
         }
 
-        var unorderedDict = {};
+
+        var seriesdetDict = {};
         for(let i = 0 ; i < seriesDet.length; i++){    
             interMediateseriesDetailsEpisode.push(seriesDet.[i].id)
 
-            unorderedDict[seriesDet.[i].id] = seriesDet.[i];
+            seriesdetDict[seriesDet.[i].id] = seriesDet.[i];
                 
         }
 
@@ -279,10 +300,12 @@ const cookies = new Cookies();
 
         let newPurchDetails = dictMaker(interMediatePurchSeriesArray, purchstuff)
         console.log("new purch details", newPurchDetails)
+        setPurchSeriesDetail(newPurchDetails)
+
 
         // let newSeriesDetails = dictMaker(interMediatePurchSeriesArray, seriesDetailsEpisode)
-        console.log("new series details", unorderedDict)
-
+        console.log("new series details", seriesdetDict)
+        setSeriesDetailComp(seriesdetDict)
     }
 
 
@@ -394,6 +417,8 @@ const cookies = new Cookies();
                         {Object.entries(IdealContent).map(([key, value]) =>(
                             <List catgName={key}  
                                 movies = {value}
+                                purchSeriesDetail = {purchSeriesDetail}
+                                seriesDetailComp = {seriesDetailComp}
                             />
                         ))}
 

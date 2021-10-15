@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 
 
 
-const ListItem = ({upMoviegrp, CategoryName, setUpmoviegrp, addNewArray, setAddNewArray, countMovie, setCountMovie}) =>{
+const ListItem = ({upMoviegrp, CategoryName, setUpmoviegrp, addNewArray, setAddNewArray, countMovie, setCountMovie, purchSeriesDetail, seriesDetailComp}) =>{
 
 
     
@@ -28,39 +28,10 @@ const ListItem = ({upMoviegrp, CategoryName, setUpmoviegrp, addNewArray, setAddN
     const MouseEnterFunc = (e) =>{
 
         e.preventDefault();
-        // var element=ReactDOM.findDOMNode(hoveRef)
-
-        // let makeHoverStyle = getComputedStyle(hoveRef.current.style)
-
-        // console.log(makeHoverStyle)
-        // const visib = "hidden"
-        // hoveRef.ClassList.add = "image-hover"
-        // const hidex = hoveRef;
-        // hidex.ClassName = "image-hover"
+        
         hoveRef.current.style.visbility = "hidden";
         hoveRef.current.style.display = "none";
-        hoveRef.current.style.border = `${2}px red solid`;
-        
-                        
-        // console.log("this is the  visibility part", hoveRef.current.style.border)
-        // return hoveRef.current.style
-        // hoveNow.current.style.backgroundColor = "blue";
-        // setIsHovered(true)
-
-        // if (isHovered ){
-        //     hoveRef.current.style.transform = `translateX(${50 + distance}px)`
-
-        //     console.log(distance)
-        // }
-
-        // console.log(elem)
-        // console.log(visib)
-        // console.log(hoveNow.current.style)
-        // hoveRef.current.style.display = "none !important";
-        
-        
-        // setHideImage("image-hover")
-        // setShowTrailerdiv("trailer-hover")
+        hoveRef.current.style.border = `${2}px red solid`;      
 
     }
 
@@ -100,22 +71,26 @@ const ListItem = ({upMoviegrp, CategoryName, setUpmoviegrp, addNewArray, setAddN
         {console.log("moviez in list item" , upMoviegrp)}
        
         {console.log("category names on list item ", CategoryName)}
+        {console.log("listitem seriesDetailComp", seriesDetailComp)}
         
             
               {  
                 upMoviegrp.map(({id, image_id, uid, title }, idx = countMovie +1 ) =>
                 
                     <div   className="listItem" ref ={hoveRef}  >
-                            {console.log("series id" ,id)}
+                            {console.log("series id in list" ,id)}
+                            
                             <Link  style={{textDecoration: "none", padding: "0"}}
-                                    to={{pathname: "/moviesdetailpage", 
+                                    to={{pathname: "/series", 
                                       state: { 
                                           detail: {
                                               movieID: `${id}`, 
                                               imageID: `${image_id}`,
                                               title: `${title}`,
                                               uiD: `${uid}`,
-                                              categoryName: `${CategoryName}`
+                                              categoryName: `${CategoryName}`,
+                                              purchSeriesDetail: purchSeriesDetail[id],
+                                              seriesDetail: seriesDetailComp[id]
                                             }
                                         }  
                                       

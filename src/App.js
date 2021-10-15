@@ -97,6 +97,9 @@ function App() {
 					<Route path="/dstvdashboardlive">
 						<DstvDashboardLive />
 					</Route>
+					<Route path="/series">
+						<SeriesDetail />
+					</Route>
 					<Route path="/tvshowspage">
 						<DashboardTvShows />
 					</Route>

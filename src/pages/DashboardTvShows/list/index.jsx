@@ -8,7 +8,7 @@ import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import  ListItem  from '../ListItem';
 
 
-const List = ({catgName, movies}) =>{
+const List = ({catgName, movies, purchSeriesDetail, seriesDetailComp}) =>{
     const [slideNumber, setSlideNumber ] = useState(0);
     const [isMoved, setIsMoved] = useState(false);
     const [upMoviegrp, setUpmoviegrp] = useState(false)
@@ -66,7 +66,7 @@ const List = ({catgName, movies}) =>{
                     ""
                     :
                     <div className="list">
-                    {console.log("movie Count", upMoviegrp.length)}
+                    {console.log("purch det in list", purchSeriesDetail)}
                     
                             <span className="listTitle">{catgName} </span>
                             <div className="wrapper">
@@ -89,6 +89,8 @@ const List = ({catgName, movies}) =>{
                                                 countMovie={countMovie}
                                                 setCountMovie={setCountMovie}
                                                 CategoryName = {catgName}
+                                                purchSeriesDetail = {purchSeriesDetail}
+                                                seriesDetailComp = {seriesDetailComp}
                                                 />
                                     }
                                 </div>
