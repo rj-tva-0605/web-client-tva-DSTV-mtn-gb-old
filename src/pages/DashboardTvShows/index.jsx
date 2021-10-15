@@ -244,7 +244,8 @@ const cookies = new Cookies();
         .then((response) => { 
             
             console.log("Response from seriesDetailsEpisode", response.data.data, "purchStuff", purchstuff);
-            arrangeDetailsOfSeries(purchstuff, response.data.data)
+            let seriesDet = response.data.data
+            arrangeDetailsOfSeries(purchstuff, seriesDet)
         }
         )
         .catch(function (error) {
@@ -253,29 +254,34 @@ const cookies = new Cookies();
     }
 
 
-    const arrangeDetailsOfSeries = (purchasedSeriesStatus, seriesDetailsEpisode) =>{
+    const arrangeDetailsOfSeries = (purchstuff, seriesDet) =>{
         // use dictMaker to make new dicts with id and the data 
         // in the arrays from response of the two data
         let interMediatePurchSeriesArray = []
         let interMediateseriesDetailsEpisode = []
+        console.log("arrange episode works")
 
-        for(let i = 0 ; i < purchasedSeriesStatus.length; i++){
-            interMediatePurchSeriesArray.append(purchasedSeriesStatus[i].["id"])           
+        for(let i = 0 ; i < purchstuff.length; i++){
+            interMediatePurchSeriesArray.push(purchstuff[i].["id"])           
         }
 
-        for(let i = 0 ; i < seriesDetailsEpisode.length; i++){    
-            interMediateseriesDetailsEpisode.append(seriesDetailsEpisode.[i].id)
+        var unorderedDict = {};
+        for(let i = 0 ; i < seriesDet.length; i++){    
+            interMediateseriesDetailsEpisode.push(seriesDet.[i].id)
+
+            unorderedDict[seriesDet.[i].id] = seriesDet.[i];
+                
         }
 
         console.log("interMediateSeriesArray " ,interMediatePurchSeriesArray)
         console.log("interMediateseriesDetailsEpisode" ,interMediateseriesDetailsEpisode)
         // key value to be used to check the purchase value and detail of the series respectively
 
-        let newPurchDetails = dictMaker(interMediatePurchSeriesArray, purchasedSeriesStatus)
+        let newPurchDetails = dictMaker(interMediatePurchSeriesArray, purchstuff)
         console.log("new purch details", newPurchDetails)
 
-        let newSeriesDetails = dictMaker(interMediatePurchSeriesArray, seriesDetailsEpisode)
-        console.log("new series details", newSeriesDetails)
+        // let newSeriesDetails = dictMaker(interMediatePurchSeriesArray, seriesDetailsEpisode)
+        console.log("new series details", unorderedDict)
 
     }
 
