@@ -1,0 +1,60 @@
+*{
+    margin: 0;
+}
+
+.main-scroll-body{
+    overflow-y: auto !important;
+    height: calc(100vh - 24px - 40px - 40px);
+}
+.seri-epi-main-title{
+    width: 20%;
+    margin: 0 auto;
+    
+}
+.seri-epi-main-layout{
+    width: 80%;
+    margin: 2px auto;
+    border: 2px solid red ;
+}
+.seri-epi-main-heading-lyt{
+    width: 90%;
+    margin: 2px auto;
+    border: 2px solid red ;
+    display: flex;
+    justify-content: space-between;
+}
+.episode-cards-cont{
+    width: 95%;
+    margin: 2px auto;
+}
+.episode-cards{
+    display: flex;
+    
+    justify-content: space-evenly !important;
+    border-bottom: grey !important;
+}
+.episode-gen{
+    margin: 1% 8%;
+}
+.episode-number{
+    margin: 3% 3% 9% 4%;
+}
+.episode-img{
+    margin: 3% 0;
+    width: 20%;
+    height: 5%;
+}
+
+.episode-title-mins{
+    width: 90%;
+    height: 6%;
+    margin: 3% 0;
+    /* border: 2px red solid; */
+    display: flex;
+    justify-content: space-between;
+    
+}
+.episode-desc{
+    width: 60%;
+    height: 20%;
+}
