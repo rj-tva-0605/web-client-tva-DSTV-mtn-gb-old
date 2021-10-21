@@ -30,6 +30,8 @@ import MoviesTrailerShaka from 'pages/DashboardMovies/Movies/MoviesTrailerShaka'
 import DashboardMovies from 'pages/DashboardMovies';
 import DashboardMoviesStream from 'pages/DashboardMovies/Movies';
 
+import EpisodePlay from 'pages/DashboardTvShows/EpisodePlay';
+
 import DashboardTvShows from 'pages/DashboardTvShows';
 import SeriesDetail from 'pages/DashboardTvShows/SeriesDetail';
 
@@ -37,6 +39,7 @@ import SeriesDetail from 'pages/DashboardTvShows/SeriesDetail';
 
 import DashMoviesShows from 'pages/DashboardOld/DashMoviesShows';
 
+import PackagesPage from 'pages/PackagesPage';
 
 import React, { useEffect, useRef } from 'react';
 import Cookies from 'universal-cookie';
@@ -62,7 +65,7 @@ function App() {
 				}
 			
 				console.log(refresh_token)
-			}, 1800001);
+			}, 1800000);
 		
 		
 
@@ -100,6 +103,9 @@ function App() {
 					<Route path="/series">
 						<SeriesDetail />
 					</Route>
+					<Route path="/episodestream">
+						<EpisodePlay />
+					</Route>
 					<Route path="/tvshowspage">
 						<DashboardTvShows />
 					</Route>
@@ -121,7 +127,9 @@ function App() {
 					<Route path="/newdashboard">
 						<DashboardNew />
 					</Route>
-
+					<Route path="/packagespage" >
+            			<PackagesPage />
+          			</Route>
           			<Route path="/" >
             			<Homepage />
           			</Route>

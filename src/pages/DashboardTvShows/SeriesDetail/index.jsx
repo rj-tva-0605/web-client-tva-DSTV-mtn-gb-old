@@ -186,29 +186,40 @@ const SeriesDetail = () =>{
                         ? 
                         <div>loading</div>
                         :
-                        location.state.detail.seriesDetail.seasons.[seasonNumber].episodes.map(({image_id, number,title,uid, duration})=> 
-                        <div className="episode-cards" >
-                            <div className="episode-number episode-gen">{number}</div>
+                        location.state.detail.seriesDetail.seasons.[seasonNumber].episodes.map(({id, image_id, number,title,uid, duration})=> 
+                        <Link className="" style ={{ border: "none", width: "", textDecorationColor: "transparent", color: "whitesmoke"}}
+                            to = {{
+                            pathname: "/episodestream",
+                            state: {
+                                detail: {
+                                    id: id
+                                }
+                            }
+                            }}
+                          >
+                           <div className="episode-cards" >
+                                <div className="episode-number episode-gen">{number}</div>
 
-                            <div className="episode-img episode-gen">
-                                <img className=""
-                                        src={`https://ott.tvanywhereafrica.com:28182/api/client/v1/global/images/${image_id}?accessKey=WkVjNWNscFhORDBLCg==`} alt={320872} 
-                                        style={{objectFit: 'cover !important', width: "100%", height: "100%"}}
-                                        /> 
-                            </div>
-                                                                                   
-                            <div className="episode-description episode-gen">
-                                <div className="episode-title-mins">
-                                    <p>{title}</p>
-                                    <p>{duration}min</p>
+                                <div className="episode-img episode-gen">
+                                    <img className=""
+                                            src={`https://ott.tvanywhereafrica.com:28182/api/client/v1/global/images/${image_id}?accessKey=WkVjNWNscFhORDBLCg==`} alt={320872} 
+                                            style={{objectFit: 'cover !important', width: "100%", height: "100%"}}
+                                            /> 
                                 </div>
-                                <div className="episode-desc">Joe, a programmer and obsessive self-quantifier, and Emily, a budding comedy performer, are happily married until they decide to use one another in their work. A dark comedy about love, technology, and what can’t be programmed</div>
-                            </div>
+                                                                                    
+                                <div className="episode-description episode-gen">
+                                    <div className="episode-title-mins">
+                                        <p>{title}</p>
+                                        <p>{duration}min</p>
+                                    </div>
+                                    <div className="episode-desc">Joe, a programmer and obsessive self-quantifier, and Emily, a budding comedy performer, are happily married until they decide to use one another in their work. A dark comedy about love, technology, and what can’t be programmed</div>
+                                </div>
 
-                            <hr  style={{color: "red"}} />
-                            
-                        </div>
-                    ) 
+                                <hr  style={{color: "red"}} />
+                                
+                            </div>
+                            </Link>
+                            ) 
                         } 
                         
 
