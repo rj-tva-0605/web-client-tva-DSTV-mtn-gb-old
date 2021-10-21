@@ -76,7 +76,7 @@ const Purchasemodal = ({showPayAlert, setShowPayAlert,
       });
 
       history.push({
-        pathname:  "/dashboard",
+        pathname:  "/newdashboard"
         
                  });
 
