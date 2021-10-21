@@ -29,6 +29,7 @@ const Purchasemodal = ({showPayAlert, setShowPayAlert,
 
     // modal show and hide 
     const handleClose = () => {
+        // e.preventDefault();
         setShowPayAlert(false);
         setTriggerControl(false);
         setPackageRateDetails(false)
@@ -45,7 +46,7 @@ const Purchasemodal = ({showPayAlert, setShowPayAlert,
     });
     
 
-    const loginfunc = (e) => {
+    const proceedfunc = (e) => {
       e.preventDefault();
 
       // dispatch(loginReducer(data))
@@ -86,9 +87,9 @@ const Purchasemodal = ({showPayAlert, setShowPayAlert,
                 <p>Package Title --> {packageRateDetails.packageName}</p>
                 <p>Rate Code --> {packageRateDetails.rateCode}</p>
                 
-                <div>
-                    <button type="button" class="btn btn-success">Success</button>
-                    <button type="button" class="btn btn-danger">Close</button>
+                <div className="package-buttons-confirmation">
+                    <button type="button" class="btn btn-success" onClick={(e) =>proceedfunc(e)} >Success</button>
+                    <button type="button" class="btn btn-danger"  onClick={handleClose}>Close</button>
                 </div>
 
               </div>
