@@ -59,7 +59,7 @@ const Purchasemodal = ({showPayAlert, setShowPayAlert,
 
       var config = {
         method: 'post',
-        url: 'https://tvanywheretest-ott.magnaquest.com/MTNGBSDPPG/subscription',
+        url: 'https://mtngbissautest-bcrm.magnaquest.com/mtngnbsdppgtest',
         headers: { 
           'Authorization': 'Basic TVROR0JVQ1dFQlVTUjpNdG5nYnBhc3NAMTIzNA==', 
           'Content-Type': 'application/json'

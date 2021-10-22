@@ -170,6 +170,7 @@ const cookies = new Cookies();
         const access_token = cookies.get("access_token")
         const user_id = cookies.get("user_id");
         const operator_uid = cookies.get("operator_uid");
+        console.log("Operator uid Test happens here ", operator_uid)
         let packageTempids = []
         let purchasedPackageIds = []
 
