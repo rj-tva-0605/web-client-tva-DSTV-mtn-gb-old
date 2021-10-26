@@ -2,9 +2,9 @@ import axios from 'axios';
 
 // import { useDispatch } from 'react-redux';
 
-import { LOGIN_SUCCESS, LOGIN_ERROR, LOGOUT, REFRESH_SUCCESS } from '../actions/types';
+import { SIGNUP_SUCCESS, LOGIN_SUCCESS, LOGIN_ERROR, LOGOUT, REFRESH_SUCCESS } from '../actions/types';
 
-import {login, logout, refreshTokenAction} from 'store/actions';
+import {signup, login, logout, signupError, refreshTokenAction} from 'store/actions';
 
 import {createCookie} from 'utils/cookie_helper';
 import Cookies from 'universal-cookie'
@@ -86,6 +86,42 @@ export const loginReducer = (data) => (dispatch)  => {
 
 }
 
+export const signupReducer = (data) => (dispatch)  => {
+
+  
+  
+  var config = {
+    method: 'post',
+    url: 'https://tvanywhere-support.magnaquest.com/webapi/Restapi/GenerateOTP?ReferenceNo=17412xzs123abc',
+    headers: { 
+      'Username': 'MTNGBUCWEBUSR', 
+      'Password': 'Mtngbpass@1234', 
+      'Externalparty': 'tvanywhere-mtngb', 
+      'Cache-Control': 'no-cache', 
+      'Content-Type': 'application/json'
+    },
+    data : data
+  };    
+
+    axios(config)
+    .then((response) => {
+
+      
+      
+      dispatch(signup(response.data.data))
+      console.log("signup details in auth reducer ", response.data)
+    })
+    .catch(error => {
+      console.error(`Error: ${error}`);
+      dispatch(signupError());
+      console.log("now logged out on csms we can now logout on app");
+
+          });
+
+}
+
+
+
 export const logoutReducer = () =>(dispatch) => {
 
     // hit csms api and logout
@@ -136,12 +172,17 @@ const authReducer = (state = initialState, action) => {
           cookies.remove("access_token")
           cookies.remove("user_id")
           cookies.remove("operator_uid")
-
           return{
             ...state,
             isUserLoggedIn: false,
             accessToken: ""
           }
+        case SIGNUP_SUCCESS:
+          return{
+            ...state,
+            isUserSignedUp: true,
+            
+          };
         default:
             return state;
      }

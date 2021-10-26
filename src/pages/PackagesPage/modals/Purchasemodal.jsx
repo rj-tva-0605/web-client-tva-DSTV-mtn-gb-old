@@ -17,9 +17,10 @@ import PackagesDisplay from 'components/PackagesDisplay';
 
 
 
-const Purchasemodal = ({showPayAlert, setShowPayAlert, 
+
+const Purchasemodal = ({triggerpay, setTriggerPay, showPayAlert, setShowPayAlert, 
                         packageContent, setTriggerControl, 
-                        packageRateDetails,setPackageRateDetails}) => {
+                        }) => {
     
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -32,56 +33,21 @@ const Purchasemodal = ({showPayAlert, setShowPayAlert,
         // e.preventDefault();
         setShowPayAlert(false);
         setTriggerControl(false);
-        setPackageRateDetails(false)
+        setTriggerPay(false);
       };
 
     const handleUsername = (e) => setUsername(e.target.value);
     const handlePassword = (e) => setPassword(e.target.value);
 
-    var data = JSON.stringify({
-      "username": username,
-      "password": password,
-      "device": "rodney",
-      "device_class": "desktop"
-    });
     
-
+    const trigfunc = () =>{
+      handleClose();
+      setTriggerPay(true);
+      console.log("close purchase modal trigger purchase modal")
+      }
     
-    const proceedfunc = (e) => {
-      e.preventDefault();
-
-      // dispatch(loginReducer(data))
-      
-      var data = JSON.stringify({
-        "mobilenumber": "966601969",
-        "productid": "24501220000005180"
-      });
-
-      var config = {
-        method: 'post',
-        url: 'https://mtngbissautest-bcrm.magnaquest.com/mtngnbsdppgtest',
-        headers: { 
-          'Authorization': 'Basic TVROR0JVQ1dFQlVTUjpNdG5nYnBhc3NAMTIzNA==', 
-          'Content-Type': 'application/json'
-        },
-        data : data
-      };
-
-      axios(config)
-      .then( response => {
-        console.log("Pay response for Package", response.data);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-
-      history.push({
-        pathname:  "/newdashboard"
-        
-                 });
-
-
-    }
+    
+    
 
     
 
@@ -96,29 +62,23 @@ const Purchasemodal = ({showPayAlert, setShowPayAlert,
           className="login-modal"
           centered
         >
-          <Modal.Header closeButton>
-            <Modal.Title>
-                <h1>Payment Notice</h1>
-            </Modal.Title>
-          </Modal.Header>
+          
+
           <Modal.Body>
-             <br />
-             <br />
-             <br />                      
-            { !packageRateDetails? 
-              ""
-              :
+             
+                <h1 className="package-center-heading">Activate Data Bundle</h1>
+             
+             <p className="package-center-text" >valid for 1 day @ CFA 200</p>                      
+            
               <div>
-                <p>Package Title --> {packageRateDetails.packageName}</p>
-                <p>Rate Code --> {packageRateDetails.rateCode}</p>
-                
+                {/* {console.log(packageRateDetails.rateCode)} */}
                 <div className="package-buttons-confirmation">
-                    <button type="button" class="btn btn-success" onClick={(e) =>proceedfunc(e)} >Success</button>
+                    <button type="button" class="btn btn-success" onClick={trigfunc} >Success</button>
                     <button type="button" class="btn btn-danger"  onClick={handleClose}>Close</button>
                 </div>
 
               </div>
-            }
+            
             <br />
             <br/>
             <p className=" login-link "><small>New to Glo-TV?<a href="">Sign up now</a></small></p>

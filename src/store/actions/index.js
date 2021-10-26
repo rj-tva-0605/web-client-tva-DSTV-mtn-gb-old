@@ -1,4 +1,4 @@
-import { REFRESH_SUCCESS, LOGIN_SUCCESS, LOGOUT } from "./types";
+import { REFRESH_SUCCESS, SIGNUP_SUCCESS, SIGNUP_ERROR, LOGIN_SUCCESS, LOGOUT } from "./types";
 
 
 export function refreshTokenAction(data){
@@ -6,6 +6,21 @@ export function refreshTokenAction(data){
     return{
         type: REFRESH_SUCCESS,
         payload: data
+    }
+}
+
+export function signup(data){
+
+    return{
+        type: SIGNUP_SUCCESS,
+        payload: data
+    }
+}
+
+export function signupError(){
+
+    return{
+        type: SIGNUP_ERROR
     }
 }
 

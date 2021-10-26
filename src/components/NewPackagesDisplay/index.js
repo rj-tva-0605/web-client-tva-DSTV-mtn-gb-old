@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import  './style.css';
 
 import Purchasemodal from '../../pages/PackagesPage/modals/Purchasemodal';
+import TriggerPurchasemodal from '../../pages/PackagesPage/modalsFirstConfirmation/TriggerPurchasemodal'
+
 
 
 const NewPackagesDisplay = ({showTitle, packageContent, setPackageContent }) =>{
@@ -18,6 +20,9 @@ const NewPackagesDisplay = ({showTitle, packageContent, setPackageContent }) =>{
     const [showPayAlert, setShowPayAlert] = useState(false);
     const [triggerControl, setTriggerControl] = useState(false);
     const [packageRateDetails, setPackageRateDetails] = useState(false);
+
+    const [triggerpay, setTriggerPay] = useState(false);
+
 
    
 
@@ -45,6 +50,7 @@ const NewPackagesDisplay = ({showTitle, packageContent, setPackageContent }) =>{
         console.log("Button pressed")
     }
 
+    
 
 
 
@@ -62,9 +68,24 @@ const NewPackagesDisplay = ({showTitle, packageContent, setPackageContent }) =>{
                     <Purchasemodal 
                         showPayAlert={showPayAlert} 
                         setShowPayAlert={setShowPayAlert} 
-                        setTriggerControl={setTriggerControl} 
-                        packageRateDetails={packageRateDetails} 
-                        setPackageRateDetails= {setPackageRateDetails}/>
+                        setTriggerControl={setTriggerControl}                         
+                        triggerpay = {triggerpay}
+                        setTriggerPay = {setTriggerPay}
+
+                        />
+
+                        
+                        <TriggerPurchasemodal
+                            triggerpay = {triggerpay}
+                            setTriggerPay = {setTriggerPay}
+                            packageRateDetails={packageRateDetails} 
+                            setPackageRateDetails= {setPackageRateDetails}                            
+
+                        />
+
+                    
+
+
 
                     <button className="one-card package-title" value="1st test value " onClick={(e) => {showModalfunc(e ,"VOD 3days", "4356"); }} >
                         <p>Glotv VOD 3 days</p>
