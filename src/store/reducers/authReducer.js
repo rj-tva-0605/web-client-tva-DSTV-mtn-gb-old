@@ -92,13 +92,37 @@ export const signupReducer = (data) => (dispatch)  => {
   
   var config = {
     method: 'post',
-    url: 'https://tvanywheretest-ott.magnaquest.com/webapi/Restapi/GenerateOTP?ReferenceNo=17412xzs123abc',
+    url: 'https://tvanywheretest-ott.magnaquest.com/webapi/Restapi/GenerateOTP?ReferenceNo=17412xzs123abcwwwqsw',
     headers: { 
-      'Username': 'MTNGBUCWEBUSR', 
-      'Password': 'Mtngbpass@1234', 
+      'username': 'MTNGBUCWEBUSR', 
+      'password': 'Mtngbpass@1234', 
       'Externalparty': 'tvanywhere-mtngb', 
-      'Cache-Control': 'no-cache', 
-      'Content-Type': 'application/json'
+      'cache-Control': 'no-cache', 
+      'content-Type': 'application/json',
+      'access-control-allow-methods' : 'GET,POST',
+      'access-control-allow-origin' : '*',
+      'cache-control' : 'no-cache',
+      'content-length' : 112,
+      'content-type' : 'application/json; charset=utf-8',
+      'date' : 'Tue, 26 Oct 2021 13:30:51 GMT',
+      'expires': -1,
+      'pragma' : 'no-cache',
+      'server' : 'Microsoft-IIS/10.0',
+      'x-powered-by' : 'ASP.NET',
+      'authority' : 'tvanywheretest-ott.magnaquest.com',
+      'method' : 'POST',
+      'path' : '/WEBAPI/RestApi/GenerateOtp?ReferenceNo=17412xzs123abcwwwqsw',
+      'scheme' : 'https',
+      'accept' : 'application/json, text/plain, /',
+      'accept-encoding' : 'gzip, deflate, br',
+      'accept-language' : 'en-US,en;q=0.9',
+      'content-length' : 88,
+      'content-type' : 'application/json',
+      'referer' : 'https://glotv-selfcare.magnaquest.com/',
+      'sec-fetch-dest' : 'empty',
+      'sec-fetch-mode' : 'cors',
+      'sec-fetch-site' : 'same-site',
+      'ReferenceNo' : '17412xzs123abcwwwqsw'
     },
     data : data
   };    
