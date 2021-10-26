@@ -92,28 +92,16 @@ export const signupReducer = (data) => (dispatch)  => {
   
   var config = {
     method: 'post',
-    url: 'https://tvanywheretest-ott.magnaquest.com/webapi/Restapi/GenerateOTP?ReferenceNo=17412xzs123abcwwwqsw',
+    url: 'https://tvanywheretest-ott.magnaquest.com/webapi/Restapi/GenerateOTP?ReferenceNo=17412xzs123abcwwwqsrtdq',
     headers: { 
       'username': 'MTNGBUCWEBUSR', 
       'password': 'Mtngbpass@1234', 
       'Externalparty': 'tvanywhere-mtngb', 
-      'cache-Control': 'no-cache', 
       'content-Type': 'application/json',
-      'access-control-allow-methods' : 'GET,POST',
-      'access-control-allow-origin' : '*',
-      'cache-control' : 'no-cache',
-      'content-length' : 112,
       'content-type' : 'application/json; charset=utf-8',
-      'expires': -1,
-      'pragma' : 'no-cache',
-      'server' : 'Microsoft-IIS/10.0',
-      'authority' : 'tvanywheretest-ott.magnaquest.com',
-      'method' : 'POST',
-      'scheme' : 'https',
       'accept' : 'application/json, text/plain, /',
       'accept-language' : 'en-US,en;q=0.9',
       'content-type' : 'application/json',
-      'ReferenceNo' : '17412xzs123abcwwwqsw'
     },
     data : data
   };    
