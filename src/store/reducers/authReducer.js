@@ -109,7 +109,6 @@ export const signupReducer = (data) => (dispatch)  => {
       'server' : 'Microsoft-IIS/10.0',
       'authority' : 'tvanywheretest-ott.magnaquest.com',
       'method' : 'POST',
-      'path' : '/WEBAPI/RestApi/GenerateOtp?ReferenceNo=17412xzs123abcwwwqsw',
       'scheme' : 'https',
       'accept' : 'application/json, text/plain, /',
       'accept-language' : 'en-US,en;q=0.9',
