@@ -3,6 +3,7 @@ import React, {useState} from 'react';
 import {Button, Modal} from 'react-bootstrap';
 import  './Signup.css';
 
+import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import {signupReducer} from '../../store/reducers/authReducer';
@@ -52,6 +53,71 @@ const Signup = ({showsignup, setShowSignup}) => {
 
 
     }
+
+    const verifyUserExistsfunc = (e) => {
+      e.preventDefault();
+      var data = JSON.stringify({
+        "KEY_NAMEVALUE": {
+          "KEY_NAME": "PROCESS",
+          "KEY_VALUE": "GETUSERID"
+        },
+        "ADDITIONAL_INFO": "{'ENTITYCODE':'MTNGB','MOBILENO':'02123456789'}"
+      });
+
+      var config = {
+        method: 'post',
+        url: 'https://tvanywheretest-ott.magnaquest.com/webapi/Restapi/GetRecordsBySearch?ReferenceNo=17412xzs123abcwwwqsrtdq43wq764832732',
+        headers: { 
+          'Username': 'MTNGBUCWEBUSR', 
+          'Password': 'Mtngbpass@1234', 
+          'Externalparty': 'tvanywhere-mtngb', 
+          'Content-Type': 'application/json'
+        },
+        data : data
+      };
+
+      axios(config)
+      .then(function (response) {
+        console.log("this is from verify if user exists", response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+    }
+
+    const validateOTPfunc = (e) => {
+      e.preventDefault();
+      var data = JSON.stringify({
+        "VALIDATEOTP": {
+          "MOBILEPHONE": "918899889988",
+          "OTPEMAIL": "JSONTEST@gmail.com",
+          "OTP": "42944006"
+        }
+      });
+
+      var config = {
+        method: 'post',
+        url: 'https://tvanywheretest-ott.magnaquest.com/webapi/Restapi/ValidateOTP?ReferenceNo=17412xzs123abcwwwqsrtdq43wq764832',
+        headers: { 
+          'Username': 'MTNGBUCWEBUSR', 
+          'Password': 'Mtngbpass@1234', 
+          'Externalparty': 'tvanywhere-mtngb', 
+          'Content-Type': 'application/json'
+        },
+        data : data
+      };
+
+      axios(config)
+      .then(function (response) {
+        console.log("valid otp function ", response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+    }
+
     
     return (
       <div>      
@@ -71,7 +137,7 @@ const Signup = ({showsignup, setShowSignup}) => {
           <Modal.Body >
              
 
-             <form className="signup-form" onSubmit={signupfunc}>
+             <form className="signup-form" onSubmit={validateOTPfunc}>
                 <div class="form-group">
                     <input type="text" class="form-control" value={mobilenumber} placeholder="080XXXXXXX" onChange={(e) => handleMobileNumber(e)}/>
                 </div>
