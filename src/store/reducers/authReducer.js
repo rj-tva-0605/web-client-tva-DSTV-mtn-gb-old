@@ -92,7 +92,7 @@ export const signupReducer = (data) => (dispatch)  => {
   
   var config = {
     method: 'post',
-    url: 'https://tvanywhere-support.magnaquest.com/webapi/Restapi/GenerateOTP?ReferenceNo=17412xzs123abc',
+    url: 'https://tvanywheretest-ott.magnaquest.com/webapi/Restapi/GenerateOTP?ReferenceNo=17412xzs123abc',
     headers: { 
       'Username': 'MTNGBUCWEBUSR', 
       'Password': 'Mtngbpass@1234', 
