@@ -11,7 +11,7 @@ import {signupReducer} from '../../store/reducers/authReducer';
 
 
 
-const Signup = ({showsignup, setShowSignup}) => {
+const VerifyUserExistRegister = ({showsignup, setShowSignup}) => {
     
   const dispatch = useDispatch();
   const history = useHistory();
@@ -68,7 +68,7 @@ const Signup = ({showsignup, setShowSignup}) => {
               })
               .catch(error => {
                 console.error(`Error: ${error}`);
-                // dispatch(signupError());
+                dispatch(signupError());
                 console.log("now logged out on csms we can now logout on app");
           
                     });
@@ -195,4 +195,4 @@ const Signup = ({showsignup, setShowSignup}) => {
     );
   }
   
-  export default Signup;
+  export default VerifyUserExistRegister;

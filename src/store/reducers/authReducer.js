@@ -89,37 +89,9 @@ export const loginReducer = (data) => (dispatch)  => {
 export const signupReducer = (data) => (dispatch)  => {
 
   
+    dispatch(signup(data))
+
   
-  var config = {
-    method: 'post',
-    url: 'https://tvanywheretest-ott.magnaquest.com/webapi/Restapi/GenerateOTP?ReferenceNo=17412xzs123abcwwwqsrtdq',
-    headers: { 
-      'username': 'MTNGBUCWEBUSR', 
-      'password': 'Mtngbpass@1234', 
-      'Externalparty': 'tvanywhere-mtngb', 
-      'content-Type': 'application/json',
-      'content-type' : 'application/json; charset=utf-8',
-      'accept' : 'application/json, text/plain, /',
-      'accept-language' : 'en-US,en;q=0.9',
-      'content-type' : 'application/json',
-    },
-    data : data
-  };    
-
-    axios(config)
-    .then((response) => {
-
-      
-      
-      dispatch(signup(response.data.data))
-      console.log("signup details in auth reducer ", response.data)
-    })
-    .catch(error => {
-      console.error(`Error: ${error}`);
-      dispatch(signupError());
-      console.log("now logged out on csms we can now logout on app");
-
-          });
 
 }
 
