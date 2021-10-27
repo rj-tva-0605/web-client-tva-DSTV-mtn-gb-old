@@ -1,17 +1,18 @@
 
 import React, {useState} from 'react';
 import {Button, Modal} from 'react-bootstrap';
-import  './GenerateOTPNewUser.css';
+import  './SignupDetailsNewUser.css';
 
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import {signupReducer} from '../../store/reducers/authReducer';
+import ValidateOTPNewUser from '../ValidateOTPNewUser';
 
 
 
 
-const GenerateOTPNewUser = ({showsignup, setShowSignup}) => {
+const SignupDetailsNewUser = ({showsignup, setShowSignup}) => {
     
   const dispatch = useDispatch();
   const history = useHistory();
@@ -115,37 +116,7 @@ const GenerateOTPNewUser = ({showsignup, setShowSignup}) => {
 
     }
 
-    const validateOTPfunc = (e) => {
-      e.preventDefault();
-      var data = JSON.stringify({
-        "VALIDATEOTP": {
-          "MOBILEPHONE": "918899889988",
-          "OTPEMAIL": "JSONTEST@gmail.com",
-          "OTP": "42944006"
-        }
-      });
 
-      var config = {
-        method: 'post',
-        url: 'https://tvanywheretest-ott.magnaquest.com/webapi/Restapi/ValidateOTP?ReferenceNo=17412xzs123abcwwwqsrtdq43wq764832',
-        headers: { 
-          'Username': 'MTNGBUCWEBUSR', 
-          'Password': 'Mtngbpass@1234', 
-          'Externalparty': 'tvanywhere-mtngb', 
-          'Content-Type': 'application/json'
-        },
-        data : data
-      };
-
-      axios(config)
-      .then(function (response) {
-        console.log("valid otp function ", response.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-
-    }
 
     
     return (
@@ -195,4 +166,4 @@ const GenerateOTPNewUser = ({showsignup, setShowSignup}) => {
     );
   }
   
-  export default GenerateOTPNewUser;
+  export default SignupDetailsNewUser;

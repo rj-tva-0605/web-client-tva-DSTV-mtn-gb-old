@@ -1,7 +1,7 @@
 
 import React, {useState} from 'react';
 import {Button, Modal} from 'react-bootstrap';
-import  './SignupDetailsNewUser.css';
+import  './ValidateOTPNewUser.css';
 
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
@@ -11,7 +11,7 @@ import {signupReducer} from '../../store/reducers/authReducer';
 
 
 
-const SignupDetailsNewUser = ({showsignup, setShowSignup}) => {
+const ValidateOTPNewUser = ({showsignup, setShowSignup}) => {
     
   const dispatch = useDispatch();
   const history = useHistory();
@@ -41,79 +41,9 @@ const SignupDetailsNewUser = ({showsignup, setShowSignup}) => {
   });
     
 
-    const signupfunc = (e) => {
-      e.preventDefault();
-      if (confirmPassword === password){
-            var config = {
-              method: 'post',
-              url: 'https://tvanywheretest-ott.magnaquest.com/webapi/Restapi/GenerateOTP?ReferenceNo=17412xzs123abcwwwqsrtdq',
-              headers: { 
-                'username': 'MTNGBUCWEBUSR', 
-                'password': 'Mtngbpass@1234', 
-                'Externalparty': 'tvanywhere-mtngb', 
-                'content-Type': 'application/json',
-                'content-type' : 'application/json; charset=utf-8',
-                'accept' : 'application/json, text/plain, /',
-                'accept-language' : 'en-US,en;q=0.9',
-                'content-type' : 'application/json',
-              },
-              data : data
-            };    
-          
-              axios(config)
-              .then((response) => {
+    
 
-                // dispatch(signupReducer(data))
-                console.log("signup details in auth reducer ", response.data)
-              })
-              .catch(error => {
-                console.error(`Error: ${error}`);
-                dispatch(signupError());
-                console.log("now logged out on csms we can now logout on app");
-          
-                    });
-          
-    }
-      else{console.log("password mismatch")}
-      history.push({
-        pathname:  "",
-        
-                 });
-
-
-    }
-
-    const verifyUserExistsfunc = (e) => {
-      e.preventDefault();
-      var data = JSON.stringify({
-        "KEY_NAMEVALUE": {
-          "KEY_NAME": "PROCESS",
-          "KEY_VALUE": "GETUSERID"
-        },
-        "ADDITIONAL_INFO": "{'ENTITYCODE':'MTNGB','MOBILENO':'02123456789'}"
-      });
-
-      var config = {
-        method: 'post',
-        url: 'https://tvanywheretest-ott.magnaquest.com/webapi/Restapi/GetRecordsBySearch?ReferenceNo=17412xzs123abcwwwqsrtdq43wq764832732',
-        headers: { 
-          'Username': 'MTNGBUCWEBUSR', 
-          'Password': 'Mtngbpass@1234', 
-          'Externalparty': 'tvanywhere-mtngb', 
-          'Content-Type': 'application/json'
-        },
-        data : data
-      };
-
-      axios(config)
-      .then(function (response) {
-        console.log("this is from verify if user exists", response.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-
-    }
+  
 
     const validateOTPfunc = (e) => {
       e.preventDefault();
@@ -166,7 +96,7 @@ const SignupDetailsNewUser = ({showsignup, setShowSignup}) => {
           <Modal.Body >
              
 
-             <form className="signup-form" onSubmit={verifyUserExistsfunc}>
+             <form className="signup-form" onSubmit={validateOTPfunc}>
                 <div class="form-group">
                     <input type="text" class="form-control" value={mobilenumber} placeholder="080XXXXXXX" onChange={(e) => handleMobileNumber(e)}/>
                 </div>
@@ -195,4 +125,4 @@ const SignupDetailsNewUser = ({showsignup, setShowSignup}) => {
     );
   }
   
-  export default SignupDetailsNewUser;
+  export default ValidateOTPNewUser;

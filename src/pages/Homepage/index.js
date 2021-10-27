@@ -9,7 +9,9 @@ import logo from '../../assets/images/tv_anywhere_logo.png';
 
 import {Button} from 'react-bootstrap';
 
-import SignupModal from '../../components/modals/Signup';
+import VerifyUserExistRegisterModal from '../../components/modals/VerifyUserExistRegister';
+import GenerateOTPNewUserModal from '../../components/modals/GenerateOTPNewUser';
+
 import LoginModal from '../../components/modals/Login';
 
 import './Homepage.css';
@@ -21,12 +23,28 @@ const Homepage = () => {
 
     const [showsignup, setShowSignup] = useState(false);
     const [showlogin, setShowLogin] = useState(false);
+
+    const [showVerifyUserExist, setShowVerifyUserExist] = useState(false);
+    const [showGenerateOTP, setShowGenerateOTP] = useState(false);
+
+    // const [show]
   
     
 
-    const handleSignupShow  = () => setShowSignup(true);
+    const handleShowVerifyUserExist  = () => setShowVerifyUserExist(true);
+
+    const handleShowGenerateOTP  = () =>{ setTimeout(function(){ setShowGenerateOTP(true); }, 10);
+
+                                            }
+    if(showVerifyUserExist === "donenextprocess"){
+        handleShowGenerateOTP()
+        setShowVerifyUserExist(false)
+    }
+
     const handleLoginShow  = () => setShowLogin(true);
-  
+    
+
+    
     const dispatch = useDispatch();
     const isUserLoggedIn = useSelector(state => state.auth.isUserLoggedIn)
 
@@ -63,10 +81,13 @@ const Homepage = () => {
                                 <p  class="mt-2 mb-0 pb-0 hme-signup-text">Ready to watch? Enter your mobile number to Sign Up</p>
                                 <form className="header-form sign-up-inp-hme">
                                     <input  type="text" pattern="[0-9]*" formcontrolname="mobile" aria-describedby="gloMobileNumber" placeholder="GXXX Mobile Number eg.080XXXXXXX" class="form-control shadow-none px-4 py-3 input_phone sign-up-inp-hme-slct-a"></input>
-                                    <Button className="header-input-button rounded-sm shadow-none form-control  sign-up-inp-hme-slct-b" variant="secondary" onClick={handleSignupShow} >Signup</Button>
+                                    <Button className="header-input-button rounded-sm shadow-none form-control  sign-up-inp-hme-slct-b" variant="secondary" onClick={handleShowVerifyUserExist} >Signup</Button>
                                 </form>
-                                <SignupModal  showsignup={showsignup} setShowSignup={setShowSignup} />
+                                <VerifyUserExistRegisterModal  showVerifyUserExist={showVerifyUserExist} setShowVerifyUserExist={setShowVerifyUserExist} />
 
+                                <GenerateOTPNewUserModal  showGenerateOTP={showGenerateOTP} setShowGenerateOTP={setShowGenerateOTP} />
+
+                                
                                 {/* <p class="frgt-pswd">
                                     <a  style={{textDecoration:"none"}} href="/forgotPassword">Forgot Password?</a>
                                 </p> */}

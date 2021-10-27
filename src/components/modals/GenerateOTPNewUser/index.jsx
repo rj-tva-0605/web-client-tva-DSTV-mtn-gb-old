@@ -1,17 +1,17 @@
 
 import React, {useState} from 'react';
 import {Button, Modal} from 'react-bootstrap';
-import  './ValidateOTPNewUser.css';
+import  './GenerateOTPNewUser.css';
 
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
-import {signupReducer} from '../../store/reducers/authReducer';
+import {signupReducer} from '../../../store/reducers/authReducer';
 
 
 
 
-const ValidateOTPNewUser = ({showsignup, setShowSignup}) => {
+const GenerateOTPNewUser = ({showGenerateOTP, setShowGenerateOTP}) => {
     
   const dispatch = useDispatch();
   const history = useHistory();
@@ -22,7 +22,7 @@ const ValidateOTPNewUser = ({showsignup, setShowSignup}) => {
   const [confirmPassword, setConfirmPassword] = useState("");
 
   
-  const handleClose = (e) => setShowSignup(false);
+  const handleClose = (e) => setShowGenerateOTP(false);
   const handleMobileNumber = (e) => setMobileNumber(e.target.value);
   const handleEmail = (e) => setEmail(e.target.value);
   const handlePassword = (e) => setPassword(e.target.value);
@@ -41,79 +41,7 @@ const ValidateOTPNewUser = ({showsignup, setShowSignup}) => {
   });
     
 
-    const signupfunc = (e) => {
-      e.preventDefault();
-      if (confirmPassword === password){
-            var config = {
-              method: 'post',
-              url: 'https://tvanywheretest-ott.magnaquest.com/webapi/Restapi/GenerateOTP?ReferenceNo=17412xzs123abcwwwqsrtdq',
-              headers: { 
-                'username': 'MTNGBUCWEBUSR', 
-                'password': 'Mtngbpass@1234', 
-                'Externalparty': 'tvanywhere-mtngb', 
-                'content-Type': 'application/json',
-                'content-type' : 'application/json; charset=utf-8',
-                'accept' : 'application/json, text/plain, /',
-                'accept-language' : 'en-US,en;q=0.9',
-                'content-type' : 'application/json',
-              },
-              data : data
-            };    
-          
-              axios(config)
-              .then((response) => {
 
-                // dispatch(signupReducer(data))
-                console.log("signup details in auth reducer ", response.data)
-              })
-              .catch(error => {
-                console.error(`Error: ${error}`);
-                dispatch(signupError());
-                console.log("now logged out on csms we can now logout on app");
-          
-                    });
-          
-    }
-      else{console.log("password mismatch")}
-      history.push({
-        pathname:  "",
-        
-                 });
-
-
-    }
-
-    const verifyUserExistsfunc = (e) => {
-      e.preventDefault();
-      var data = JSON.stringify({
-        "KEY_NAMEVALUE": {
-          "KEY_NAME": "PROCESS",
-          "KEY_VALUE": "GETUSERID"
-        },
-        "ADDITIONAL_INFO": "{'ENTITYCODE':'MTNGB','MOBILENO':'02123456789'}"
-      });
-
-      var config = {
-        method: 'post',
-        url: 'https://tvanywheretest-ott.magnaquest.com/webapi/Restapi/GetRecordsBySearch?ReferenceNo=17412xzs123abcwwwqsrtdq43wq764832732',
-        headers: { 
-          'Username': 'MTNGBUCWEBUSR', 
-          'Password': 'Mtngbpass@1234', 
-          'Externalparty': 'tvanywhere-mtngb', 
-          'Content-Type': 'application/json'
-        },
-        data : data
-      };
-
-      axios(config)
-      .then(function (response) {
-        console.log("this is from verify if user exists", response.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-
-    }
 
     const validateOTPfunc = (e) => {
       e.preventDefault();
@@ -151,7 +79,7 @@ const ValidateOTPNewUser = ({showsignup, setShowSignup}) => {
     return (
       <div>      
         <Modal
-          show={showsignup}
+          show={showGenerateOTP}
           onHide={handleClose}
           backdrop="static"
           keyboard={false}
@@ -160,13 +88,13 @@ const ValidateOTPNewUser = ({showsignup, setShowSignup}) => {
         >
           <Modal.Header closeButton>
             <Modal.Title>
-                <h1>Sign Up</h1>
+                <h1> GenerateOTP </h1>
             </Modal.Title>
           </Modal.Header>
           <Modal.Body >
              
 
-             <form className="signup-form" onSubmit={verifyUserExistsfunc}>
+             <form className="signup-form" onSubmit={validateOTPfunc}>
                 <div class="form-group">
                     <input type="text" class="form-control" value={mobilenumber} placeholder="080XXXXXXX" onChange={(e) => handleMobileNumber(e)}/>
                 </div>
@@ -195,4 +123,4 @@ const ValidateOTPNewUser = ({showsignup, setShowSignup}) => {
     );
   }
   
-  export default ValidateOTPNewUser;
+  export default GenerateOTPNewUser;
