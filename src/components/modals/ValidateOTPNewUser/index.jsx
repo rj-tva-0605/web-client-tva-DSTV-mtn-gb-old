@@ -77,6 +77,48 @@ const ValidateOTPNewUser = ({showValidateOTP, setShowValidateOTP}) => {
 
     }
 
+    const [otp, setOtp] = useState(new Array(6).fill(""));
+    const [otpValue, setOtpValue] = useState([])
+    const [count, setCount] = useState(0)
+    const [handleOtpValueFuncTrig, setHandleOtpValueFuncTrig] = useState(false)
+
+    const handleChange = (element, index) => {
+        if (isNaN(element.value)) return false;
+
+        setOtp([...otp.map((d, idx) => (idx === index ? element.value : d))]);
+
+        setCount(count + 1)
+        
+        //Focus next input
+        if (element.nextSibling) {
+            element.nextSibling.focus();
+        }
+        console.log("This is otp", otp)
+
+        console.log("count value ", count )
+
+        if(count + 1  ===  6 ){
+            var otpUse = [...otp.map((d, idx) => (d))]
+            console.log("OtpValue", otpUse)
+            setOtpValue(otp)
+            setCount(0)
+            setHandleOtpValueFuncTrig(true)
+            // setOtp(new Array(6).fill(""))
+            
+            handleClose()
+        }
+    };
+
+    if(handleOtpValueFuncTrig != false ){
+        const handleOtpfunc = () => {
+          console.log("this is otp value from hadleotpfunc", otp)
+        }
+        handleOtpfunc()
+    }
+    
+
+
+
     
     return (
       <div>      
@@ -101,15 +143,31 @@ const ValidateOTPNewUser = ({showValidateOTP, setShowValidateOTP}) => {
             </div>
                           
                 <form className="form-otp " onSubmit={validateOTPfunc}>
+                      {/* <input className="otp" type="text"  onChange={""} maxLength={1} />
                       <input className="otp" type="text"  onChange={""} maxLength={1} />
                       <input className="otp" type="text"  onChange={""} maxLength={1} />
                       <input className="otp" type="text"  onChange={""} maxLength={1} />
                       <input className="otp" type="text"  onChange={""} maxLength={1} />
-                      <input className="otp" type="text"  onChange={""} maxLength={1} />
-                      <input className="otp" type="text"  onChange={""} maxLength={1} />
+                      <input className="otp" type="text"  onChange={""} maxLength={1} /> */}
+                      {otp.map((data, index) => {
+                        return (
+                            <input
+                                className="otp-field"
+                                type="text"
+                                name="otp"
+                                maxLength="1"
+                                key={index}
+                                value={data}
+                                onChange={e => handleChange(e.target, index)}
+                                onFocus={e => e.target.select()}
+                            />
+                        );
+                    })}
+
+
                 </form>
-                          <hr class="mt-4" />
-                          <button class='btn btn-primary btn-block mt-4 mb-4 customBtn'>Verify</button>
+                <hr class="mt-4" />
+                <button class='btn btn-primary btn-block mt-4 mb-4 customBtn'>Verify</button>
                         
 
 
