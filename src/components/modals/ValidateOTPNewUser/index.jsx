@@ -15,33 +15,14 @@ const ValidateOTPNewUser = ({showValidateOTP, setShowValidateOTP}) => {
     
   const dispatch = useDispatch();
   const history = useHistory();
-
-  const [mobilenumber, setMobileNumber] = useState("");
-  const [password, setPassword]= useState("");
-  const [email, setEmail] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-
+  const [otpReady, setOtpReady] = useState(false)
   
-  const handleClose = (e) => setShowValidateOTP(false);
-  const handleMobileNumber = (e) => setMobileNumber(e.target.value);
-  const handleEmail = (e) => setEmail(e.target.value);
-  const handlePassword = (e) => setPassword(e.target.value);
-  const handleConfirmPassword = (e) => setConfirmPassword(e.target.value);
-    
-    
-  var data = JSON.stringify({
-    "GENERATEOTP": {
-      "MOBILEPHONE": mobilenumber,
-      "otpemail": email,
-      "PARTYID": "0",
-      "COUNTRYCODE": "Guinea-Bissau",
-      "RESEND": "TRUE",
-      "ATTRIBUTE1": ""
-    }
-  });
-    
-
-    
+  
+  const handleClose = (e) => {
+                              setShowValidateOTP(false);
+                              
+                            }
+  
 
   
 
@@ -51,7 +32,7 @@ const ValidateOTPNewUser = ({showValidateOTP, setShowValidateOTP}) => {
         "VALIDATEOTP": {
           "MOBILEPHONE": "918899889988",
           "OTPEMAIL": "JSONTEST@gmail.com",
-          "OTP": "42944006"
+          "OTP": otpReady
         }
       });
 
@@ -75,6 +56,8 @@ const ValidateOTPNewUser = ({showValidateOTP, setShowValidateOTP}) => {
         console.log(error);
       });
 
+      // setOtp(new Array(6).fill(""))
+
     }
 
     const [otp, setOtp] = useState(new Array(6).fill(""));
@@ -97,24 +80,86 @@ const ValidateOTPNewUser = ({showValidateOTP, setShowValidateOTP}) => {
 
         console.log("count value ", count )
 
-        if(count + 1  ===  6 ){
-            var otpUse = [...otp.map((d, idx) => (d))]
-            console.log("OtpValue", otpUse)
-            setOtpValue(otp)
-            setCount(0)
+        
+        // check trend.
+        // compare value in setcountcharacter with current count
+        // decrement and increment trend clauses and actions
+        var countcharacter = [...otp].filter(x => x === "").length;
+        console.log("Count Character ", countcharacter);
+
+        var tempConCatOtp = otp.join('')
+        console.log("Temp otp Concat ", tempConCatOtp)
+
+        if(countcharacter  === true ){
+            // var otpUse = [...otp.map((d, idx) => (d))]
+            // console.log("OtpValue", otpUse)
+            // setOtpValue(otp)
+            // setCount(0)
             setHandleOtpValueFuncTrig(true)
-            // setOtp(new Array(6).fill(""))
+           
             
             handleClose()
+        }
+
+        var reCountCharacter = [...otp].filter(x => x === "").length;
+        console.log("recountchracter", reCountCharacter)
+
+        if(reCountCharacter === 0){
+          console.log("Temp otp Concat ", tempConCatOtp)
         }
     };
 
     if(handleOtpValueFuncTrig != false ){
         const handleOtpfunc = () => {
           console.log("this is otp value from hadleotpfunc", otp)
+          var tempConCatOtp = otp.join('')
+          console.log("Temp otp Concat ", tempConCatOtp)
+          setOtpReady(tempConCatOtp)
+          
         }
         handleOtpfunc()
+        
     }
+
+
+
+    // resend otp
+
+    const resendOTPfunc = (e) => {
+      e.preventDefault();
+      var data = JSON.stringify({
+        "VALIDATEOTP": {
+          "MOBILEPHONE": "918899889988",
+          "OTPEMAIL": "JSONTEST@gmail.com",
+          "OTP": otpReady
+        }
+      });
+
+      var config = {
+        method: 'post',
+        url: 'https://tvanywheretest-ott.magnaquest.com/webapi/Restapi/ValidateOTP?ReferenceNo=17412xzs123abcwwwqsrtdq43wq764832',
+        headers: { 
+          'Username': 'MTNGBUCWEBUSR', 
+          'Password': 'Mtngbpass@1234', 
+          'Externalparty': 'tvanywhere-mtngb', 
+          'Content-Type': 'application/json'
+        },
+        data : data
+      };
+
+      axios(config)
+      .then(function (response) {
+        console.log("valid otp function ", response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+      // setOtp(new Array(6).fill(""))
+
+    }
+
+    
     
 
 
@@ -142,13 +187,8 @@ const ValidateOTPNewUser = ({showValidateOTP, setShowValidateOTP}) => {
               Verify OTP
             </div>
                           
-                <form className="form-otp " onSubmit={validateOTPfunc}>
-                      {/* <input className="otp" type="text"  onChange={""} maxLength={1} />
-                      <input className="otp" type="text"  onChange={""} maxLength={1} />
-                      <input className="otp" type="text"  onChange={""} maxLength={1} />
-                      <input className="otp" type="text"  onChange={""} maxLength={1} />
-                      <input className="otp" type="text"  onChange={""} maxLength={1} />
-                      <input className="otp" type="text"  onChange={""} maxLength={1} /> */}
+                <form className="form-otp " onSubmit={(e) => validateOTPfunc(e)}>
+                      
                       {otp.map((data, index) => {
                         return (
                             <input
@@ -163,11 +203,11 @@ const ValidateOTPNewUser = ({showValidateOTP, setShowValidateOTP}) => {
                             />
                         );
                     })}
-
+                <Button className= "rounded-sm shadow-none form-control" type="submit"  >Submit</Button>
 
                 </form>
                 <hr class="mt-4" />
-                <button class='btn btn-primary btn-block mt-4 mb-4 customBtn'>Verify</button>
+                
                         
 
 
