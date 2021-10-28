@@ -12,7 +12,9 @@
   .title{
     font-weight:600;
     margin-top:20px;
-    font-size:24px
+    font-size:24px;
+    width: 30%;
+    margin: 0 auto;
   }
   
   .customBtn{
@@ -25,10 +27,32 @@
   
   .form-otp{
       display: flex;
+      margin-bottom: 5%;
   }
 
   .form-otp input {
       width: 75%;
       height: 8vh;
       margin: 2%;
+  }
+  .otp-field{
+    text-align: center;
+  }
+
+  .form-submit-button{
+    /* flex:none; */
+    /* margin: 10% 0; */
+    margin-bottom: 2%;
+
+  }
+  .resend-otp-button{
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none; 
+    color:white;  
+    width: 99%;
+    margin: 0 auto;
+    margin-top: 5%;
+    /* margin-left: 40%; */
+    /* border: 2px red solid; */
   }
