@@ -6,12 +6,12 @@ import  './ValidateOTPNewUser.css';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
-import {signupReducer} from '../../store/reducers/authReducer';
+import {signupReducer} from '../../../store/reducers/authReducer';
 
 
 
 
-const ValidateOTPNewUser = ({showsignup, setShowSignup}) => {
+const ValidateOTPNewUser = ({showValidateOTP, setShowValidateOTP}) => {
     
   const dispatch = useDispatch();
   const history = useHistory();
@@ -22,7 +22,7 @@ const ValidateOTPNewUser = ({showsignup, setShowSignup}) => {
   const [confirmPassword, setConfirmPassword] = useState("");
 
   
-  const handleClose = (e) => setShowSignup(false);
+  const handleClose = (e) => setShowValidateOTP(false);
   const handleMobileNumber = (e) => setMobileNumber(e.target.value);
   const handleEmail = (e) => setEmail(e.target.value);
   const handlePassword = (e) => setPassword(e.target.value);
@@ -81,7 +81,7 @@ const ValidateOTPNewUser = ({showsignup, setShowSignup}) => {
     return (
       <div>      
         <Modal
-          show={showsignup}
+          show={showValidateOTP}
           onHide={handleClose}
           backdrop="static"
           keyboard={false}
@@ -90,33 +90,29 @@ const ValidateOTPNewUser = ({showsignup, setShowSignup}) => {
         >
           <Modal.Header closeButton>
             <Modal.Title>
-                <h1>Sign Up</h1>
+                <h1>Validate</h1>
             </Modal.Title>
           </Modal.Header>
           <Modal.Body >
              
+              
+            <div class="title">
+              Verify OTP
+            </div>
+                          
+                <form className="form-otp " onSubmit={validateOTPfunc}>
+                      <input className="otp" type="text"  onChange={""} maxLength={1} />
+                      <input className="otp" type="text"  onChange={""} maxLength={1} />
+                      <input className="otp" type="text"  onChange={""} maxLength={1} />
+                      <input className="otp" type="text"  onChange={""} maxLength={1} />
+                      <input className="otp" type="text"  onChange={""} maxLength={1} />
+                      <input className="otp" type="text"  onChange={""} maxLength={1} />
+                </form>
+                          <hr class="mt-4" />
+                          <button class='btn btn-primary btn-block mt-4 mb-4 customBtn'>Verify</button>
+                        
 
-             <form className="signup-form" onSubmit={validateOTPfunc}>
-                <div class="form-group">
-                    <input type="text" class="form-control" value={mobilenumber} placeholder="080XXXXXXX" onChange={(e) => handleMobileNumber(e)}/>
-                </div>
-                <br /> 
-                <div class="form-group">
-                    <input type="text" class="form-control" value={email} placeholder="" onChange={(e) => handleEmail(e)}/>
-                </div>
-                <br /> 
-                <div class="form-group">                    
-                    <input type="text" class="form-control" value={password} placeholder="Password" onChange={(e) => handlePassword(e)}/>
-                </div>
-                <br /> 
-                <div class="form-group">
-                    <input type="text" class="form-control" value={confirmPassword}  placeholder="Confirm Password "  onChange={(e) => handleConfirmPassword(e)}/>
-                </div>
-                <br />
-                <Button className= "rounded-sm shadow-none form-control" type="submit"  >Submit</Button>
-                <br />
-                <br />
-            </form>
+
             <p className=" signup-link "><small>Already have an account?<a href="">Sign up now</a></small></p>
           </Modal.Body>
           

@@ -10,7 +10,7 @@ import logo from '../../assets/images/tv_anywhere_logo.png';
 import {Button} from 'react-bootstrap';
 
 import VerifyUserExistRegisterModal from '../../components/modals/VerifyUserExistRegister';
-import GenerateOTPNewUserModal from '../../components/modals/GenerateOTPNewUser';
+import ValidateOTPNewUserModal from '../../components/modals/ValidateOTPNewUser';
 
 import LoginModal from '../../components/modals/Login';
 
@@ -26,18 +26,19 @@ const Homepage = () => {
 
     const [showVerifyUserExist, setShowVerifyUserExist] = useState(false);
     const [showGenerateOTP, setShowGenerateOTP] = useState(false);
+    const [showValidateOTP, setShowValidateOTP] = useState(false);
 
-    // const [show]
+
   
     
 
     const handleShowVerifyUserExist  = () => setShowVerifyUserExist(true);
 
-    const handleShowGenerateOTP  = () =>{ setTimeout(function(){ setShowGenerateOTP(true); }, 10);
+    const handleShowValidateOTP  = () =>{ setTimeout(function(){ setShowValidateOTP(true); }, 10);
 
                                             }
-    if(showVerifyUserExist === "donenextprocess"){
-        handleShowGenerateOTP()
+    if(showVerifyUserExist === "verifyuserdonenextprocess"){
+        handleShowValidateOTP()
         setShowVerifyUserExist(false)
     }
 
@@ -85,7 +86,7 @@ const Homepage = () => {
                                 </form>
                                 <VerifyUserExistRegisterModal  showVerifyUserExist={showVerifyUserExist} setShowVerifyUserExist={setShowVerifyUserExist} />
 
-                                <GenerateOTPNewUserModal  showGenerateOTP={showGenerateOTP} setShowGenerateOTP={setShowGenerateOTP} />
+                                <ValidateOTPNewUserModal  showValidateOTP={showValidateOTP} setShowValidateOTP={setShowValidateOTP} />
 
                                 
                                 {/* <p class="frgt-pswd">

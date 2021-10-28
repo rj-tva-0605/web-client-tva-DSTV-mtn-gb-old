@@ -1,3 +1,5 @@
+// validate user exist and generate OTP
+
 
 import React, {useState} from 'react';
 import {Button, Modal} from 'react-bootstrap';
@@ -56,7 +58,7 @@ const VerifyUserExistRegister = ({showVerifyUserExist, setShowVerifyUserExist}) 
 
           var config = {
             method: 'post',
-            url: 'https://tvanywheretest-ott.magnaquest.com/webapi/Restapi/GetRecordsBySearch?ReferenceNo=17412xzs123abcwwwqsrtdq43wq764832732',
+            url: 'https://tvanywheretest-ott.magnaquest.com/webapi/Restapi/GetRecordsBySearch?ReferenceNo=17412xzs123abcwwwqsrtCYpjWMi5p0FEEytp',
             headers: { 
               'Username': 'MTNGBUCWEBUSR', 
               'Password': 'Mtngbpass@1234', 
@@ -69,6 +71,7 @@ const VerifyUserExistRegister = ({showVerifyUserExist, setShowVerifyUserExist}) 
           axios(config)
           .then(function (response) {
             console.log("this is from verify if user exists", response.data);
+            console.log("ERROR NO STATUS CODE LOOK in Messages", response.data.RESPONSEINFO.ERRORNO)
           })
           .catch(function (error) {
             console.log(error);
@@ -78,7 +81,7 @@ const VerifyUserExistRegister = ({showVerifyUserExist, setShowVerifyUserExist}) 
             pathname:  "",
             
                     });
-      setShowVerifyUserExist("donenextprocess")
+      setShowVerifyUserExist("verifyuserdonenextprocess")
     }
 
     
@@ -96,7 +99,7 @@ const VerifyUserExistRegister = ({showVerifyUserExist, setShowVerifyUserExist}) 
         >
           <Modal.Header closeButton>
             <Modal.Title>
-                <h1>Sign Up</h1>
+                <h1>Verify User</h1>
             </Modal.Title>
           </Modal.Header>
           <Modal.Body >
