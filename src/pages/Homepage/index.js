@@ -21,13 +21,11 @@ const Homepage = () => {
 
   
 
-    const [showsignup, setShowSignup] = useState(false);
     const [showlogin, setShowLogin] = useState(false);
 
     const [showVerifyUserExist, setShowVerifyUserExist] = useState(false);
     const [showValidateOTP, setShowValidateOTP] = useState(false);
     const [passVerifyNumber, setPassVerifyNumber] = useState("");
-    const [editNumber, setEditNumber] = useState(false)
 
 
   

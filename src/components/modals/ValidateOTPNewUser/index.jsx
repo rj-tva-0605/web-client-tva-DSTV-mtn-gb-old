@@ -23,7 +23,7 @@ const ValidateOTPNewUser = ({
   const history = useHistory();
   const [otpReady, setOtpReady] = useState(false)
   const [counter, setCounter] = useState(85);
-  const [loadingOtpNotification,setLoadingOtpNotification] = useState(false);
+  const [loadingOtpNotification,setLoadingOtpNotification] = useState("");
     
   
   const handleClose = (e) => {
@@ -161,6 +161,7 @@ const ValidateOTPNewUser = ({
       .then(function (response) {
         console.log("Resend otp function ", response.data);
         setCounter(60)
+        setLoadingOtpNotification("Sending OTP ...")
       })
       .catch(function (error) {
         console.log(error);
@@ -213,6 +214,9 @@ const ValidateOTPNewUser = ({
 
   });
 
+
+  
+
   
 
     
@@ -226,13 +230,12 @@ const ValidateOTPNewUser = ({
           className = "signup-modal"
           centered
         >
-          <Modal.Header closeButton>
-            <Modal.Title>
-                <h1 style={{fontSize:"95%"}}>Please enter your verification code (OTP)
-                </h1>
-            </Modal.Title>
-          </Modal.Header>
-          <Modal.Body >
+         
+          <Modal.Body closeButton >
+
+          <h2 >
+            Please enter your verification code (OTP)
+          </h2>
              
             {!passVerifyNumber ? passVerifyNumber?
                 <>Loading</>
@@ -242,7 +245,10 @@ const ValidateOTPNewUser = ({
               <>
                 <div className="title">
                   Sent to {passVerifyNumber}
-                  <button onClick={()=>{setShowVerifyUserExist(true); handleClose()} }>Edit</button>
+                  <button className= "edit-number-button" 
+                    onClick={()=>{setShowVerifyUserExist(true); handleClose()} }>
+                    Edit
+                  </button>
                   
                 </div>
 
@@ -273,8 +279,9 @@ const ValidateOTPNewUser = ({
 
                 {counter == 0
                   ?
-                  <button className=" resend-otp-button" onClick = {(e) =>{resendOTPfunc(e) }}>Resend OTP code </button>                
-                :
+                  <button className=" resend-otp-button" onClick = {(e) =>{resendOTPfunc(e); setLoadingOtpNotification("Sending OTP ....") }}>
+                      Resend OTP code {loadingOtpNotification} </button>                
+                  :
                   <div className=" resend-otp-timer"> Resend OTP in {counter} seconds</div>
                 }
                 

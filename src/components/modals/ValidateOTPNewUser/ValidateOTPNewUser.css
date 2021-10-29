@@ -1,5 +1,19 @@
 
-
+.signup-form{
+  margin-top: 15%;
+}
+.signup-modal .modal-content{
+  background-color: #333033;
+  color: white;
+}
+.signup-modal .modal-backdrop,.show{
+  background-color: rgba(0, 0, 0, 0.8);
+}
+.signup-link{
+  width: 300px;
+  margin: auto;
+  
+}
 
 
 /* OTP design below  */
@@ -10,11 +24,20 @@
   }
   
   .title{
-    font-weight:600;
+    font-weight:2;
     margin-top:20px;
     font-size:24px;
-    width: 30%;
+    width: 97%;
     margin: 0 auto;
+    margin-bottom: 10%;
+  }
+
+  .edit-number-button{
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none; 
+    color:rgb(233, 218, 17);
+    margin-left: 2%;
   }
   
   .customBtn{
@@ -37,6 +60,8 @@
   }
   .otp-field{
     text-align: center;
+    font-size: x-large ;
+    font-weight: bolder;
   }
 
   .form-submit-button{
