@@ -11,16 +11,24 @@ import {signupReducer} from '../../../store/reducers/authReducer';
 
 
 
-const ValidateOTPNewUser = ({showValidateOTP, setShowValidateOTP}) => {
+const ValidateOTPNewUser = ({
+                              showValidateOTP, 
+                              setShowValidateOTP,
+                              passVerifyNumber,
+                              setShowVerifyUserExist
+                              
+                            }) => {
     
   const dispatch = useDispatch();
   const history = useHistory();
   const [otpReady, setOtpReady] = useState(false)
-  const [counter, setCounter] = useState(30);
+  const [counter, setCounter] = useState(85);
+  const [loadingOtpNotification,setLoadingOtpNotification] = useState(false);
     
   
   const handleClose = (e) => {
                               setShowValidateOTP(false);
+                              setCounter(60)
                               
                             }
   
@@ -128,7 +136,7 @@ const ValidateOTPNewUser = ({showValidateOTP, setShowValidateOTP}) => {
 
     const resendOTPfunc = (e) => {
       e.preventDefault();
-
+      
       let  uniquestring= String(getDateTime())
       console.log("Uniquestring", uniquestring)
       var data = JSON.stringify({
@@ -152,7 +160,7 @@ const ValidateOTPNewUser = ({showValidateOTP, setShowValidateOTP}) => {
       axios(config)
       .then(function (response) {
         console.log("Resend otp function ", response.data);
-        setCounter(30)
+        setCounter(60)
       })
       .catch(function (error) {
         console.log(error);
@@ -190,7 +198,6 @@ const ValidateOTPNewUser = ({showValidateOTP, setShowValidateOTP}) => {
   }
 
   useEffect(() => {
-    // if (counter > 2){
     const interval = setInterval(() => {
       if(counter < 1){
         // console.log("done")
@@ -202,11 +209,11 @@ const ValidateOTPNewUser = ({showValidateOTP, setShowValidateOTP}) => {
     return () => {
       clearInterval(interval);
     };
-  // }
+  
 
   });
 
-
+  
 
     
     return (
@@ -227,46 +234,57 @@ const ValidateOTPNewUser = ({showValidateOTP, setShowValidateOTP}) => {
           </Modal.Header>
           <Modal.Body >
              
-              
-            <div className="title">
-              Verify OTP
-            </div>
-                          
-                <form className="" onSubmit={(e) => validateOTPfunc(e)}>
-                    <div className= "form-otp ">
-                      {otp.map((data, index) => {
-                        return (
-                            <input
-                                className="otp-field"
-                                type="text"
-                                name="otp"
-                                maxLength="1"
-                                key={index}
-                                value={data}
-                                onChange={e => handleChange(e.target, index)}
-                                onFocus={e => e.target.select()}
-                            />
-                        );
-                    })}
-                    </div>
-                <Button className= "rounded-sm shadow-none form-control " type="submit"  >Submit</Button>
+            {!passVerifyNumber ? passVerifyNumber?
+                <>Loading</>
+              :
+              <>Please Enter Number </>
+              :
+              <>
+                <div className="title">
+                  Sent to {passVerifyNumber}
+                  <button onClick={()=>{setShowVerifyUserExist(true); handleClose()} }>Edit</button>
+                  
+                </div>
 
-                </form>
+                              
+                    <form className="" onSubmit={(e) => validateOTPfunc(e)}>
+                        <div className= "form-otp ">
+                          {otp.map((data, index) => {
+                            return (
+                                <input
+                                    className="otp-field"
+                                    type="text"
+                                    name="otp"
+                                    maxLength="1"
+                                    key={index}
+                                    value={data}
+                                    onChange={e => handleChange(e.target, index)}
+                                    onFocus={e => e.target.select()}
+                                />
+                            );
+                        })}
+                        </div>
+                    <Button className= "rounded-sm shadow-none form-control " type="submit"  >Submit</Button>
+
+                    </form>
+                    
+                            
+                    {/* <Button className= "rounded-sm shadow-none form-control bg-secondary" type="submit" onClick = {(e) =>{resendOTPfunc(e)}} >Resend OTP</Button> */}
+
+                {counter == 0
+                  ?
+                  <button className=" resend-otp-button" onClick = {(e) =>{resendOTPfunc(e) }}>Resend OTP code </button>                
+                :
+                  <div className=" resend-otp-timer"> Resend OTP in {counter} seconds</div>
+                }
                 
-                        
-                {/* <Button className= "rounded-sm shadow-none form-control bg-secondary" type="submit" onClick = {(e) =>{resendOTPfunc(e)}} >Resend OTP</Button> */}
-
-            {counter !== 0
-              ?
-            <div className=" resend-otp-timer"> Resend OTP in {counter} seconds</div>
-             :
-            <button className=" resend-otp-button" onClick = {(e) =>{resendOTPfunc(e)}}>Resend OTP code </button>
-            }
-            
+          </>
+          }
           </Modal.Body>
           
         </Modal>  
       </div>
+      
     );
   }
   

@@ -13,8 +13,43 @@ import {signupReducer} from '../../../store/reducers/authReducer';
 
 
 
-const VerifyUserExistRegister = ({showVerifyUserExist, setShowVerifyUserExist}) => {
-    
+const VerifyUserExistRegister = ({
+                                  showVerifyUserExist, 
+                                  setShowVerifyUserExist,
+                                  setPassVerifyNumber,
+
+                                }) => {
+  
+  const getDateTimeUniqueString = () => {
+    var now     = new Date(); 
+    var year    = now.getFullYear();
+    var month   = now.getMonth()+1; 
+    var day     = now.getDate();
+    var hour    = now.getHours();
+    var minute  = now.getMinutes();
+    var second  = now.getSeconds(); 
+    if(month.toString().length == 1) {
+         month = '0'+month;
+    }
+    if(day.toString().length == 1) {
+         day = '0'+day;
+    }   
+    if(hour.toString().length == 1) {
+         hour = '0'+hour;
+    }
+    if(minute.toString().length == 1) {
+         minute = '0'+minute;
+    }
+    if(second.toString().length == 1) {
+         second = '0'+second;
+    }   
+    var dateTime = year+month+day+hour+minute+second; 
+    let  uniquestring= String(dateTime)
+  
+     return uniquestring;
+}
+
+
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -31,22 +66,14 @@ const VerifyUserExistRegister = ({showVerifyUserExist, setShowVerifyUserExist}) 
   const handleConfirmPassword = (e) => setConfirmPassword(e.target.value);
     
     
-  var data = JSON.stringify({
-    "GENERATEOTP": {
-      "MOBILEPHONE": mobilenumber,
-      "otpemail": email,
-      "PARTYID": "0",
-      "COUNTRYCODE": "Guinea-Bissau",
-      "RESEND": "TRUE",
-      "ATTRIBUTE1": ""
-    }
-  });
+  
     
 
   
 
     const verifyUserExistsfunc = (e) => {
       e.preventDefault();
+      let uniquestring = getDateTimeUniqueString()
       if (confirmPassword === password){
           var data = JSON.stringify({
             "KEY_NAMEVALUE": {
@@ -58,7 +85,7 @@ const VerifyUserExistRegister = ({showVerifyUserExist, setShowVerifyUserExist}) 
 
           var config = {
             method: 'post',
-            url: 'https://tvanywheretest-ott.magnaquest.com/webapi/Restapi/GetRecordsBySearch?ReferenceNo=17412xzs123abcwwwqsrtCYpjWMi5p0FEEytp',
+            url: `https://tvanywheretest-ott.magnaquest.com/webapi/Restapi/GetRecordsBySearch?ReferenceNo=17412xzs123${uniquestring}YpjWMi5p0FEEytp`,
             headers: { 
               'Username': 'MTNGBUCWEBUSR', 
               'Password': 'Mtngbpass@1234', 
@@ -71,6 +98,9 @@ const VerifyUserExistRegister = ({showVerifyUserExist, setShowVerifyUserExist}) 
           axios(config)
           .then(function (response) {
             console.log("this is from verify if user exists", response.data);
+            //OTP function genrated here
+            setPassVerifyNumber(mobilenumber)
+            generateOTPfunc()
             console.log("ERROR NO STATUS CODE LOOK in Messages", response.data.RESPONSEINFO.ERRORNO)
           })
           .catch(function (error) {
@@ -84,11 +114,51 @@ const VerifyUserExistRegister = ({showVerifyUserExist, setShowVerifyUserExist}) 
       setShowVerifyUserExist("verifyuserdonenextprocess")
     }
 
+
+    const generateOTPfunc = () => {
+
+      let uniquestring = getDateTimeUniqueString()
+      var data = JSON.stringify({
+        "GENERATEOTP": {
+          "MOBILEPHONE": mobilenumber,
+          "otpemail": email,
+          "PARTYID": "0",
+          "COUNTRYCODE": "Guinea-Bissau",
+          "RESEND": "TRUE",
+          "ATTRIBUTE1": ""
+        }
+      });
+
+      var config = {
+        method: 'post',
+        url: `https://tvanywheretest-ott.magnaquest.com/webapi/Restapi/GenerateOTP?ReferenceNo=174${uniquestring}wwwqsrtdq43wq764832`,
+        headers: { 
+          'Username': 'MTNGBUCWEBUSR', 
+          'Password': 'Mtngbpass@1234', 
+          'Externalparty': 'tvanywhere-mtngb', 
+          'Content-Type': 'application/json'
+        },
+        data : data
+      };
+
+      axios(config)
+      .then(function (response) {
+        console.log("Generate  Otp function ", response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+      // setOtp(new Array(6).fill(""))
+
+    }
+    
     
 
     
     return (
-      <div>      
+      <div>    
+        
         <Modal
           show={showVerifyUserExist}
           onHide={handleClose}

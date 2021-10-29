@@ -25,8 +25,9 @@ const Homepage = () => {
     const [showlogin, setShowLogin] = useState(false);
 
     const [showVerifyUserExist, setShowVerifyUserExist] = useState(false);
-    const [showGenerateOTP, setShowGenerateOTP] = useState(false);
     const [showValidateOTP, setShowValidateOTP] = useState(false);
+    const [passVerifyNumber, setPassVerifyNumber] = useState("");
+    const [editNumber, setEditNumber] = useState(false)
 
 
   
@@ -84,9 +85,18 @@ const Homepage = () => {
                                     <input  type="text" pattern="[0-9]*" formcontrolname="mobile" aria-describedby="gloMobileNumber" placeholder="GXXX Mobile Number eg.080XXXXXXX" class="form-control shadow-none px-4 py-3 input_phone sign-up-inp-hme-slct-a"></input>
                                     <Button className="header-input-button rounded-sm shadow-none form-control  sign-up-inp-hme-slct-b" variant="secondary" onClick={handleShowVerifyUserExist} >Signup</Button>
                                 </form>
-                                <VerifyUserExistRegisterModal  showVerifyUserExist={showVerifyUserExist} setShowVerifyUserExist={setShowVerifyUserExist} />
+                                <VerifyUserExistRegisterModal  
+                                    showVerifyUserExist={showVerifyUserExist} 
+                                    setShowVerifyUserExist={setShowVerifyUserExist} 
+                                    setPassVerifyNumber={setPassVerifyNumber}
+                                    />
 
-                                <ValidateOTPNewUserModal  showValidateOTP={showValidateOTP} setShowValidateOTP={setShowValidateOTP} />
+                                <ValidateOTPNewUserModal  
+                                    showValidateOTP={showValidateOTP} 
+                                    setShowValidateOTP={setShowValidateOTP} 
+                                    passVerifyNumber={passVerifyNumber}
+                                    setShowVerifyUserExist={setShowVerifyUserExist}
+                                    />
 
                                 
                                 {/* <p class="frgt-pswd">
