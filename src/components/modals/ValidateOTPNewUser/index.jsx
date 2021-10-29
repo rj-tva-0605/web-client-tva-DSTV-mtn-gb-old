@@ -161,10 +161,11 @@ const ValidateOTPNewUser = ({
       .then(function (response) {
         console.log("Resend otp function ", response.data);
         setCounter(60)
-        setLoadingOtpNotification("Sending OTP ...")
+        setLoadingOtpNotification("")
       })
       .catch(function (error) {
         console.log(error);
+        // handleClose()
       });
 
       // setOtp(new Array(6).fill(""))
@@ -279,7 +280,7 @@ const ValidateOTPNewUser = ({
 
                 {counter == 0
                   ?
-                  <button className=" resend-otp-button" onClick = {(e) =>{resendOTPfunc(e); setLoadingOtpNotification("Sending OTP ....") }}>
+                  <button className=" resend-otp-button" onClick = {(e) =>{setLoadingOtpNotification("Sending OTP ...."); resendOTPfunc(e);  }}>
                       Resend OTP code {loadingOtpNotification} </button>                
                   :
                   <div className=" resend-otp-timer"> Resend OTP in {counter} seconds</div>
