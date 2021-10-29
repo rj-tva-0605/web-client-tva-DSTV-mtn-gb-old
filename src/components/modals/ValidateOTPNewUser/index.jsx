@@ -16,7 +16,8 @@ const ValidateOTPNewUser = ({showValidateOTP, setShowValidateOTP}) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [otpReady, setOtpReady] = useState(false)
-  const [counter, setCounter] = useState(30);  
+  const [counter, setCounter] = useState(30);
+    
   
   const handleClose = (e) => {
                               setShowValidateOTP(false);
@@ -151,6 +152,7 @@ const ValidateOTPNewUser = ({showValidateOTP, setShowValidateOTP}) => {
       axios(config)
       .then(function (response) {
         console.log("Resend otp function ", response.data);
+        setCounter(30)
       })
       .catch(function (error) {
         console.log(error);
@@ -191,7 +193,7 @@ const ValidateOTPNewUser = ({showValidateOTP, setShowValidateOTP}) => {
     // if (counter > 2){
     const interval = setInterval(() => {
       if(counter < 1){
-        console.log("done")
+        // console.log("done")
       }else{
       setCounter(counter - 1);
       }
@@ -254,7 +256,13 @@ const ValidateOTPNewUser = ({showValidateOTP, setShowValidateOTP}) => {
                         
                 {/* <Button className= "rounded-sm shadow-none form-control bg-secondary" type="submit" onClick = {(e) =>{resendOTPfunc(e)}} >Resend OTP</Button> */}
 
-            <button className=" resend-otp-button" onClick = {(e) =>{resendOTPfunc(e)}}>Resend OTP code {counter}</button>
+            {counter !== 0
+              ?
+            <div className=" resend-otp-timer"> Resend OTP in {counter} seconds</div>
+             :
+            <button className=" resend-otp-button" onClick = {(e) =>{resendOTPfunc(e)}}>Resend OTP code </button>
+            }
+            
           </Modal.Body>
           
         </Modal>  
