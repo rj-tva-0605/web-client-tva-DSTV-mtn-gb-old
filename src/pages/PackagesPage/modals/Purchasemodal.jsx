@@ -41,6 +41,33 @@ const Purchasemodal = ({triggerpay, setTriggerPay, showPayAlert, setShowPayAlert
 
     
     const trigfunc = () =>{
+
+      var data = JSON.stringify({
+        "mobilenumber": "9666019691",
+        "productid": "24501220000005301"
+      });
+      
+      var config = {
+        method: 'post',
+        url: 'https://tvanywheretest-ott.magnaquest.com/MTNGBSDPPG/subscription',
+        headers: { 
+          'Username': 'MTNGBUCWEBUSR', 
+          'Password': 'Mtngbpass@1234', 
+          'Externalparty': 'tvanywhere-mtngb', 
+          'Content-Type': 'application/json'
+        },
+        data : data
+      };
+      
+      axios(config)
+      .then(function (response) {
+        console.log("Response from hitting packages", response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+      
+
       handleClose();
       setTriggerPay(true);
       console.log("close purchase modal trigger purchase modal")

@@ -17,6 +17,8 @@ const NewPackagesDisplay = ({showTitle, packageContent, setPackageContent }) =>{
     const [dropdownGloLitePack, setDropdownGloLitePack] = useState("");
     const [dropdownGloMaxPack, setDropdownGloMaxPack] = useState("");
 
+
+
     const [showPayAlert, setShowPayAlert] = useState(false);
     const [triggerControl, setTriggerControl] = useState(false);
     const [packageRateDetails, setPackageRateDetails] = useState(false);
@@ -75,14 +77,7 @@ const NewPackagesDisplay = ({showTitle, packageContent, setPackageContent }) =>{
                         />
 
                         
-                        <TriggerPurchasemodal
-                            triggerpay = {triggerpay}
-                            setTriggerPay = {setTriggerPay}
-                            packageRateDetails={packageRateDetails} 
-                            setPackageRateDetails= {setPackageRateDetails}                            
-
-                        />
-
+                       
                     
 
 
