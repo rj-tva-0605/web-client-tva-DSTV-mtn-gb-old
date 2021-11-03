@@ -3,31 +3,27 @@ import  './style.css';
 
 import Purchasemodal from '../../pages/PackagesPage/modals/Purchasemodal';
 import Triggermodal from '../../pages/PackagesPage/modals/TriggerModal';
+import ResponsePurchaseModal from 'pages/PackagesPage/modals/ResponsePurchaseModal';
+import LoadingModal from 'pages/PackagesPage/modals/LoadingModal';
 
-
-import TriggerPurchasemodal from '../../pages/PackagesPage/modalsFirstConfirmation/TriggerPurchasemodal'
 
 
 
 const NewPackagesDisplay = ({showTitle, packageContent, setPackageContent }) =>{
 
-    const [selectedpakagetitle, setSelectedPackageTitle] = useState(false);
-    const [finalPackageBtn, setfinalPackageBtn] = useState(false)
-    const [dropdownThreeDayPack, setDropdownThreeDayPack] = useState("");
-    const [dropdownSevenDayPack, setDropdownSevenDayPack] = useState("");
-    const [dropdownThirtyDayPack, setDropdownThirtyDayPack] = useState("");
-    const [dropdownBlockbusterPack, setDropdownBlockbusterPack] = useState("");
-    const [dropdownGloLitePack, setDropdownGloLitePack] = useState("");
-    const [dropdownGloMaxPack, setDropdownGloMaxPack] = useState("");
+   
 
 
 
     const [showPayAlert, setShowPayAlert] = useState(false);
     const [triggerControl, setTriggerControl] = useState(false);
-    const [trigPurchase, setTrigPurchase] = useState(false)
-    const [packageRateDetails, setPackageRateDetails] = useState(false);
+    const [showtrigPurchase, setShowTrigPurchase] = useState(false)
+    const [showResponsePurchModal, setShowResponsePurchModal] = useState(false)
 
-    const [triggerpay, setTriggerPay] = useState(false);
+    const [packageRateDetails, setPackageRateDetails] = useState(false);
+    const [loadingModal, setLoadingModal] = useState(false)
+
+    // const [triggerpay, setTriggerPay] = useState(false);
 
 
    
@@ -43,6 +39,7 @@ const NewPackagesDisplay = ({showTitle, packageContent, setPackageContent }) =>{
             setPackageRateDetails(
                 {
                     packageName: packttle,
+                    phoneNUmber: "+234647477474",
                     rateCode: ratecode
                 }
             )
@@ -75,18 +72,38 @@ const NewPackagesDisplay = ({showTitle, packageContent, setPackageContent }) =>{
                         showPayAlert={showPayAlert} 
                         setShowPayAlert={setShowPayAlert} 
                         setTriggerControl={setTriggerControl}                         
-                        triggerpay = {triggerpay}
-                        setTriggerPay = {setTriggerPay}
-                        trigPurchase = {trigPurchase}
-                        setTrigPurchase ={setTrigPurchase}
+                        showtrigPurchase = {showtrigPurchase}
+                        setShowTrigPurchase ={setShowTrigPurchase}
+                        setPackageRateDetails={setPackageRateDetails}
+                        packageRateDetails ={packageRateDetails}
+                        setLoadingModal= {setLoadingModal}
+
+
                         />
 
                     <Triggermodal
-                        trigPurchase = {trigPurchase}
-                        setTrigPurchase ={setTrigPurchase}
+                        showtrigPurchase = {showtrigPurchase}
+                        setShowTrigPurchase ={setShowTrigPurchase}
+                        setShowResponsePurchModal={setShowResponsePurchModal}
+                        packageRateDetails ={packageRateDetails}
+                        setPackageRateDetails={setPackageRateDetails}
+                        setLoadingModal= {setLoadingModal}
+
                         />
 
-                        
+                    <ResponsePurchaseModal
+                        showResponsePurchModal={showResponsePurchModal}
+                        setShowResponsePurchModal={setShowResponsePurchModal}
+                        packageRateDetails ={packageRateDetails}
+                        setLoadingModal= {setLoadingModal}
+
+
+                    />
+
+                    <LoadingModal
+                        loadingModal= {loadingModal}
+                        setLoadingModal= {setLoadingModal}
+                        />
                        
                     
 
@@ -97,12 +114,12 @@ const NewPackagesDisplay = ({showTitle, packageContent, setPackageContent }) =>{
                         <h1>₦150</h1>
                         <p>Movies only <br/>3 days</p>
                         </button>
-                    <button className="one-card package-title" onClick={(e) => {showModalfunc(e ,"VOD 7days", "5876"); }}>
+                    <button className="one-card package-title" onClick={(e) => {showModalfunc(e ," Glotv VOD 7days", "5876"); }}>
                         <p>Glotv VOD 7 days</p>
                         <h1>₦150</h1>
                         <p>Movies only <br/>7 days</p>
                         </button>
-                    <button className="one-card package-title" onClick={(e) => {showModalfunc(e ,"VOD 30days", "9647"); }}>
+                    <button className="one-card package-title" onClick={(e) => {showModalfunc(e ,"Glotv VOD 30days", "9647"); }}>
                         <p>Glotv VOD 30 days</p>
                         <h1>₦150</h1>
                         <p>Movies only <br/> 30 days</p>

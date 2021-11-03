@@ -12,20 +12,14 @@ import PackagesDisplay from 'components/PackagesDisplay';
 
 
 
+const Purchasemodal = ({ showPayAlert, setShowPayAlert, 
+                         setTriggerControl,  setShowTrigPurchase, 
+                         setPackageRateDetails,  packageRateDetails,  setLoadingModal
 
-
-
-
-
-
-const Purchasemodal = ({triggerpay, setTriggerPay, showPayAlert, setShowPayAlert, 
-                        packageContent, setTriggerControl,  setTrigPurchase
                         }) => {
     
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    // const dispatch = useDispatch()
-    const history = useHistory()
+    
+    
 
 
     // modal show and hide 
@@ -33,51 +27,31 @@ const Purchasemodal = ({triggerpay, setTriggerPay, showPayAlert, setShowPayAlert
         // e.preventDefault();
         setShowPayAlert(false);
         setTriggerControl(false);
-        setTriggerPay(false);
+        // setTriggerPay(false);
 
       };
 
-    const handleUsername = (e) => setUsername(e.target.value);
-    const handlePassword = (e) => setPassword(e.target.value);
+    const handleCloseNoChoice = () =>{
+      setTriggerControl(false);
+      setPackageRateDetails(false);
+      setShowPayAlert(false);
+      setLoadingModal(false)      
+
+    }
+    
+
 
     
     const trigfunc = () =>{
 
       
+      setLoadingModal(true)
 
-      
-
-      var data = JSON.stringify({
-        "mobilenumber": "1111122222",
-        "productid": "24501220000005301"
-      });
-      
-      var config = {
-        method: 'post',
-        url: 'https://mtngbissautest-bcrm.magnaquest.com/mtngnbsdppgtest/subscription',
-        headers: { 
-          'Username': 'MTNGBUCWEBUSR', 
-          'Password': 'Mtngbpass@1234', 
-          'Externalparty': 'tvanywhere-mtngb', 
-          'Content-Type': 'application/json'
-        },
-        data : data
-      };
-      
-      axios(config)
-      .then(function (response) {
-        console.log("Response from hitting packages", response.data);
-        let newResponse = JSON.parse(response.data);
-        console.log("Convert stringified json back to json Message", newResponse.Message );
-        
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-      
-      setTimeout(function(){ setTrigPurchase(true) }, 3000);
+      setTimeout(function(){ setShowTrigPurchase(true) }, 400);
       handleClose();
       console.log("close purchase modal trigger purchase modal")
+      console.log("Package Details", packageRateDetails)
+
       }
     
     
@@ -100,22 +74,25 @@ const Purchasemodal = ({triggerpay, setTriggerPay, showPayAlert, setShowPayAlert
 
           <Modal.Body>
              
-             <h1 className="package-center-heading">Activate Data Bundle</h1>
+             <h1 className="package-center-heading"  
+                    style={{width: "87%", margin: "0 auto", marginBottom: "15%"}}>
+                  <span style={{fontSize: "1.75rem", marginBottom: "7%", width: "75%"}}>You have opted to subscribe to</span>
+                  <br/>
+                  <span>{packageRateDetails.packageName}</span></h1>
              
-             <p className="package-center-text" >valid for 1 day @ CFA 200</p>                      
             
               <div>
                 {/* {console.log(packageRateDetails.rateCode)} */}
                 <div className="package-buttons-confirmation">
-                    <button type="button" class="btn btn-success" onClick={trigfunc} >Success</button>
-                    <button type="button" class="btn btn-danger"  onClick={handleClose}>Close</button>
+                    <button type="button" class="btn btn-success" onClick={trigfunc} >Proceed</button>
+                    <button type="button" class="btn btn-danger"  onClick={handleCloseNoChoice}>Decline</button>
                 </div>
 
               </div>
             
             <br />
             <br/>
-            <p className=" login-link "><small>New to Glo-TV?<a href="">Sign up now</a></small></p>
+            
 
           </Modal.Body>
 

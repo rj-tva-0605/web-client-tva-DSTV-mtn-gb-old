@@ -1,0 +1,27 @@
+
+.login-modal .modal-content{
+    background-color: #333033;
+    color: white;
+}
+.login-modal .modal-backdrop,.show{
+    background-color: rgba(0, 0, 0, 0.7);
+}
+.login-link{
+    width: 200px;
+    margin: auto;
+    
+}
+.package-buttons-confirmation{
+    display:flex;
+    justify-content: space-around;
+}
+.package-center-heading{
+    width: 97%;
+    margin: 0 auto;
+    /* border:  2px red solid !important; */
+}
+.package-center-text{
+    width: 50%;
+    margin: 8% auto;
+    /* border:  2px red solid !important; */
+}

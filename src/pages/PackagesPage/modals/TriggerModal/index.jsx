@@ -18,7 +18,9 @@ import PackagesDisplay from 'components/PackagesDisplay';
 
 
 
-const Triggermodal = ({trigPurchase, setTrigPurchase
+const Triggermodal = ({showtrigPurchase, setShowTrigPurchase,
+                        setPackageRateDetails, packageRateDetails,
+                        setShowResponsePurchModal, setLoadingModal
                         }) => {
     
     const [username, setUsername] = useState("");
@@ -29,11 +31,16 @@ const Triggermodal = ({trigPurchase, setTrigPurchase
 
     // modal show and hide 
     const handleClose = () => {
-      setTrigPurchase(false)
+      setShowTrigPurchase(false)
+
       };
 
-    const handleUsername = (e) => setUsername(e.target.value);
-    const handlePassword = (e) => setPassword(e.target.value);
+    const handleCloseNoChoice = () =>{
+      setLoadingModal(false) 
+      setShowTrigPurchase(false)
+     
+    }
+    
 
     
     const trigfunc = () =>{
@@ -60,6 +67,9 @@ const Triggermodal = ({trigPurchase, setTrigPurchase
         console.log("Response from hitting packages", response.data);
         let newResponse = JSON.parse(response.data);
         console.log("Convert stringified json back to json Message", newResponse.Message );
+        console.log("Package Details", packageRateDetails);
+        setTimeout(function(){ setShowResponsePurchModal(true) }, 8);
+
         
       })
       .catch(function (error) {
@@ -69,7 +79,7 @@ const Triggermodal = ({trigPurchase, setTrigPurchase
 
       handleClose();
       // setTriggerPay(true);
-      console.log("close purchase modal trigger purchase modal")
+      console.log(" final Response purchase modal trigger purchase modal")
       }
     
     
@@ -81,7 +91,7 @@ const Triggermodal = ({trigPurchase, setTrigPurchase
       <div>
   
         <Modal
-          show={trigPurchase}
+          show={showtrigPurchase}
           onHide={handleClose}
           backdrop="static"
           keyboard={false}
@@ -92,7 +102,7 @@ const Triggermodal = ({trigPurchase, setTrigPurchase
 
           <Modal.Body>
              
-                <h1 className="package-center-heading"> Trigger modal --- Activate Data Bundle</h1>
+                <h1 className="package-center-heading"> Trigger Purchase modal --- Activate Data Bundle</h1>
              
              <p className="package-center-text" >valid for 1 day @ CFA 200</p>                      
             
@@ -100,7 +110,7 @@ const Triggermodal = ({trigPurchase, setTrigPurchase
                 {/* {console.log(packageRateDetails.rateCode)} */}
                 <div className="package-buttons-confirmation">
                     <button type="button" class="btn btn-success" onClick={trigfunc} >Success</button>
-                    <button type="button" class="btn btn-danger"  onClick={handleClose}>Close</button>
+                    <button type="button" class="btn btn-danger"  onClick={handleCloseNoChoice}>Close</button>
                 </div>
 
               </div>
