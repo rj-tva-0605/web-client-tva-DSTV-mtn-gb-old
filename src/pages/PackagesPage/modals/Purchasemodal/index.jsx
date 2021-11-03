@@ -19,7 +19,7 @@ import PackagesDisplay from 'components/PackagesDisplay';
 
 
 const Purchasemodal = ({triggerpay, setTriggerPay, showPayAlert, setShowPayAlert, 
-                        packageContent, setTriggerControl, 
+                        packageContent, setTriggerControl,  setTrigPurchase
                         }) => {
     
     const [username, setUsername] = useState("");
@@ -34,6 +34,7 @@ const Purchasemodal = ({triggerpay, setTriggerPay, showPayAlert, setShowPayAlert
         setShowPayAlert(false);
         setTriggerControl(false);
         setTriggerPay(false);
+
       };
 
     const handleUsername = (e) => setUsername(e.target.value);
@@ -42,14 +43,18 @@ const Purchasemodal = ({triggerpay, setTriggerPay, showPayAlert, setShowPayAlert
     
     const trigfunc = () =>{
 
+      
+
+      
+
       var data = JSON.stringify({
-        "mobilenumber": "9666019691",
+        "mobilenumber": "1111122222",
         "productid": "24501220000005301"
       });
       
       var config = {
         method: 'post',
-        url: 'https://tvanywheretest-ott.magnaquest.com/MTNGBSDPPG/subscription',
+        url: 'https://mtngbissautest-bcrm.magnaquest.com/mtngnbsdppgtest/subscription',
         headers: { 
           'Username': 'MTNGBUCWEBUSR', 
           'Password': 'Mtngbpass@1234', 
@@ -62,14 +67,16 @@ const Purchasemodal = ({triggerpay, setTriggerPay, showPayAlert, setShowPayAlert
       axios(config)
       .then(function (response) {
         console.log("Response from hitting packages", response.data);
+        let newResponse = JSON.parse(response.data);
+        console.log("Convert stringified json back to json Message", newResponse.Message );
+        
       })
       .catch(function (error) {
         console.log(error);
       });
       
-
+      setTimeout(function(){ setTrigPurchase(true) }, 3000);
       handleClose();
-      setTriggerPay(true);
       console.log("close purchase modal trigger purchase modal")
       }
     
@@ -93,7 +100,7 @@ const Purchasemodal = ({triggerpay, setTriggerPay, showPayAlert, setShowPayAlert
 
           <Modal.Body>
              
-                <h1 className="package-center-heading">Activate Data Bundle</h1>
+             <h1 className="package-center-heading">Activate Data Bundle</h1>
              
              <p className="package-center-text" >valid for 1 day @ CFA 200</p>                      
             

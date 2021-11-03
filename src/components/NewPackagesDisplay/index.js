@@ -2,6 +2,9 @@ import React, {useState} from 'react';
 import  './style.css';
 
 import Purchasemodal from '../../pages/PackagesPage/modals/Purchasemodal';
+import Triggermodal from '../../pages/PackagesPage/modals/TriggerModal';
+
+
 import TriggerPurchasemodal from '../../pages/PackagesPage/modalsFirstConfirmation/TriggerPurchasemodal'
 
 
@@ -21,6 +24,7 @@ const NewPackagesDisplay = ({showTitle, packageContent, setPackageContent }) =>{
 
     const [showPayAlert, setShowPayAlert] = useState(false);
     const [triggerControl, setTriggerControl] = useState(false);
+    const [trigPurchase, setTrigPurchase] = useState(false)
     const [packageRateDetails, setPackageRateDetails] = useState(false);
 
     const [triggerpay, setTriggerPay] = useState(false);
@@ -73,7 +77,13 @@ const NewPackagesDisplay = ({showTitle, packageContent, setPackageContent }) =>{
                         setTriggerControl={setTriggerControl}                         
                         triggerpay = {triggerpay}
                         setTriggerPay = {setTriggerPay}
+                        trigPurchase = {trigPurchase}
+                        setTrigPurchase ={setTrigPurchase}
+                        />
 
+                    <Triggermodal
+                        trigPurchase = {trigPurchase}
+                        setTrigPurchase ={setTrigPurchase}
                         />
 
                         

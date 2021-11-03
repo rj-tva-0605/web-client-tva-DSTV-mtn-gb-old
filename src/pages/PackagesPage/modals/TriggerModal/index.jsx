@@ -1,7 +1,7 @@
 
 import React, {useState} from 'react';
 import {Button, Modal} from 'react-bootstrap';
-import './TriggerPurchasemodal.css';
+import './Triggermodal.css';
 import axios from 'axios';
 
 
@@ -17,71 +17,63 @@ import PackagesDisplay from 'components/PackagesDisplay';
 
 
 
-const TriggerPurchasemodal = ({ triggerpay, setTriggerPay,
-                                packageContent,packageRateDetails,
-                                setPackageRateDetails}) => {
+
+const Triggermodal = ({trigPurchase, setTrigPurchase
+                        }) => {
     
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    
     // const dispatch = useDispatch()
     const history = useHistory()
 
 
     // modal show and hide 
     const handleClose = () => {
-        // e.preventDefault();
-        
-        setPackageRateDetails(false)
+      setTrigPurchase(false)
       };
 
     const handleUsername = (e) => setUsername(e.target.value);
     const handlePassword = (e) => setPassword(e.target.value);
 
-    var data = JSON.stringify({
-      "username": username,
-      "password": password,
-      "device": "rodney",
-      "device_class": "desktop"
-    });
     
+    const trigfunc = () =>{
 
-    
-    const proceedfunc = (e) => {
-      e.preventDefault();
-
-      // dispatch(loginReducer(data))
-      
       var data = JSON.stringify({
-        "mobilenumber": "966601969",
-        "productid": "24501220000005180"
+        "mobilenumber": "1111122222",
+        "productid": "24501220000005301"
       });
-
+      
       var config = {
         method: 'post',
-        url: 'https://mtngbissautest-bcrm.magnaquest.com/mtngnbsdppgtest',
+        url: 'https://mtngbissautest-bcrm.magnaquest.com/mtngnbsdppgtest/subscription',
         headers: { 
-          'Authorization': 'Basic TVROR0JVQ1dFQlVTUjpNdG5nYnBhc3NAMTIzNA==', 
+          'Username': 'MTNGBUCWEBUSR', 
+          'Password': 'Mtngbpass@1234', 
+          'Externalparty': 'tvanywhere-mtngb', 
           'Content-Type': 'application/json'
         },
         data : data
       };
-
+      
       axios(config)
-      .then( response => {
-        console.log("Pay response for Package", response.data);
+      .then(function (response) {
+        console.log("Response from hitting packages", response.data);
+        let newResponse = JSON.parse(response.data);
+        console.log("Convert stringified json back to json Message", newResponse.Message );
+        
       })
-      .catch(error => {
+      .catch(function (error) {
         console.log(error);
       });
+      
 
-      history.push({
-        pathname:  "/newdashboard"
-        
-                 });
-
-
-    }
+      handleClose();
+      // setTriggerPay(true);
+      console.log("close purchase modal trigger purchase modal")
+      }
+    
+    
+    
 
     
 
@@ -89,7 +81,7 @@ const TriggerPurchasemodal = ({ triggerpay, setTriggerPay,
       <div>
   
         <Modal
-          show={triggerpay}
+          show={trigPurchase}
           onHide={handleClose}
           backdrop="static"
           keyboard={false}
@@ -97,23 +89,22 @@ const TriggerPurchasemodal = ({ triggerpay, setTriggerPay,
           centered
         >
           
+
           <Modal.Body>
              
-              <h1 className="package-center-heading">Activate Data Bundle</h1>
+                <h1 className="package-center-heading"> Trigger modal --- Activate Data Bundle</h1>
              
              <p className="package-center-text" >valid for 1 day @ CFA 200</p>                      
-            { !packageRateDetails? 
-              ""
-              :
+            
               <div>
-                {console.log(packageRateDetails.rateCode)}
+                {/* {console.log(packageRateDetails.rateCode)} */}
                 <div className="package-buttons-confirmation">
-                    <button type="button" class="btn btn-success" onClick={(e) =>proceedfunc(e)} >Success</button>
+                    <button type="button" class="btn btn-success" onClick={trigfunc} >Success</button>
                     <button type="button" class="btn btn-danger"  onClick={handleClose}>Close</button>
                 </div>
 
               </div>
-            }
+            
             <br />
             <br/>
             <p className=" login-link "><small>New to Glo-TV?<a href="">Sign up now</a></small></p>
@@ -125,4 +116,4 @@ const TriggerPurchasemodal = ({ triggerpay, setTriggerPay,
     );
   }
   
-  export default TriggerPurchasemodal;
+  export default Triggermodal;
