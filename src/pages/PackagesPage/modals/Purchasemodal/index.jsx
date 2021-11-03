@@ -75,16 +75,21 @@ const Purchasemodal = ({ showPayAlert, setShowPayAlert,
           <Modal.Body>
              
              <h1 className="package-center-heading"  
-                    style={{width: "87%", margin: "0 auto", marginBottom: "15%"}}>
-                  <span style={{fontSize: "1.75rem", marginBottom: "7%", width: "75%"}}>You have opted to subscribe to</span>
+                    style={{width: "87%", margin: "0 auto", marginBottom: "7%"}}>
+                  <span style={{fontSize: "1.75rem", marginBottom: "7%", width: "15%"}}>You have opted to subscribe to</span>
                   <br/>
-                  <span>{packageRateDetails.packageName}</span></h1>
-             
+                  <span>{packageRateDetails.packageName}</span>
+                </h1> 
             
               <div>
+                <div 
+                    style={{width: "29%", margin: "0 auto", marginBottom: "9%", fontSize: "1.25rem",
+                    border: "2px solid red"}}>
+                  {packageRateDetails.phoneNumber} 
+                </div>
                 {/* {console.log(packageRateDetails.rateCode)} */}
                 <div className="package-buttons-confirmation">
-                    <button type="button" class="btn btn-success" onClick={trigfunc} >Proceed</button>
+                    <button type="button" class="btn btn-success" onClick={trigfunc} >Buy {packageRateDetails.price}</button>
                     <button type="button" class="btn btn-danger"  onClick={handleCloseNoChoice}>Decline</button>
                 </div>
 

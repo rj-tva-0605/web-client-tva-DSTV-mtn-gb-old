@@ -60,7 +60,8 @@ const ResponsePurchaseModal = ({
 
           <Modal.Body>
 
-              <i className="fa fa-check-circle fa-lg" style={{color: "yellow", width: "80%", margin: "0 auto", marginBottom: "3%"}}></i>
+              <i className="fa fa-check-circle fa-lg" 
+                  style={{color: "yellow", width: "40%", marginRight: "90px" , marginBottom: "3%", fontSize: "1.90rem"}} />
              
                 <h1 className="package-center-heading mx-auto"> Bundle Activation Initiated</h1>
              

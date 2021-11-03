@@ -30,7 +30,7 @@ const NewPackagesDisplay = ({showTitle, packageContent, setPackageContent }) =>{
 
 
 
-    const showModalfunc = (e , packttle, ratecode) =>{
+    const showModalfunc = (e , packttle, ratecode, price ) =>{
         e.preventDefault();
         if(!triggerControl){
             setTriggerControl(true)
@@ -39,7 +39,8 @@ const NewPackagesDisplay = ({showTitle, packageContent, setPackageContent }) =>{
             setPackageRateDetails(
                 {
                     packageName: packttle,
-                    phoneNUmber: "+234647477474",
+                    phoneNumber: "+234647477474",
+                    price: price,
                     rateCode: ratecode
                 }
             )
@@ -109,27 +110,27 @@ const NewPackagesDisplay = ({showTitle, packageContent, setPackageContent }) =>{
 
 
 
-                    <button className="one-card package-title" value="1st test value " onClick={(e) => {showModalfunc(e ,"VOD 3days", "4356"); }} >
+                    <button className="one-card package-title" value="1st test value " onClick={(e) => {showModalfunc(e ,"VOD 3days", "4356", "400 CFA" ); }} >
                         <p>Glotv VOD 3 days</p>
                         <h1>₦150</h1>
                         <p>Movies only <br/>3 days</p>
                         </button>
-                    <button className="one-card package-title" onClick={(e) => {showModalfunc(e ," Glotv VOD 7days", "5876"); }}>
+                    <button className="one-card package-title" onClick={(e) => {showModalfunc(e ," Glotv VOD 7days", "5876", "500 CFA"); }}>
                         <p>Glotv VOD 7 days</p>
                         <h1>₦150</h1>
                         <p>Movies only <br/>7 days</p>
                         </button>
-                    <button className="one-card package-title" onClick={(e) => {showModalfunc(e ,"Glotv VOD 30days", "9647"); }}>
+                    <button className="one-card package-title" onClick={(e) => {showModalfunc(e ,"Glotv VOD 30days", "9647", "700 CFA"); }}>
                         <p>Glotv VOD 30 days</p>
                         <h1>₦150</h1>
                         <p>Movies only <br/> 30 days</p>
                         </button>
-                    <button className="one-card package-title" onClick={(e) => {showModalfunc(e ,"Glotv Lite", "10047"); }}>
+                    <button className="one-card package-title" onClick={(e) => {showModalfunc(e ,"Glotv Lite", "10047", "800 CFA"); }}>
                         <p>Glotv Lite</p>
                         <h1>₦150</h1>
                         <p>Movies & Live TV <br/> 7 days</p>
                         </button>
-                    <button className="one-card package-title" onClick={(e) => {showModalfunc(e ,"Glotv Max", "80047"); }}>
+                    <button className="one-card package-title" onClick={(e) => {showModalfunc(e ,"Glotv Max", "80047", "1000 CFA"); }}>
                         <p>Glotv Max</p>
                         <h1>₦150</h1>
                         <p>Movies & Live TV <br/> 7 days</p>
