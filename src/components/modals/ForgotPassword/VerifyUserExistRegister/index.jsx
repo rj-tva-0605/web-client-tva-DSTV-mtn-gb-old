@@ -80,7 +80,7 @@ const VerifyUserExistRegister = ({
               "KEY_NAME": "PROCESS",
               "KEY_VALUE": "GETUSERID"
             },
-            "ADDITIONAL_INFO": `{ ENTITYCODE : MTNGB , MOBILENO: ${mobilenumber} }`
+            "ADDITIONAL_INFO": "{'ENTITYCODE':'MTNGB','MOBILENO':'02123456789'}"
           });
 
           var config = {

@@ -1,0 +1,89 @@
+
+.signup-form{
+  margin-top: 15%;
+}
+.signup-modal .modal-content{
+  background-color: #333033;
+  color: white;
+}
+.signup-modal .modal-backdrop,.show{
+  background-color: rgba(0, 0, 0, 0.8);
+}
+.signup-link{
+  width: 300px;
+  margin: auto;
+  
+}
+
+
+/* OTP design below  */
+
+.bgWhite{
+    background:white;
+    box-shadow:0px 3px 6px 0px #cacaca;
+  }
+  
+  .title{
+    font-weight:2;
+    margin-top:20px;
+    font-size:24px;
+    width: 97%;
+    margin: 0 auto;
+    margin-bottom: 10%;
+  }
+
+  .edit-number-button{
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none; 
+    color:rgb(233, 218, 17);
+    margin-left: 2%;
+  }
+  
+  .customBtn{
+    border-radius:0px;
+    padding:10px;
+  }
+  
+  
+  
+  
+  .form-otp{
+      display: flex;
+      margin-bottom: 5%;
+  }
+
+  .form-otp input {
+      width: 75%;
+      height: 8vh;
+      margin: 2%;
+  }
+  .otp-field{
+    text-align: center;
+    font-size: x-large ;
+    font-weight: bolder;
+  }
+
+  .form-submit-button{
+    /* flex:none; */
+    /* margin: 10% 0; */
+    margin-bottom: 2%;
+
+  }
+  .resend-otp-button{
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none; 
+    color:white;  
+    width: 99%;
+    margin: 0 auto;
+    margin-top: 5%;
+    /* margin-left: 40%; */
+    /* border: 2px red solid; */
+  }
+
+  .resend-otp-timer{
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 1%;
+  }

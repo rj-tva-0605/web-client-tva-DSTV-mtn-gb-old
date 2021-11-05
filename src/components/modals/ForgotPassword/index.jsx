@@ -1,19 +1,21 @@
-// validate user exist and generate OTP
+
+
+// validate user exist and generate OTP  
+// before we proceed with forgot password logic
 
 
 import React, {useState} from 'react';
 import {Button, Modal} from 'react-bootstrap';
-import  './VerifyUserExistRegister.css';
+import  './style.css';
 
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
-import {signupReducer} from '../../../store/reducers/authReducer';
 
 
 
 
-const VerifyUserExistRegister = ({
+const ForgotPaswordModal = ({
                                   showVerifyUserExist, 
                                   setShowVerifyUserExist,
                                   setPassVerifyNumber,
@@ -149,7 +151,6 @@ const VerifyUserExistRegister = ({
         console.log(error);
       });
 
-      // setOtp(new Array(6).fill(""))
 
     }
     
@@ -203,5 +204,6 @@ const VerifyUserExistRegister = ({
       </div>
     );
   }
-  
-  export default VerifyUserExistRegister;
+
+  export default ForgotPaswordModal
+
