@@ -1,5 +1,5 @@
 
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {useDispatch, useSelector} from 'react-redux';
 
 import { logoutReducer } from "store/reducers/authReducer";
@@ -15,11 +15,14 @@ import ValidateOTPNewUserModal from '../../components/modals/ValidateOTPNewUser'
 import LoginModal from '../../components/modals/Login';
 
 import './Homepage.css';
+import { useHistory } from 'react-router';
+
 
 
 const Homepage = () => {
 
   
+    const history = useHistory()
 
     const [showlogin, setShowLogin] = useState(false);
 
@@ -28,7 +31,8 @@ const Homepage = () => {
     const [passVerifyNumber, setPassVerifyNumber] = useState("");
 
 
-  
+    const isUserLoggedIn = useSelector(state => state.auth.isUserLoggedIn)
+    const messageLoginError = useSelector(state =>state.auth.messageLoginError)
     
 
     const handleShowVerifyUserExist  = () => setShowVerifyUserExist(true);
@@ -43,14 +47,35 @@ const Homepage = () => {
 
     const handleLoginShow  = () => setShowLogin(true);
     
+    if(!isUserLoggedIn){
+        history.push({
+            pathname:  "/",
+          
+                      });
+    }else if(isUserLoggedIn){
+        history.push({
+            pathname:  "/newdashboard",
+          
+                      });
+    }
 
     
     const dispatch = useDispatch();
-    const isUserLoggedIn = useSelector(state => state.auth.isUserLoggedIn)
+    
 
     const handleLogout = () =>{
         dispatch(logoutReducer())
     }
+
+
+    useEffect(() => {
+        if(isUserLoggedIn){
+            history.push({
+                pathname:'/newdashboard'
+            })
+        }
+        
+    }, [])
 
     return(
         <div className="home-vert-scrollable" >

@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import { SIGNUP_SUCCESS, LOGIN_SUCCESS, LOGIN_ERROR, LOGOUT, REFRESH_SUCCESS } from '../actions/types';
 
-import {signup, login, logout, signupError, refreshTokenAction} from 'store/actions';
+import {signup, login, loginError, logout, signupError, refreshTokenAction} from 'store/actions';
 
 import {createCookie} from 'utils/cookie_helper';
 import Cookies from 'universal-cookie'
@@ -13,6 +13,7 @@ const cookies = new Cookies();
 
 const initialState = {
   isUserLoggedIn: false,
+  messageLoginError: "",
   accessToken: "",
 
 };
@@ -73,14 +74,23 @@ export const loginReducer = (data) => (dispatch)  => {
 
       axios(config)
       .then((response) => {
-
-        cookies.set("refresh_token", response.data.data.refresh_token)
-        cookies.set("access_token", response.data.data.access_token)
-        cookies.set('user_id', response.data.data.user_id)
-        cookies.set("operator_uid", response.data.data.operator_uid)
+          if(response.data.data.operator_uid == "mtngb"){
+              cookies.set("refresh_token", response.data.data.refresh_token)
+              cookies.set("access_token", response.data.data.access_token)
+              cookies.set('user_id', response.data.data.user_id)
+              cookies.set("operator_uid", response.data.data.operator_uid)
+              
+              dispatch(login(response.data.data))
+          }
+          else{
+              dispatch(loginError(response.data.data))
+            console.log("Authreducer", process.env.OPERATOR_UID_FROM_ENV)
+          }
         
-        dispatch(login(response.data.data))
+
         console.log(JSON.stringify(response.data))
+        
+
       })
       .catch(error => console.error(`Error: ${error}`));
 
@@ -140,8 +150,16 @@ const authReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isUserLoggedIn: true,
+                messageLoginError: "newdashboard",
                 accessToken: action.payload.access_token 
             };
+        case LOGIN_ERROR:
+        return {
+            ...state,
+            isUserLoggedIn: false,
+            messageLoginError: "",
+            accessToken: action.payload.access_token 
+        };
         case LOGOUT:
           cookies.remove("refresh_token")
           cookies.remove("access_token")

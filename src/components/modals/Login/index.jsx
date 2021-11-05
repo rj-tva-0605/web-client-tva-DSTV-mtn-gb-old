@@ -4,7 +4,7 @@ import {Button, Modal} from 'react-bootstrap';
 import './Login.css';
 import axios from 'axios';
 
-import { useDispatch } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {loginReducer} from '../../../store/reducers/authReducer';
 import { useHistory } from 'react-router';
 
@@ -27,6 +27,10 @@ const Login = ({showlogin, setShowLogin}) => {
     const dispatch = useDispatch()
     const history = useHistory()
 
+    const messageLoginError = useSelector(state =>state.auth.messageLoginError)
+    const isUserLoggedIn = useSelector(state => state.auth.isUserLoggedIn)
+
+
 
     // modal show and hide 
     const handleClose = () => setShowLogin(false);
@@ -46,14 +50,23 @@ const Login = ({showlogin, setShowLogin}) => {
       e.preventDefault();
 
       dispatch(loginReducer(data))
-      history.push({
-        pathname:  "/newdashboard",
-        
+      // check if operator uid is mtngb if not make redirect to homepage
+      // set unset loginor different action so there will be no login action
+    
+      //settimeout 
+      setTimeout(function(){ 
+        history.push({
+          pathname:  `/`,
+      
                  });
-
-
+      }, 8000);
+      
+      
     }
 
+    
+
+    
     
 
     return (

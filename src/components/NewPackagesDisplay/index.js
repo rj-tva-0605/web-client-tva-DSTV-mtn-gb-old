@@ -62,6 +62,7 @@ const NewPackagesDisplay = ({showTitle, packageContent, setPackageContent }) =>{
     return(
         <>
             <div>
+                {/* <div> {process.env.REACT_APP_NOT_SECRET_CODE}</div> */}
                 {!showTitle? 
                     <h3 className="main-package-title"> Choose a plan that is right for you</h3>
                     :

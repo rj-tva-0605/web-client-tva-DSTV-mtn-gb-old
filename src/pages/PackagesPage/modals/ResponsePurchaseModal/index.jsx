@@ -66,8 +66,8 @@ const ResponsePurchaseModal = ({
                 <h1 className="package-center-heading mx-auto"> Bundle Activation Initiated</h1>
              
              <p className="package-center-text" >
-               Your bundle activation has started you.<br /> 
-               You will recieve an SMS once it is completed
+                  Your bundle activation has started you.<br/> 
+                  You will recieve an SMS once it is completed
              </p>                      
             
               <div>
