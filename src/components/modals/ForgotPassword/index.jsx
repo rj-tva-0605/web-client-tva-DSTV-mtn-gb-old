@@ -174,7 +174,7 @@ const ForgotPaswordModal = ({
              <form className="signup-form" onSubmit={verifyUserExistsfunc}>
                 <p style={{width: "40%", margin: "20px auto"}}> Enter Mobile Number </p>
                 <div class="form-group">
-                    <input type="text" class="form-control" value={mobilenumber} placeholder="080XXXXXXX" onChange={(e) => handleMobileNumber(e)}/>
+                    <input type="text" class="form-control" value={mobilenumber} placeholder="966XXXXXXXX" onChange={(e) => handleMobileNumber(e)}/>
                 </div>
                 <br /> 
                 

@@ -78,7 +78,7 @@ const AlertToPurchasemodal = ({showMoviePayAlert, setShowMoviePayAlert}) => {
              <br />
              <form onSubmit = {loginfunc}>
                 <div class="form-group">
-                    <input type="text" class="form-control" value={username} placeholder="Username e.g. g080XXXXXXXX" onChange={(e) => handleUsername(e)}/>
+                    <input type="text" class="form-control" value={username} placeholder="Username e.g. 966XXXXXXX" onChange={(e) => handleUsername(e)}/>
                 </div>
                 <br /> 
                 <div class="form-group">
@@ -91,7 +91,7 @@ const AlertToPurchasemodal = ({showMoviePayAlert, setShowMoviePayAlert}) => {
             </form>
             <br />
             <br/>
-            <p className=" login-link "><small>New to Glo-TV?<a href="">Sign up now</a></small></p>
+            <p className=" login-link "><small>New to MTN-GB?<a href="">Sign up now</a></small></p>
 
           </Modal.Body>
 

@@ -92,7 +92,7 @@ const AlertToPurchasemodal = ({showMoviePayAlert, setShowMoviePayAlert}) => {
                to proceed to our purchase a package</h2>
             <br />
             <br/>
-            <p className=" login-link "><small>New to Glo-TV?<a href="">Sign up now</a></small></p>
+            <p className=" login-link "><small>New to MTN-GB?<a href="">Sign up now</a></small></p>
 
           </Modal.Body>
 

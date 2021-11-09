@@ -111,30 +111,30 @@ const NewPackagesDisplay = ({showTitle, packageContent, setPackageContent }) =>{
 
 
 
-                    <button className="one-card package-title" value="1st test value " onClick={(e) => {showModalfunc(e ,"VOD 3days", "4356", "400 CFA" ); }} >
-                        <p>Glotv VOD 3 days</p>
-                        <h1>₦150</h1>
-                        <p>Movies only <br/>3 days</p>
+                    <button className="one-card package-title" value="1st test value " onClick={(e) => {showModalfunc(e ,"MTN TV One Day 1", "24501220000005301", "400 CFA" ); }} >
+                        <p style={{fontSize: "98%"}}>MTN TV One Day 1</p>
+                        <h1 style={{fontSize: "220%"}}>CFA 200</h1>
+                        <p>Movies & Live TV<br/>3 days</p>
                         </button>
-                    <button className="one-card package-title" onClick={(e) => {showModalfunc(e ," Glotv VOD 7days", "5876", "500 CFA"); }}>
-                        <p>Glotv VOD 7 days</p>
-                        <h1>₦150</h1>
-                        <p>Movies only <br/>7 days</p>
+                    <button className="one-card package-title" onClick={(e) => {showModalfunc(e ,"MTN TV One Day 2", "24501220000005303", "450 CFA"); }}>
+                        <p style={{fontSize: "98%"}}>MTN TV One Day 2</p>
+                        <h1 style={{fontSize: "220%"}}>CFA 450</h1>
+                        <p>Movies only<br/>7 days</p>
                         </button>
-                    <button className="one-card package-title" onClick={(e) => {showModalfunc(e ,"Glotv VOD 30days", "9647", "700 CFA"); }}>
-                        <p>Glotv VOD 30 days</p>
-                        <h1>₦150</h1>
-                        <p>Movies only <br/> 30 days</p>
+                    <button className="one-card package-title" onClick={(e) => {showModalfunc(e ,"MTN TV 3 Days", "24501220000005304", "1200 CFA"); }}>
+                        <p style={{fontSize: "98%"}}>MTN TV 3 Days</p>
+                        <h1 style={{fontSize: "190%"}}>CFA 1200</h1>
+                        <p>Movies only<br/> 3 days</p>
                         </button>
-                    <button className="one-card package-title" onClick={(e) => {showModalfunc(e ,"Glotv Lite", "10047", "800 CFA"); }}>
-                        <p>Glotv Lite</p>
-                        <h1>₦150</h1>
+                    <button className="one-card package-title" onClick={(e) => {showModalfunc(e ,"MTN TV 7 Days", "24501220000005306", "3350 CFA"); }}>
+                        <p style={{fontSize: "98%"}}>MTN TV 7 Days</p>
+                        <h1 style={{fontSize: "190%"}}>CFA 3350</h1>
                         <p>Movies & Live TV <br/> 7 days</p>
                         </button>
-                    <button className="one-card package-title" onClick={(e) => {showModalfunc(e ,"Glotv Max", "80047", "1000 CFA"); }}>
-                        <p>Glotv Max</p>
-                        <h1>₦150</h1>
-                        <p>Movies & Live TV <br/> 7 days</p>
+                    <button className="one-card package-title" onClick={(e) => {showModalfunc(e ,"Glotv Max", "24501220000005307", "1000 CFA"); }}>
+                        <p style={{fontSize: "98%"}}>MTN TV 14 Days</p>
+                        <h1 style={{fontSize: "190%"}}>CFA 7000</h1>
+                        <p>Movies & Live TV <br/> 14 days</p>
                         </button>
                 </div>
             </div>

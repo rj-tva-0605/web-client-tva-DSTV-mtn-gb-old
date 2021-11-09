@@ -177,7 +177,7 @@ const VerifyUserExistRegister = ({
 
              <form className="signup-form" onSubmit={verifyUserExistsfunc}>
                 <div class="form-group">
-                    <input type="text" class="form-control" value={mobilenumber} placeholder="080XXXXXXX" onChange={(e) => handleMobileNumber(e)}/>
+                    <input type="text" class="form-control" value={mobilenumber} placeholder="966XXXXXXX" onChange={(e) => handleMobileNumber(e)}/>
                 </div>
                 <br /> 
                 <div class="form-group">

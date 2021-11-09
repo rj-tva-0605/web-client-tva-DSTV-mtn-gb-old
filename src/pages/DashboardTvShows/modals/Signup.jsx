@@ -31,7 +31,7 @@ const Signup = ({showsignup, setShowSignup}) => {
 
              <form className="signup-form">
                 <div class="form-group">
-                    <input type="text" class="form-control"  placeholder="080XXXXXXX" />
+                    <input type="text" class="form-control"  placeholder="966XXXXXXX" />
                 </div>
                 <br /> 
                 <div class="form-group">
