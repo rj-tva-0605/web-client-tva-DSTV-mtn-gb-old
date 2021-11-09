@@ -13,9 +13,14 @@ import VerifyUserExistRegisterModal from '../../components/modals/VerifyUserExis
 import ValidateOTPNewUserModal from '../../components/modals/ValidateOTPNewUser';
 
 import LoginModal from '../../components/modals/Login';
+import ForgotPaswordModal from "components/modals/ForgotPassword";
+
 
 import './Homepage.css';
 import { useHistory } from 'react-router';
+import ForgotValidateOTPNewUser from "components/modals/ForgotPassword/ForgotValidateOTPNewUser";
+
+import ForgotSendNewPassword from "components/modals/ForgotPassword/ForgotSendNewPassword";
 
 
 
@@ -26,10 +31,22 @@ const Homepage = () => {
 
     const [showlogin, setShowLogin] = useState(false);
 
+    const [showForgPsswdModal, setShowForgPsswdModal] = useState(false)
+    const [showForgPsswdOTPModal, setShowForgPsswdOTPModal] = useState(false)
+    const [showForgotValidateOTP, setShowForgotValidateOTP] = useState(false)
+    const [passForgotVerifyNumber, setShowPassForgotVerifyNumber] = useState(false)                         
+
+
+
+
     const [showVerifyUserExist, setShowVerifyUserExist] = useState(false);
     const [showValidateOTP, setShowValidateOTP] = useState(false);
     const [passVerifyNumber, setPassVerifyNumber] = useState("");
+    const [loadCurrent, setLoadcurrent] = useState(false)
 
+    const [showUserIDForgotPsswd, setShowUserIDForgotPsswd ] = useState(false)
+
+    const [showSendNewPassword, setShowSendNewPassword] = useState(false)
 
     const isUserLoggedIn = useSelector(state => state.auth.isUserLoggedIn)
     const messageLoginError = useSelector(state =>state.auth.messageLoginError)
@@ -37,13 +54,31 @@ const Homepage = () => {
 
     const handleShowVerifyUserExist  = () => setShowVerifyUserExist(true);
 
-    const handleShowValidateOTP  = () =>{ setTimeout(function(){ setShowValidateOTP(true); }, 10);
-
-                                            }
+    const handleShowValidateOTP  = () =>{setTimeout(function(){ setShowValidateOTP(true); }, 100) };
+    const handleShowForgValidateOTP  = () =>{setTimeout(function(){ setShowForgotValidateOTP(true); }, 100) };
+    const handleShowFinalPasswSub = ()=>{setTimeout(function(){setShowSendNewPassword(true)}, 500)}
+                                            
     if(showVerifyUserExist === "verifyuserdonenextprocess"){
         handleShowValidateOTP()
         setShowVerifyUserExist(false)
+        setLoadcurrent(true)
+
+    
+    } 
+    if(showForgPsswdModal === "verifyuserdonenextprocess" ){
+            handleShowForgValidateOTP();        
+            setShowForgPsswdModal(false) ;       
+            console.log("forgetModal has done its own")
+            setLoadcurrent(true)
+
     }
+    if(showForgotValidateOTP === "verifyuserdonenextprocess" ){
+        handleShowFinalPasswSub();        
+        setShowForgotValidateOTP(false) ;       
+        console.log("forgetModal has done its own")
+        setLoadcurrent(true)
+
+}
 
     const handleLoginShow  = () => setShowLogin(true);
     
@@ -63,9 +98,8 @@ const Homepage = () => {
     const dispatch = useDispatch();
     
 
-    const handleLogout = () =>{
-        dispatch(logoutReducer())
-    }
+    const handleLogout = () => dispatch(logoutReducer())
+    
 
 
     useEffect(() => {
@@ -92,7 +126,32 @@ const Homepage = () => {
                                             :
                                                 <button type="button" class="btn btn-danger nav-menu-button " onClick={handleLogout}>Logout</button>
                                             }
-                                            <LoginModal showlogin={showlogin} setShowLogin={setShowLogin} />
+                                            <LoginModal showlogin={showlogin} setShowLogin={setShowLogin} showForgPsswdModal={showForgPsswdModal} setShowForgPsswdModal={setShowForgPsswdModal} />
+                                            <ForgotPaswordModal 
+                                                showForgPsswdModal={showForgPsswdModal} 
+                                            
+                                                setShowForgPsswdModal={setShowForgPsswdModal} 
+                                                setShowForgotValidateOTP = {setShowForgotValidateOTP}
+                                                passForgotVerifyNumber = {passForgotVerifyNumber}
+                                                setShowPassForgotVerifyNumber={setShowPassForgotVerifyNumber}
+                                            />
+                                            <ForgotValidateOTPNewUser
+                                                showForgPsswdModal={showForgPsswdModal} 
+                                                setShowForgPsswdModal={setShowForgPsswdModal}
+                                                showForgotValidateOTP={showForgotValidateOTP}
+                                                setShowForgotValidateOTP = {setShowForgotValidateOTP}
+                                                passForgotVerifyNumber = {passForgotVerifyNumber}
+                                                setShowPassForgotVerifyNumber={setShowPassForgotVerifyNumber}
+                                                setShowUserIDForgotPsswd = {setShowUserIDForgotPsswd}
+                                            />
+
+                                            <ForgotSendNewPassword
+                                                passForgotVerifyNumber = {passForgotVerifyNumber}
+                                                showUserIDForgotPsswd= {showUserIDForgotPsswd}
+                                                showSendNewPassword = {showSendNewPassword}
+                                                setShowSendNewPassword = {setShowSendNewPassword}
+
+                                            />
                                         </li>
                                     </ul>
                             </div>

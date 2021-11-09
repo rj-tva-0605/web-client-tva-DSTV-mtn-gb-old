@@ -20,7 +20,9 @@ import { useHistory } from 'react-router';
 
 
 
-const Login = ({showlogin, setShowLogin}) => {
+const Login = ({
+                showlogin, setShowLogin, 
+                showForgPsswdModal, setShowForgPsswdModal}) => {
     
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -64,6 +66,11 @@ const Login = ({showlogin, setShowLogin}) => {
       
     }
 
+      const forgotPassfunc = (e) =>{
+        e.preventDefault();
+        setShowLogin(false)
+        setTimeout(() => {setShowForgPsswdModal(true)}, 600);
+      }
     
 
     
@@ -103,6 +110,7 @@ const Login = ({showlogin, setShowLogin}) => {
                 <br />
             </form>
             <br />
+            <a  className="forget-pass" onClick={forgotPassfunc}> Forgot Password</a>
             <br/>
             <p className=" login-link "><small>New to Glo-TV?<a href="">Sign up now</a></small></p>
 

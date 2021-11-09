@@ -42,9 +42,9 @@ const MovieDetailZ = () =>{
     
 
     const purchasedMoviesChecker = (packages) =>{
-        let pstringpack = cookies.get("purchasedPackageIds")
+        // let pstringpack = cookies.get("purchasedPackageIds")
 
-        // let pstringpack = [852,765,795]
+        let pstringpack = [852,765,795]
         
          for( let v = 0 ; v < packages.length; v++){
              console.log("package ids are  here", packages.[v])

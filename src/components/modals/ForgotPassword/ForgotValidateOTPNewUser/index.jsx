@@ -1,21 +1,22 @@
 
 import React, { useEffect, useState} from 'react';
 import {Button, Modal} from 'react-bootstrap';
-import  './ValidateOTPNewUser.css';
+import  './ForgotValidateOTPNewUser.css';
 
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
-import {signupReducer} from '../../../store/reducers/authReducer';
 
 
 
 
-const ValidateOTPNewUser = ({
-                              showValidateOTP, 
-                              setShowValidateOTP,
-                              passVerifyNumber,
-                              setShowVerifyUserExist
+const ForgotValidateOTPNewUser = ({
+  
+                              showForgotValidateOTP, 
+                              setShowForgotValidateOTP,
+                              passForgotVerifyNumber,
+                              setShowForgPsswdModal,
+                              setShowUserIDForgotPsswd
                               
                             }) => {
     
@@ -27,7 +28,7 @@ const ValidateOTPNewUser = ({
     
   
   const handleClose = (e) => {
-                              setShowValidateOTP(false);
+                              setShowForgotValidateOTP(false);
                               setCounter(60)
                               
                             }
@@ -37,6 +38,8 @@ const ValidateOTPNewUser = ({
 
     const validateOTPfunc = (e) => {
       e.preventDefault();
+      let uniquestring = getDateTimeUniqueString()
+
       var data = JSON.stringify({
         "VALIDATEOTP": {
           "MOBILEPHONE": "918899889988",
@@ -47,7 +50,7 @@ const ValidateOTPNewUser = ({
 
       var config = {
         method: 'post',
-        url: 'https://tvanywheretest-ott.magnaquest.com/webapi/Restapi/ValidateOTP?ReferenceNo=17412xzs123abcwwwqsrtdq43wq764832',
+        url: `https://tvanywheretest-ott.magnaquest.com/webapi/Restapi/ValidateOTP?ReferenceNo=17412${uniquestring}xzs123abcwwwqsrtdq43wq764832`,
         headers: { 
           'Username': 'MTNGBUCWEBUSR', 
           'Password': 'Mtngbpass@1234', 
@@ -60,6 +63,9 @@ const ValidateOTPNewUser = ({
       axios(config)
       .then(function (response) {
         console.log("valid otp function ", response.data);
+        setShowUserIDForgotPsswd(13242);
+        setShowForgotValidateOTP("verifyuserdonenextprocess")
+
       })
       .catch(function (error) {
         console.log(error);
@@ -90,9 +96,7 @@ const ValidateOTPNewUser = ({
         console.log("count value ", count )
 
         
-        // check trend.
-        // compare value in setcountcharacter with current count
-        // decrement and increment trend clauses and actions
+        
         var countcharacter = [...otp].filter(x => x === "").length;
         console.log("Count Character ", countcharacter);
 
@@ -100,10 +104,7 @@ const ValidateOTPNewUser = ({
         console.log("Temp otp Concat ", tempConCatOtp)
 
         if(countcharacter  === true ){
-            // var otpUse = [...otp.map((d, idx) => (d))]
-            // console.log("OtpValue", otpUse)
-            // setOtpValue(otp)
-            // setCount(0)
+            
             setHandleOtpValueFuncTrig(true)
            
             
@@ -137,7 +138,7 @@ const ValidateOTPNewUser = ({
     const resendOTPfunc = (e) => {
       e.preventDefault();
       
-      let  uniquestring= String(getDateTime())
+      let uniquestring = getDateTimeUniqueString()
       console.log("Uniquestring", uniquestring)
       var data = JSON.stringify({
           "RESENDOTP":{ 
@@ -168,11 +169,13 @@ const ValidateOTPNewUser = ({
         // handleClose()
       });
 
+      // handleClose()
+
       // setOtp(new Array(6).fill(""))
 
     }
 
-    const getDateTime = () => {
+    const getDateTimeUniqueString = () => {
       var now     = new Date(); 
       var year    = now.getFullYear();
       var month   = now.getMonth()+1; 
@@ -195,11 +198,14 @@ const ValidateOTPNewUser = ({
       if(second.toString().length == 1) {
            second = '0'+second;
       }   
-      var dateTime = year+month+day+hour+minute+second;   
-       return dateTime;
+      var dateTime = year+month+day+hour+minute+second; 
+      let  uniquestring= String(dateTime)
+    
+       return uniquestring;
   }
 
   useEffect(() => {
+    // console.log("showForgotValidateOTP here", showForgotValidateOTP)
     const interval = setInterval(() => {
       if(counter < 1){
         // console.log("done")
@@ -224,7 +230,7 @@ const ValidateOTPNewUser = ({
     return (
       <div>      
         <Modal
-          show={showValidateOTP}
+          show={showForgotValidateOTP}
           onHide={handleClose}
           backdrop="static"
           keyboard={false}
@@ -238,16 +244,16 @@ const ValidateOTPNewUser = ({
             Please enter your verification code (OTP)
           </h2>
              
-            {!passVerifyNumber ? passVerifyNumber?
+            {!passForgotVerifyNumber ? passForgotVerifyNumber?
                 <>Loading</>
               :
               <>Please Enter Number </>
               :
               <>
                 <div className="title">
-                  Sent to {passVerifyNumber}
+                  Sent to {passForgotVerifyNumber}
                   <button className= "edit-number-button" 
-                    onClick={()=>{setShowVerifyUserExist(true); handleClose()} }>
+                    onClick={()=>{setShowForgPsswdModal(true); handleClose();} }>
                     Edit
                   </button>
                   
@@ -296,4 +302,4 @@ const ValidateOTPNewUser = ({
     );
   }
   
-  export default ValidateOTPNewUser;
+  export default ForgotValidateOTPNewUser;

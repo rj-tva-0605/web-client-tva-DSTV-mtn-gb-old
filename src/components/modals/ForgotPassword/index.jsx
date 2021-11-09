@@ -16,10 +16,9 @@ import { useHistory } from 'react-router';
 
 
 const ForgotPaswordModal = ({
-                                  showVerifyUserExist, 
-                                  setShowVerifyUserExist,
-                                  setPassVerifyNumber,
-
+                                  showForgPsswdModal, 
+                                  setShowForgPsswdModal,
+                                  setShowPassForgotVerifyNumber
                                 }) => {
   
   const getDateTimeUniqueString = () => {
@@ -61,7 +60,7 @@ const ForgotPaswordModal = ({
   const [confirmPassword, setConfirmPassword] = useState("");
 
   
-  const handleClose = (e) => setShowVerifyUserExist(false);
+  const handleClose = (e) => setShowForgPsswdModal(false);
   const handleMobileNumber = (e) => setMobileNumber(e.target.value);
   const handleEmail = (e) => setEmail(e.target.value);
   const handlePassword = (e) => setPassword(e.target.value);
@@ -76,13 +75,14 @@ const ForgotPaswordModal = ({
     const verifyUserExistsfunc = (e) => {
       e.preventDefault();
       let uniquestring = getDateTimeUniqueString()
-      if (confirmPassword === password){
+      console.log("this is unique string", uniquestring)
+        // console.log("forgot script", "ADDITIONAL_INFO:{ ENTITYCODE : MTNGB , MOBILENO:" + mobilenumber +"}")
           var data = JSON.stringify({
             "KEY_NAMEVALUE": {
               "KEY_NAME": "PROCESS",
               "KEY_VALUE": "GETUSERID"
             },
-            "ADDITIONAL_INFO": `{ ENTITYCODE : MTNGB , MOBILENO: ${mobilenumber} }`
+            "ADDITIONAL_INFO": "{'ENTITYCODE':'MTNGB','MOBILENO':'09059221879'}"
           });
 
           var config = {
@@ -101,19 +101,14 @@ const ForgotPaswordModal = ({
           .then(function (response) {
             console.log("this is from verify if user exists", response.data);
             //OTP function genrated here
-            setPassVerifyNumber(mobilenumber)
+            setShowPassForgotVerifyNumber(mobilenumber)
             generateOTPfunc()
             console.log("ERROR NO STATUS CODE LOOK in Messages", response.data.RESPONSEINFO.ERRORNO)
           })
           .catch(function (error) {
             console.log(error);
-          });}
-      else{console.log("password mismatch")}
-          history.push({
-            pathname:  "",
-            
-                    });
-      setShowVerifyUserExist("verifyuserdonenextprocess")
+          });
+      setShowForgPsswdModal("verifyuserdonenextprocess")
     }
 
 
@@ -161,7 +156,7 @@ const ForgotPaswordModal = ({
       <div>    
         
         <Modal
-          show={showVerifyUserExist}
+          show={showForgPsswdModal}
           onHide={handleClose}
           backdrop="static"
           keyboard={false}
@@ -170,29 +165,19 @@ const ForgotPaswordModal = ({
         >
           <Modal.Header closeButton>
             <Modal.Title>
-                <h1>Verify User</h1>
+                <h1 style={{textAlign: "center"}}>Forgot Password</h1>
             </Modal.Title>
           </Modal.Header>
           <Modal.Body >
              
 
              <form className="signup-form" onSubmit={verifyUserExistsfunc}>
+                <p style={{width: "40%", margin: "20px auto"}}> Enter Mobile Number </p>
                 <div class="form-group">
                     <input type="text" class="form-control" value={mobilenumber} placeholder="080XXXXXXX" onChange={(e) => handleMobileNumber(e)}/>
                 </div>
                 <br /> 
-                <div class="form-group">
-                    <input type="text" class="form-control" value={email} placeholder="" onChange={(e) => handleEmail(e)}/>
-                </div>
-                <br /> 
-                <div class="form-group">                    
-                    <input type="text" class="form-control" value={password} placeholder="Password" onChange={(e) => handlePassword(e)}/>
-                </div>
-                <br /> 
-                <div class="form-group">
-                    <input type="text" class="form-control" value={confirmPassword}  placeholder="Confirm Password "  onChange={(e) => handleConfirmPassword(e)}/>
-                </div>
-                <br />
+                
                 <Button className= "rounded-sm shadow-none form-control" type="submit"  >Submit</Button>
                 <br />
                 <br />

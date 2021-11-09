@@ -7,6 +7,7 @@ import axios from 'axios';
 // import { useDispatch } from 'react-redux';
 // import {loginReducer} from '../../store/reducers/authReducer';
 import { useHistory } from 'react-router';
+import { Link } from 'react-router-dom';
 
 
 
@@ -76,19 +77,19 @@ const AlertToPurchasemodal = ({showMoviePayAlert, setShowMoviePayAlert}) => {
           <br />
              <br />
              <br />
-             <form onSubmit = {loginfunc}>
-                <div class="form-group">
-                    <input type="text" class="form-control" value={username} placeholder="Username e.g. g080XXXXXXXX" onChange={(e) => handleUsername(e)}/>
-                </div>
-                <br /> 
-                <div class="form-group">
-                    <input type="text" class="form-control" value={password} placeholder="Password" onChange={(e) => handlePassword(e)} />
-                </div>
-                <br /> 
-                <Button className= "rounded-sm shadow-none form-control" type="submit" >Submit</Button>
-                
-                <br />
-            </form>
+             <h2> Please click 
+             <Link className="" 
+                                     to = {{
+                                      pathname: "/packagespage",
+                                      state: {
+                                           detail: {
+                                               id: ""
+                                           }
+                                       }
+                                   }}
+                                    > 
+                here </Link>
+               to proceed to our purchase a package</h2>
             <br />
             <br/>
             <p className=" login-link "><small>New to Glo-TV?<a href="">Sign up now</a></small></p>
