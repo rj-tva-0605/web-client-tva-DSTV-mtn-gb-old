@@ -3,7 +3,8 @@
 // distribute info check the example for logout 
 // check the if we can call the value of any string from the json then we can access 
 // without doing any export of value in json file 
-//then we can just tweak the variable en and potiuguese 
+//then we can just tweak the variable en and portuguese 
+import translations from 'translations';
 
 import React from 'react';
 import './style.css';
@@ -16,6 +17,7 @@ import { useEffect, useState } from 'react';
 import { useHistory } from "react-router";
 import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import {useDispatch, useSelector} from 'react-redux';
 
 import NavbarGeneral from 'components/NavbarGeneral';
 import FooterGeneral from 'components/FooterGeneral';
@@ -47,6 +49,7 @@ const cookies = new Cookies();
     const location = useLocation();
 
     
+    const isUserLoggedIn = useSelector(state => state.auth.isUserLoggedIn)
 
 
 
@@ -236,10 +239,17 @@ const cookies = new Cookies();
 
 
     
+    
 
 
+    useEffect(() => { 
 
-    useEffect(() => {     
+        if(isUserLoggedIn){
+            history.push({
+                pathname:'/newdashboard'
+            })}else{history.push({
+                pathname:'/'
+            })}
 
         packageIDfunc()
 
@@ -263,7 +273,7 @@ const cookies = new Cookies();
                 <div className="navbars-ctrl">
 
                     <NavbarGeneral />
-                    
+                    {/* <div>{process.env.REACT_APP_ENV_SETTINGS}</div> */}
                                             
                 </div>
                 
@@ -293,7 +303,7 @@ const cookies = new Cookies();
                         <div style={{ width: "", height: "", flex: "0 1 24%"}}>
                             <img className="" 
                                 style={{ width: "95%", height: "150px", borderRadius: "4px"}}
-                                src={`https://glonigeria.tvanywhereafrica.com:28182/api/client/v1/global/images/${322746}?accessKey=WkVjNWNscFhORDBLCg==`} alt={322755} />  
+                                src={`https://glonigeria.tvanywhereafrica.com:28182/api/client/v1/global/images/${322746}?accessKey=WkVjNWNscFhORDBLCg==`} alt={322746} />  
                             </div>
                     </div>
                   
@@ -321,7 +331,8 @@ const cookies = new Cookies();
                     }
 
                     <FooterGeneral />
-                
+                    
+                    {/* {console.log( "settings from the env ")} */}
             </div>
     )
 

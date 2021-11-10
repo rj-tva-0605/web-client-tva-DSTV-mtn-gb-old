@@ -1,3 +1,4 @@
+import { translations } from 'translations';
 
 import React, {useState, useEffect} from "react";
 import {useDispatch, useSelector} from 'react-redux';
@@ -200,6 +201,7 @@ const Homepage = () => {
                                 <div className="regis-apple">
                                     <h2 ><i className="fa fa-apple"/>  <strong>Apple Store </strong> </h2><i class="fa fa-registered " />
                                 </div> 
+                                {console.log(translations.gb.about , "here")}
                                     <br/>
                                     <p>Download the app for IOS on the App store . </p>
                                 </div>

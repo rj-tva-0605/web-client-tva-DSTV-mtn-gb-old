@@ -10,11 +10,13 @@ import Cookies from 'universal-cookie';
 import { useEffect, useState } from 'react';
 
 import { Link } from 'react-router-dom';
+import {useDispatch, useSelector} from 'react-redux';
 
 import ChannelsTemplate from './ChannelsTemplate';
 
 import NavbarGeneral from 'components/NavbarGeneral';
 import FooterGeneral from 'components/FooterGeneral';
+import { useHistory } from "react-router";
 
 
 
@@ -37,6 +39,8 @@ const cookies = new Cookies();
     const [currentChannel, setCurrentChannel] = useState("kids")
 
 
+    const isUserLoggedIn = useSelector(state => state.auth.isUserLoggedIn)
+    const history = useHistory();
 
 
 
@@ -207,6 +211,14 @@ const cookies = new Cookies();
 
 
     useEffect(() => {   
+
+        if(isUserLoggedIn){
+            history.push({
+                pathname:'/newdashboard'
+            })}else{history.push({
+                pathname:'/'
+            })}
+
         const access_token = cookies.get("access_token");
         const user_id = cookies.get("user_id");
         const operator_uid = cookies.get("operator_uid");

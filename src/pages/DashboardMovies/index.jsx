@@ -9,6 +9,9 @@ import axios from 'axios';
 import Cookies from 'universal-cookie';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import {useDispatch, useSelector} from 'react-redux';
+import { useHistory } from "react-router";
+
 
 import List from './list'
 
@@ -29,6 +32,8 @@ const cookies = new Cookies();
 
     //  use redux instead to store it like storing access 
     //  token const [purchasedIdealContent, setPurchasedIdealContent] = useState(false)
+    const isUserLoggedIn = useSelector(state => state.auth.isUserLoggedIn)
+    const history = useHistory();
 
 
 
@@ -203,10 +208,18 @@ const cookies = new Cookies();
        }
     
     
+       
 
 
+    useEffect(() => {
 
-    useEffect(() => {     
+        if(isUserLoggedIn){
+            history.push({
+                pathname:'/newdashboard'
+            })}else{history.push({
+                pathname:'/'
+            })}   
+
         const access_token = cookies.get("access_token");
         const user_id = cookies.get("user_id");
         const operator_uid = cookies.get("operator_uid");

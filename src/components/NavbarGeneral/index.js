@@ -20,18 +20,14 @@ const NavbarGeneral = () =>{
     const isUserLoggedIn = useSelector(state => state.auth.isUserLoggedIn)
 
     const dispatch = useDispatch();
-    const handleLogout = () => dispatch(logoutReducer())
+    const handleLogout = () => {   history.push({
+                                                pathname:'/'
+                                                })
+                                        dispatch(logoutReducer());
+                                    
+                                }
 
-    useEffect(() => {
-        if(isUserLoggedIn){
-            history.push({
-                pathname:'/newdashboard'
-            })}else{history.push({
-                pathname:'/'
-            })}
-        
-        
-    }, [])
+    
 
     return(
         <div className="main-Navbar"> 

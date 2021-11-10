@@ -7,11 +7,13 @@ import thunk from 'redux-thunk';
 
 
 const composeEnhancers =
-  typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+  // start commenting out from here in production to hide redux from showing in dev tools
+  process.env.NODE_ENV !== 'production' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
     ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
         // Specify extension’s options like name, actionsBlacklist, actionsCreators, serialize...
-      })
-    : compose;
+      }) :
+    // end the commenting out of react dev tools here 
+     compose;
 
 const enhancer = composeEnhancers(
   applyMiddleware(thunk)

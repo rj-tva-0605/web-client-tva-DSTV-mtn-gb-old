@@ -8,11 +8,13 @@ import axios from 'axios';
 import Cookies from 'universal-cookie';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import {useDispatch, useSelector} from 'react-redux';
 
 import List from './list';
 
 import NavbarGeneral from 'components/NavbarGeneral';
 import FooterGeneral from 'components/FooterGeneral';
+import { useHistory } from "react-router";
 
 
 
@@ -22,6 +24,7 @@ const cookies = new Cookies();
 
  const DashboardTvShows = () =>{
 
+    const history = useHistory();
 
     const [categoryIDs, setCategoryIDs] = useState([])
     const [IdealContent, setIdealContent] = useState(false)
@@ -32,6 +35,7 @@ const cookies = new Cookies();
     //  use redux instead to store it like storing access 
     //  token const [purchasedIdealContent, setPurchasedIdealContent] = useState(false)
 
+    const isUserLoggedIn = useSelector(state => state.auth.isUserLoggedIn)
 
 
 
@@ -310,9 +314,17 @@ const cookies = new Cookies();
         console.log("new series details", seriesdetDict)
         setSeriesDetailComp(seriesdetDict)
     }
+    
 
+    useEffect(() => {  
 
-    useEffect(() => {     
+        if(isUserLoggedIn){
+            history.push({
+                pathname:'/newdashboard'
+            })}else{history.push({
+                pathname:'/'
+            })}
+           
         const access_token = cookies.get("access_token");
         const user_id = cookies.get("user_id");
         const operator_uid = cookies.get("operator_uid");
