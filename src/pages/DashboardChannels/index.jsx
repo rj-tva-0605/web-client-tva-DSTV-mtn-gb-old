@@ -11,8 +11,10 @@ import { useEffect, useState } from 'react';
 
 import { Link } from 'react-router-dom';
 
-import ChannelsTemplate from './ChannelsTemplate'
+import ChannelsTemplate from './ChannelsTemplate';
 
+import NavbarGeneral from 'components/NavbarGeneral';
+import FooterGeneral from 'components/FooterGeneral';
 
 
 
@@ -232,69 +234,7 @@ const cookies = new Cookies();
                 <div className="main-dashboard">
 
                     <div className="navbars-ctrl">
-                        <div className="main-Navbar"> 
-                            {/* <p className="main-nav logo "> */}
-                                <img src={logo} className="main-nav logo "/>
-                            {/* </p> */}               
-                            <Link className="main-nav " 
-                                            style ={{ }}
-                                            to = {{
-                                            pathname: "/newdashboard",
-                                            state: {
-                                                detail: {
-                                                    id: ""
-                                                }
-                                            }
-                                        }}
-                                        >
-                                <div className="mnvs">Featured</div>
-                            </Link>
-                            <Link className="main-nav  " 
-                                            style ={{ }}
-                                            to = {{
-                                            pathname: "/moviespage",
-                                            state: {
-                                                detail: {
-                                                    id: ""
-                                                }
-                                            }
-                                        }}
-                                        >
-                                <div className=" mnvs">Movies</div>
-                            </Link>
-
-                            <Link className="main-nav " 
-                                        style ={{ }}
-                                     to = {{
-                                      pathname: "/tvshowspage",
-                                      state: {
-                                           detail: {
-                                               id: ""
-                                           }
-                                       }
-                                   }}
-                                    >
-                            <div className=" mnvs">TV Shows</div>
-                        </Link>
-                            
-                            <Link className="main-nav highlit-div" 
-                                            style ={{ }}
-                                            to = {{
-                                            pathname: "/channelspage",
-                                            state: {
-                                                detail: {
-                                                    id: ""
-                                                }
-                                            }
-                                        }}
-                                        >
-                                <div className="">Live TV</div>
-                            </Link>
-
-                            <div className="main-nav">TV Guide</div>
-
-                            <div className="main-nav">My List</div>
-                        </div>
+                        <NavbarGeneral />
                         
                         {/* define ideal content here  */}
                         { !idealChannelContent ? 
@@ -343,16 +283,7 @@ const cookies = new Cookies();
                         }
                 
 
-                    <div className="footer-box"></div>
-
-                    <div className= "footer">
-                        <div className="footer-initial">
-                            <div className="footer-fst footer-cards ">Globacom</div>
-                            <div className="footer-sec footer-cards">FAQs</div>
-                            <div className="footer-thr footer-cards">Live chat</div>
-                        </div>
-                    </div>
-            
+                    <FooterGeneral />
                 </div>
         
         </>

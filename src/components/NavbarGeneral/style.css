@@ -1,0 +1,245 @@
+
+
+
+*{
+    margin: 0;
+}
+
+/* mobile first  */
+
+body{
+    background-color:black;
+    color: whitesmoke;
+}
+.nav-menu-button{
+    width: 5%;
+}
+.main-dashboard{
+    /* width: 100%; */
+    height: auto;
+}
+.navbars-ctrl{
+    /* position: fixed; */
+    /* z-index: 10; */
+}
+.logout-button-navbar{
+
+    background-color: rgb(226, 171, 6);
+    margin-left: 46%;
+    border-color: goldenrod;
+}
+.main-Navbar{
+    
+    border-bottom: 1px solid rgb(75, 72, 72);
+    width : 98%;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    display: flex;
+
+}
+
+.main-nav{
+    /* flex: 1 0 20px; */
+    box-sizing: border-box;
+
+    width: 6%;
+    color: whitesmoke;
+    padding-bottom: 8px;
+    padding-top: 7px;
+    padding-right: 0;
+    font-weight: 200;
+    /* font-size: 30px; */
+    /* border: 2px red solid; */
+    text-align: center;
+    text-decoration: none;
+
+
+}
+
+.main-nav:hover{
+    color: rgb(251, 236, 93);
+}
+
+.logo{
+    font-size: larger;
+    font-weight:bolder;
+    font-style: italic;
+    text-align: left;
+    width: 70px;
+    font-weight: 800;
+    font-size: 30px;
+    padding-top: 1px;
+    padding-left: 30px;
+    margin-right: 3%;
+    /* border: 2px red solid; */
+    
+    height: auto;
+    z-index: 30;
+}
+.highlit-div{
+    border-bottom-style: solid;
+    border-bottom-color: rgb(250, 250, 51);
+}
+.sec-Navbar{
+    /* border-bottom: 1px solid rgb(75, 72, 72); */
+    /* width : 1000px; */
+    /* overflow: hidden; */
+    margin-top: 30px;
+    margin-bottom: 20px;
+    display: inline;
+    overflow-x: auto;
+    margin: auto;
+}
+/* .sec-Navbar div{
+    width: 300px;
+    border: red 2px solid;
+    display: inline;
+
+} */
+
+.sec-Navbar div{
+    /* box-sizing: border-box; */
+
+    /* width: 4%; */
+    /* flex: 0 1 12%; */
+    padding-bottom: 8px;
+    padding-top: 5px;
+    padding-bottom: 8px;
+    padding-right: 3px;
+    font-weight: 400;
+    font-size: 85%;
+    text-align: center;
+    width: 34%;
+    display: inline;
+    white-space: nowrap;
+    /* border: red 2px solid; */
+}
+.sec-nav{
+    /* display: flex !important; */
+}
+.sec-highlit-div{
+    color: rgb(250, 250, 51);
+}
+
+
+
+
+
+
+
+.scroll-in-centrediv{
+    /* overflow-y: auto; */
+    /* overflow-x: none !important; */
+    /* width: 50px; */
+    width: auto;
+    height: 600px;
+    scrollbar-color: rgb(247, 245, 245) rgb(2, 2, 1);
+    padding: 0;
+}
+
+
+.centered{
+    /* border: 2px solid orangered; */
+    width : 91%;
+    margin-left: 6%;
+    margin-right: 2%;
+    margin-top: 2px;
+    margin-bottom: 20%;
+    
+    height:900px;
+
+}
+
+.footer-box{
+    border: 2px solid orangered;
+    width: 90%;
+    height: 10%;
+    margin-top: 80%;
+}
+
+.footer{
+    /* border: 2px solid blue;  */
+    margin: auto;
+    width : 100%;
+    height : 20px;
+    
+    /* margin-top: 400px; */
+    background-color: rgb(31, 28, 28);
+    padding-top: 1px;
+
+    position:absolute;
+    bottom:0;
+   
+    height:50px;   /* Height of the footer */
+
+    
+}
+.footer-initial{
+    display: flex;
+    /* margin: 10%; */
+    padding-top: 1px;
+    margin-left: 2px;
+    margin-top: 15px;
+    /* border: 2px solid red; */
+}
+.footer-fst{
+    padding: 0px;
+    border-right: 2px solid rgb(197, 185, 185);
+}
+.footer-sec{
+    padding: 1px;
+    border-right: 2px solid rgb(197, 188, 188);
+
+}
+.footer-thr{
+    padding: 1px;
+    /* border: 2px solid rgb(201, 192, 192); */
+
+}
+
+.footer-cards{
+    width: 8%;
+    text-align: center;
+    padding: 1px;
+    font-size: 15px;
+}
+
+
+.cards {
+    display: flex;
+    /* justify-content: space-between; */
+    flex-wrap: wrap;
+    padding: 1%;
+ }
+
+.card{
+    border: 2px solid red;
+    text-align: center;
+    flex: 0 0 11%;
+    height: 200px;
+    box-sizing: border-box;
+    margin: 1rem .25rem;
+    justify-content: space-around;
+    max-width: calc(75% -  1em);
+}
+
+
+
+@media screen and (min-width: 40em) {
+   
+    .card {
+       max-width: calc(50% -  1em);
+       border: 2px solid blue;
+
+    }
+}
+ 
+@media screen and (min-width: 60em) {
+    
+    .card {
+        max-width: calc(25% - 1em);
+        border: 2px solid green;
+
+    }
+}

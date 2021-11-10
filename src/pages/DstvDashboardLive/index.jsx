@@ -244,7 +244,7 @@ const cookies = new Cookies();
 
                     <div className= "footer">
                         <div className="footer-initial">
-                            <div className="footer-fst footer-cards ">Globacom</div>
+                            <div className="footer-fst footer-cards ">MTN-GB</div>
                             <div className="footer-sec footer-cards">FAQs</div>
                             <div className="footer-thr footer-cards">Live chat</div>
                         </div>

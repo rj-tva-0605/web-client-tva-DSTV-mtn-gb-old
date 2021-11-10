@@ -42,7 +42,7 @@
     rgba(0, 0, 0, 0) 0%,
     rgba(0, 0, 0, 1) 100%
   ),
-  url("../../assets/images/movie-pic-mainsize.jpg");
+  url("../../assets/images/yellow_pppt_cine.png");
 background-size: cover;
 position: relative;
  
@@ -55,7 +55,7 @@ position: relative;
 
   .nav-menu-logo {   
     margin: 50px 30px;
-    width: 200px;
+    width: 15%;
     height: auto;
     z-index: 30;
   }

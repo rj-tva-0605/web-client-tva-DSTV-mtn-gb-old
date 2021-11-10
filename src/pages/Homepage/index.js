@@ -5,7 +5,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import { logoutReducer } from "store/reducers/authReducer";
 
 
-import logo from '../../assets/images/tv_anywhere_logo.png';
+import logo from '../../assets/images/mtn-logo.png';
 
 import {Button} from 'react-bootstrap';
 
@@ -106,8 +106,10 @@ const Homepage = () => {
         if(isUserLoggedIn){
             history.push({
                 pathname:'/newdashboard'
-            })
-        }
+            })}else{history.push({
+                pathname:'/'
+            })}
+        
         
     }, [])
 
@@ -192,19 +194,19 @@ const Homepage = () => {
                                 <div className="main-flex-cards rounded" >
                                     <h2><strong>Watch Live TV on Web </strong></h2>
                                     <br/>
-                                    <p>Stream over 130 channels free. Upgrade to the ultimate TV experience to watch and record local shows, news and sports.</p>
+                                    <p>Stream your live tv and Video Demand on MTN-GB </p>
                                 </div>
                                 <div className="main-flex-cards rounded ">
                                 <div className="regis-apple">
                                     <h2 ><i className="fa fa-apple"/>  <strong>Apple Store </strong> </h2><i class="fa fa-registered " />
                                 </div> 
                                     <br/>
-                                    <p>Stream over 20,000 free on-demand movies and shows from Warner Brothers, Crackle, Lionsgate, MGM and more. </p>
+                                    <p>Download the app for IOS on the App store . </p>
                                 </div>
                                 <div className="main-flex-cards">
                                 <h2><i className="fa fa-android"/>  <strong>Android</strong></h2>
                                     <br/>
-                                    <p>Curate and stream your personal collection of movies, TV, music and photos anywhere on all your devices.</p>
+                                    <p>Download the Android app on PlayStore </p>
                                 </div>
                             </div>
 

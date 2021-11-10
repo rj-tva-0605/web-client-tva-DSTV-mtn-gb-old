@@ -1,4 +1,9 @@
-
+//store the string packages and the purchased packages in the reducer
+// check the example for login 
+// distribute info check the example for logout 
+// check the if we can call the value of any string from the json then we can access 
+// without doing any export of value in json file 
+//then we can just tweak the variable en and potiuguese 
 
 import React from 'react';
 import './style.css';
@@ -11,6 +16,10 @@ import { useEffect, useState } from 'react';
 import { useHistory } from "react-router";
 import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+
+import NavbarGeneral from 'components/NavbarGeneral';
+import FooterGeneral from 'components/FooterGeneral';
+
 import PackagesDisplay from '../../components/PackagesDisplay';
 
 import NewPackagesDisplay from 'components/NewPackagesDisplay';
@@ -206,6 +215,7 @@ const cookies = new Cookies();
                 
                 console.log('string Packages for packageIDs' ,stringPackages)
                 console.log('Purchased for packageIDs' ,purchasedPackageIds)
+
                 // setting value as a cookie to be used later 
                 cookies.set("stringPackages", stringPackages)
                 cookies.set("purchasedPackageIds", purchasedPackageIds)
@@ -252,70 +262,7 @@ const cookies = new Cookies();
 
                 <div className="navbars-ctrl">
 
-                    <div className="main-Navbar"> 
-                        {/* <p className="main-nav logo "> */}
-                        
-                            <img src={logo} className="main-nav logo "/>
-                        {/* </p> */}               
-                        <Link className="main-nav highlit-div" 
-                                        style ={{ }}
-                                     to = {{
-                                      pathname: "/newdashboard",
-                                      state: {
-                                           detail: {
-                                               id: ""
-                                           }
-                                       }
-                                   }}
-                                    >
-                            <div className="mnvs">Featured</div>
-                        </Link>
-                        <Link className="main-nav " 
-                                        style ={{ }}
-                                     to = {{
-                                      pathname: "/moviespage",
-                                      state: {
-                                           detail: {
-                                               id: ""
-                                           }
-                                       }
-                                   }}
-                                    >
-                            <div className=" mnvs">Movies</div>
-                        </Link>
-
-                        <Link className="main-nav" 
-                                        style ={{ }}
-                                     to = {{
-                                      pathname: "/tvshowspage",
-                                      state: {
-                                           detail: {
-                                               id: ""
-                                           }
-                                       }
-                                   }}
-                                    >
-                            <div className=" mnvs">TV Shows</div>
-                        </Link>
-                        
-                        <Link className="main-nav " 
-                                        style ={{ }}
-                                     to = {{
-                                      pathname: "/channelspage",
-                                      state: {
-                                           detail: {
-                                               id: ""
-                                           }
-                                       }
-                                   }}
-                                    >
-                            <div className="">Live TV</div>
-                        </Link>
-
-                        <div className="main-nav">TV Guide</div>
-
-                        <div className="main-nav">My List</div>
-                    </div>
+                    <NavbarGeneral />
                     
                                             
                 </div>
@@ -372,15 +319,8 @@ const cookies = new Cookies();
                  
                 </div>
                     }
-                    <div className="footer-box"></div>
 
-                    <div className= "footer">
-                        <div className="footer-initial">
-                            <div className="footer-fst footer-cards ">Globacom</div>
-                            <div className="footer-sec footer-cards">FAQs</div>
-                            <div className="footer-thr footer-cards">Live chat</div>
-                        </div>
-                    </div>
+                    <FooterGeneral />
                 
             </div>
     )
